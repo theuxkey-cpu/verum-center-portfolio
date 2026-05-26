@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verum Supply — Portfolio Case Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface-2: #1a1a1a;
+      --border: #222222;
+      --text: #f0f0f0;
+      --text-muted: #888888;
+      --accent: #e8e0d4;
+      --accent-dim: #c4b89a;
+      --tag-bg: #1e1e1e;
+      --tag-border: #2e2e2e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Nav ── */
+    nav {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0;
+    }
+
+    nav a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav a:hover { color: var(--text); }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 48px 0 56px;
+      margin-bottom: 72px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--text-muted);
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 560px;
+      margin-bottom: 36px;
+    }
+
+    .meta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 100px;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    .tag.accent {
+      background: #1a1710;
+      border-color: #3a3420;
+      color: var(--accent-dim);
+    }
+
+    /* ── Sections ── */
+    section { margin-bottom: 72px; }
+
+    h2 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 12px;
+      margin-top: 40px;
+    }
+
+    h3:first-of-type { margin-top: 0; }
+
+    p {
+      font-size: 15px;
+      color: #c8c8c8;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    /* ── Lists ── */
+    .pain-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .pain-list li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      color: #b0b0b0;
+      line-height: 1.6;
+    }
+
+    .pain-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Iteration cards ── */
+    .iteration {
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    .iteration-number {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-dim);
+      margin-bottom: 10px;
+    }
+
+    .iteration h3 { margin-top: 0; font-size: 16px; }
+    .iteration p { font-size: 14px; margin-bottom: 0; }
+    .iteration p + p { margin-top: 10px; }
+
+    /* ── Flow diagram ── */
+    .flow {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 20px 0;
+    }
+
+    .flow-step {
+      font-size: 12px;
+      padding: 6px 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: #aaa;
+    }
+
+    .flow-arrow { color: #444; font-size: 14px; }
+
+    /* ── Color segment table ── */
+    .segment-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+    }
+
+    .segment-table th {
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .segment-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #181818;
+      color: #b0b0b0;
+      vertical-align: top;
+    }
+
+    .segment-table tr:last-child td { border-bottom: none; }
+
+    .seg-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    /* ── Screenshot ── */
+    .screenshot {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin: 24px 0;
+      display: block;
+    }
+
+    .screenshot-caption {
+      font-size: 12px;
+      color: #555;
+      text-align: center;
+      margin-top: -16px;
+      margin-bottom: 24px;
+    }
+
+    /* ── Image placeholder ── */
+    .img-block {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--surface-2);
+      border: 1px dashed #2a2a2a;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 28px 0;
+      color: #444;
+    }
+
+    .img-block .img-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #3a3a3a;
+    }
+
+    /* ── Before / After ── */
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .ba-card {
+      padding: 18px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .ba-card.before { background: #130d0d; border-color: #2a1515; }
+    .ba-card.after  { background: #0d1310; border-color: #152a1d; }
+
+    .ba-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .ba-card.before .ba-label { color: #8b3a3a; }
+    .ba-card.after  .ba-label { color: #3a8b5a; }
+    .ba-card p { font-size: 13px; margin-bottom: 0; color: #999; }
+
+    /* ── Metrics ── */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 28px 0;
+    }
+
+    .metric-card {
+      padding: 20px 22px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .metric-value {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .metric-label { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+
+    /* ── Artifacts ── */
+    .artifact-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+    .artifact-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      color: #b0b0b0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      margin-top: 48px;
+    }
+
+    footer p { font-size: 12px; color: #444; margin: 0; }
+
+    @media (max-width: 600px) {
+      .before-after { grid-template-columns: 1fr; }
+      .metrics-grid { grid-template-columns: 1fr 1fr; }
+      .flow { gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <nav><a href="index.html">← Back</a></nav>
+
+  <header>
+    <p class="eyebrow">Product Design · Cantu Inc.</p>
+    <h1>Designing the Intelligence Layer of an Enterprise Supply Chain Platform</h1>
+    <p class="subtitle">Built end-to-end UX for a supply chain management platform that replaced spreadsheets and isolated SAP tools across four departments — as the sole designer from discovery through production.</p>
+    <div class="meta-row">
+      <span class="tag accent">Verum Supply</span>
+      <span class="tag">B2B · Enterprise</span>
+      <span class="tag">Supply Chain</span>
+      <span class="tag">End-to-End Design</span>
+      <span class="tag">Governance</span>
+    </div>
+  </header>
+
+  <!-- Context -->
+  <section>
+    <h2>Context</h2>
+    <p>Cantu Inc. runs one of the largest automotive parts distribution networks in Brazil. Behind the commercial front sits a complex supply chain: Logistics, Supply Planning (S&OP), Importing, and International Purchasing — four departments that each manage critical, interdependent operations.</p>
+    <p>Before Verum Supply, these departments operated in silos. Planning happened in spreadsheets. Purchasing data lived in an isolated SAP configuration that didn't talk to logistics. Backorder status required manual follow-up. There was no shared view of what was in stock, what was on order, or what was on its way.</p>
+    <p>I was the sole UX designer on the project, involved from discovery through production across every module.</p>
+  </section>
+
+  <!-- My Role -->
+  <section>
+    <h2>My Role</h2>
+    <ul class="pain-list">
+      <li><span class="pain-icon">◎</span>Sole UX designer across all modules: Supply Planning, Backorder (National and International), SAP Integration, and Access Management</li>
+      <li><span class="pain-icon">◎</span>Ran discovery for the Supply module — defining the Push/Pull model architecture before any screen was designed</li>
+      <li><span class="pain-icon">◎</span>Created the Score de Suficiência: a 14-dimension governance framework adopted as the team's standard for feature readiness before entering development</li>
+      <li><span class="pain-icon">◎</span>Iterated weekly alongside a fast-shipping team — 4 major releases and 6 hotfixes in production over 2 months</li>
+    </ul>
+  </section>
+
+  <!-- Problem -->
+  <section>
+    <h2>Problem</h2>
+    <p><strong>Four departments. Four disconnected systems. No shared visibility.</strong></p>
+    <ul class="pain-list">
+      <li><span class="pain-icon">⚠</span><div><strong>Supply planners worked in spreadsheets.</strong> No automated calculation of min/max levels, safety stock, or lead times. Every proposal was manual.</div></li>
+      <li><span class="pain-icon">⚠</span><div><strong>Branch managers requested blind.</strong> No visibility into available stock before submitting a request. The supply team reviewed everything manually.</div></li>
+      <li><span class="pain-icon">⚠</span><div><strong>Backorder tracking was phone calls and email chains.</strong> No system showed which orders were stuck, at which stage, or why.</div></li>
+      <li><span class="pain-icon">⚠</span><div><strong>SAP data wasn't real-time.</strong> Teams made stocking decisions on stale information. Approval chains were informal — no audit trail, no SLAs.</div></li>
+    </ul>
+    <div class="before-after">
+      <div class="ba-card before">
+        <p class="ba-label">Before</p>
+        <p>Spreadsheets, isolated SAP, phone calls for backorder status, informal approvals with no audit trail, decisions made on stale data.</p>
+      </div>
+      <div class="ba-card after">
+        <p class="ba-label">After</p>
+        <p>Single platform with real-time stock visibility, structured Push/Pull flows, approval chains with full audit trail, and consolidated backorder monitoring.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research -->
+  <section>
+    <h2>Research</h2>
+    <p>Discovery ran before the first screen. The most important output was defining two fundamentally different replenishment models that had to coexist in the same platform:</p>
+    <ul class="pain-list">
+      <li><span class="pain-icon">→</span><div><strong>Push (Automatic):</strong> system-initiated, policy-driven — proactive replenishment based on consumption patterns and min/max rules</div></li>
+      <li><span class="pain-icon">→</span><div><strong>Pull (On-Demand):</strong> branch-initiated, with justification, automatic validation, and multi-level approval workflow</div></li>
+    </ul>
+    <p>Keeping these as architecturally separate pillars — with Shipment as a third independent pillar — became the design decision that shaped every subsequent interaction pattern. Conflating them in early stakeholder sessions was the main source of scope confusion.</p>
+  </section>
+
+  <!-- Solution -->
+  <section>
+    <h2>Solution</h2>
+
+    <!-- Module 1 -->
+    <div class="iteration">
+      <p class="iteration-number">Module 01</p>
+      <h3>Supply Planning — Push & Pull</h3>
+      <p>Two modes, one coherent interface. The Push flow is system-driven; the Pull flow is branch-initiated with full governance.</p>
+
+      <p><strong>Push:</strong></p>
+      <div class="flow">
+        <span class="flow-step">Load data</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Engine calculates</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Under review</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Adjust / simulate</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Approve</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Publish</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Orders generated</span>
+      </div>
+
+      <p><strong>Pull:</strong></p>
+      <div class="flow">
+        <span class="flow-step">Branch request</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Auto-validate</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Triage</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Approval chain</span><span class="flow-arrow">→</span>
+        <span class="flow-step">Shipment</span>
+      </div>
+    </div>
+
+    <!-- Color-segmented table -->
+    <div class="iteration">
+      <p class="iteration-number">Key Design Decision</p>
+      <h3>Color-Segmented Column Groups</h3>
+      <p>The supply planning table spans dozens of columns — organizational context, product identity, strategic segmentation, status, stock levels, and demand data — all simultaneously necessary. Scrolling through unlabeled columns created constant disorientation: analysts couldn't tell at a glance whether a column belonged to stock or demand data.</p>
+      <p>The solution: color-coded group headers acting as visual landmarks across the full table width. Six segments, each with a distinct hue spanning its columns — so analysts scan directly to the segment they need without reading individual headers to orient themselves.</p>
+    </div>
+
+    <img src="supply-table.png" alt="Supply planning table with color-segmented column groups" class="screenshot" />
+    <p class="screenshot-caption">Plano de abastecimento — color-coded segments: Organizational Context (gray), Product Identity (blue), Strategic Segmentation (amber), Status (red), Supply (blue), Local Demand (purple)</p>
+
+    <table class="segment-table">
+      <thead>
+        <tr>
+          <th>Segment</th>
+          <th>Columns</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="seg-dot" style="background:#9ca3af"></span>Organizational Context</td><td>Branch, Company, Region</td></tr>
+        <tr><td><span class="seg-dot" style="background:#93c5fd"></span>Product Identity</td><td>SKU, Category, Product, Brand, Model, Size</td></tr>
+        <tr><td><span class="seg-dot" style="background:#fbbf24"></span>Strategic Segmentation</td><td>Branch drive, Brand drive, Proposal, Assortment</td></tr>
+        <tr><td><span class="seg-dot" style="background:#f87171"></span>Status</td><td>Blocked</td></tr>
+        <tr><td><span class="seg-dot" style="background:#60a5fa"></span>Supply</td><td>Distribution center, stock levels by location</td></tr>
+        <tr><td><span class="seg-dot" style="background:#a78bfa"></span>Local Demand</td><td>VMM, Min stock, Optimal stock</td></tr>
+      </tbody>
+    </table>
+
+    <p>Additional table decisions: <strong>fixed + user-configurable columns</strong> (critical columns always visible, secondary columns toggled), <strong>auto-save</strong> (removing the explicit save button eliminated a recurring data loss pattern), and <strong>session-persistent smart filters</strong> (hide zero-quantity SKUs, hide already-allocated SKUs).</p>
+
+    <!-- Module 2 -->
+    <div class="iteration" style="margin-top: 40px;">
+      <p class="iteration-number">Module 02</p>
+      <h3>National Backorder Monitoring</h3>
+      <p>Before this module, backorder status required phone calls and email chains across systems. The monitoring screen gave the supply team a consolidated operational view: which orders were stuck, at which stage, and why.</p>
+      <p>Key features: SAP integration for real-time order sync, material detail modal consolidating full item data in a single view, divergence management for discrepancies identified during SAP sync, and individual order detail screens with full operational context.</p>
+    </div>
+
+    <div class="img-block">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      <span class="img-label">INSERT: Backorder monitoring screen</span>
+    </div>
+
+    <!-- Module 3 -->
+    <div class="iteration">
+      <p class="iteration-number">Module 03</p>
+      <h3>Access Management by Profile</h3>
+      <p>A supply chain platform serving multiple departments requires precise access control. I designed the system around three operational roles: Supply Analyst (full planning and approval access), Branch Manager (pull requests scoped to their assigned units only), and ADM Master (user management). Profile-to-unit linking allows the same person to hold different roles at different locations — a common pattern in a distributed distribution network.</p>
+    </div>
+
+    <!-- Module 4 -->
+    <div class="iteration">
+      <p class="iteration-number">Module 04 — Governance</p>
+      <h3>Score de Suficiência v5</h3>
+      <p>Features entering development underspecified was a recurring problem: bugs, rework, misaligned outcomes. I created the Score de Suficiência — a 14-dimension framework scored out of 100, with a 95-point threshold required before any feature enters the development queue.</p>
+      <p>The 14 dimensions span Critical (data & integrations, risks), Important (user journey, states & transitions, acceptance criteria), and Context (feature framing, UI behavior, access & permissions). The framework gave the team a shared language and turned the "is this ready?" debate into a number.</p>
+    </div>
+  </section>
+
+  <!-- Impact -->
+  <section>
+    <h2>Impact</h2>
+    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Metrics are directional and NDA-compliant.</p>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-value">4</div>
+        <div class="metric-label">Departments unified under a single supply chain platform</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">10+</div>
+        <div class="metric-label">Production releases in 2 months (deploys + hotfixes)</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">Real-time</div>
+        <div class="metric-label">Stock visibility via OMS integration — replacing stale SAP data</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">95pts</div>
+        <div class="metric-label">Score de Suficiência threshold — adopted as team standard</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Retrospective -->
+  <section>
+    <h2>What I'd Do Differently</h2>
+    <p><strong>Clarify the Push/Pull/Shipment boundary earlier in stakeholder communication.</strong> The three pillars are architecturally separate — Push doesn't auto-generate shipments, Pull requires a separate approval chain, Shipment is its own pillar. Stakeholders conflated them in the first two sprints. Making this explicit sooner would have saved scope confusion.</p>
+    <p><strong>Design the column configuration system in the first version.</strong> The fixed/configurable column pattern was introduced as a post-launch improvement. Supply analysts had already adapted by exporting to Excel to manage column selection. Mapping their specific scanning workflows during discovery would have surfaced this in time to ship it from day one.</p>
+  </section>
+
+  <!-- Artifacts -->
+  <section>
+    <h2>Artifacts</h2>
+    <ul class="artifact-list">
+      <li><span>🖥</span> Figma — Supply planning screen, Push mode [INSERT LINK]</li>
+      <li><span>📋</span> Figma — Pull request flow, branch manager view [INSERT LINK]</li>
+      <li><span>📊</span> Figma — Backorder monitoring screen [INSERT LINK]</li>
+      <li><span>🔐</span> Figma — Access management by profile [INSERT LINK]</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>VerumSupply is a production system. Screenshots and metrics have been sanitized to protect confidential business information.</p>
+  </footer>
+
+</div>
+</body>
+</html>
