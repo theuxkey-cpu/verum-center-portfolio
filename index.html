@@ -1,2 +1,379 @@
 <!DOCTYPE html>
-<html><head><meta http-equiv="refresh" content="0; url=verum-center-portfolio.html" /></head><body></body></html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keythe Rueckert — Product Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface-2: #1a1a1a;
+      --border: #222222;
+      --text: #f0f0f0;
+      --text-muted: #888888;
+      --accent: #e8e0d4;
+      --accent-dim: #c4b89a;
+      --tag-bg: #1e1e1e;
+      --tag-border: #2e2e2e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 96px 0 80px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 52px);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span { color: var(--accent-dim); }
+
+    .hero-bio {
+      font-size: 16px;
+      color: #b0b0b0;
+      line-height: 1.75;
+      max-width: 560px;
+      margin-bottom: 36px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: opacity 0.15s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover { opacity: 0.8; }
+    .btn-primary { background: var(--accent); color: #0a0a0a; }
+    .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+
+    /* ── Sections ── */
+    section {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    /* ── Case cards ── */
+    .cases {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .case-card {
+      display: block;
+      padding: 28px 32px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      text-decoration: none;
+      transition: border-color 0.15s, background 0.15s;
+      position: relative;
+    }
+
+    .case-card:hover { border-color: #333; background: #161616; }
+    .case-card:hover .case-arrow { transform: translate(3px, -3px); }
+
+    .case-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .case-company {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .case-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+
+    .case-type { font-size: 11px; color: var(--text-muted); }
+
+    .case-title {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .case-desc {
+      font-size: 14px;
+      color: #888;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .case-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .case-tag {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 100px;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      color: var(--text-muted);
+    }
+
+    .case-arrow {
+      position: absolute;
+      top: 28px;
+      right: 28px;
+      font-size: 18px;
+      color: var(--text-muted);
+      transition: transform 0.2s;
+    }
+
+    /* ── Experience & Education ── */
+    .exp-item, .edu-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 24px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exp-item:last-child, .edu-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .exp-date, .edu-date {
+      font-size: 12px;
+      color: var(--text-muted);
+      padding-top: 3px;
+      line-height: 1.4;
+    }
+
+    .exp-role, .edu-degree {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .exp-company, .edu-school {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .edu-desc {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 48px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    footer p { font-size: 13px; color: #444; }
+
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--text); }
+
+    @media (max-width: 560px) {
+      .exp-item, .edu-item { grid-template-columns: 1fr; gap: 4px; }
+      .hero { padding: 64px 0 56px; }
+      section { padding: 56px 0; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero">
+    <p class="hero-label">Product Designer</p>
+    <h1>Hi, I'm <span>Keythe</span>.</h1>
+    <p class="hero-bio">3+ years designing B2B and B2C digital products — specializing in UX research, scalable design systems, and operational interfaces for SaaS and CRM platforms. Background in advertising and branding, focused on reducing product complexity and shipping work that holds up in production.</p>
+    <div class="hero-actions">
+      <a href="mailto:keytherueckert93@gmail.com" class="btn btn-primary">Get in touch</a>
+      <a href="https://www.behance.net/keytheruec167d" target="_blank" class="btn btn-ghost">Previous work ↗</a>
+    </div>
+  </div>
+
+  <section>
+    <p class="section-label">Featured Work</p>
+    <div class="cases">
+
+      <a href="verum-center-portfolio.html" class="case-card">
+        <span class="case-arrow">↗</span>
+        <div class="case-meta">
+          <span class="case-company">Cantu Inc.</span>
+          <span class="case-dot"></span>
+          <span class="case-type">Operational Console · Enterprise</span>
+        </div>
+        <h2 class="case-title">Rebuilding an Enterprise Operational Console to Scale</h2>
+        <p class="case-desc">Consolidated five fragmented internal tools into a single console used daily by support, finance, and operations — with 1,183 business rules made self-serve through a dynamic filter dashboard.</p>
+        <div class="case-tags">
+          <span class="case-tag">UX Strategy</span>
+          <span class="case-tag">Information Architecture</span>
+          <span class="case-tag">Mobile-First</span>
+          <span class="case-tag">B2B</span>
+        </div>
+      </a>
+
+      <a href="verum-supply.html" class="case-card">
+        <span class="case-arrow">↗</span>
+        <div class="case-meta">
+          <span class="case-company">Cantu Inc.</span>
+          <span class="case-dot"></span>
+          <span class="case-type">Supply Chain · Enterprise</span>
+        </div>
+        <h2 class="case-title">Designing the Intelligence Layer of an Enterprise Supply Chain Platform</h2>
+        <p class="case-desc">Built end-to-end UX for a supply chain platform that replaced spreadsheets and isolated SAP tools across four departments — sole designer from discovery through weekly production deploys.</p>
+        <div class="case-tags">
+          <span class="case-tag">End-to-End Design</span>
+          <span class="case-tag">Complex Data Tables</span>
+          <span class="case-tag">Governance</span>
+          <span class="case-tag">SAP Integration</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Experience</p>
+    <div class="exp-item">
+      <span class="exp-date">Nov 2024 – Present</span>
+      <div>
+        <p class="exp-role">Product Designer</p>
+        <p class="exp-company">Cantu Inc.</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <span class="exp-date">Aug 2023 – Nov 2024</span>
+      <div>
+        <p class="exp-role">UX/UI Designer</p>
+        <p class="exp-company">Focusmonk</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <span class="exp-date">Jan 2023 – Aug 2023</span>
+      <div>
+        <p class="exp-role">UX/UI Designer</p>
+        <p class="exp-company">Lize</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Education</p>
+    <div class="edu-item">
+      <span class="edu-date">2026 – Present</span>
+      <div>
+        <p class="edu-degree">AI — ongoing focus</p>
+      </div>
+    </div>
+    <div class="edu-item">
+      <span class="edu-date">2023 – 2024</span>
+      <div>
+        <p class="edu-degree">MBA — UX Research, Research Ops & Design Leadership</p>
+        <p class="edu-school">Unifast & Toronto School of Management</p>
+        <p class="edu-desc">Innovation, AI, and UX with emphasis on research, usability, and data-driven product design.</p>
+      </div>
+    </div>
+    <div class="edu-item">
+      <span class="edu-date">2015 – 2018</span>
+      <div>
+        <p class="edu-degree">Bachelor — Advertising & Marketing</p>
+        <p class="edu-desc">Strategy, consumer behavior and digital communication.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Keythe Rueckert · Product Designer</p>
+    <div class="footer-links">
+      <a href="mailto:keytherueckert93@gmail.com">Email</a>
+      <a href="https://www.behance.net/keytheruec167d" target="_blank">Behance</a>
+      <a href="https://linkedin.com/in/keytherueckert" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
