@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VerumCenter — Portfolio Case Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface-2: #1a1a1a;
+      --border: #222222;
+      --text: #f0f0f0;
+      --text-muted: #888888;
+      --accent: #e8e0d4;
+      --accent-dim: #c4b89a;
+      --tag-bg: #1e1e1e;
+      --tag-border: #2e2e2e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 48px 0 56px;
+      margin-bottom: 72px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--text-muted);
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 560px;
+      margin-bottom: 36px;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 100px;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    .tag.accent {
+      background: #1a1710;
+      border-color: #3a3420;
+      color: var(--accent-dim);
+    }
+
+    /* ── Sections ── */
+    section {
+      margin-bottom: 72px;
+    }
+
+    h2 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 12px;
+      margin-top: 40px;
+    }
+
+    h3:first-of-type {
+      margin-top: 0;
+    }
+
+    p {
+      font-size: 15px;
+      color: #c8c8c8;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    /* ── Pain points ── */
+    .pain-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .pain-list li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      color: #b0b0b0;
+      line-height: 1.6;
+    }
+
+    .pain-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── Image placeholder ── */
+    .img-block {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--surface-2);
+      border: 1px dashed #2a2a2a;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 28px 0;
+      color: #444;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .img-block .img-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #3a3a3a;
+    }
+
+    .img-block svg {
+      opacity: 0.3;
+    }
+
+    /* ── Iteration cards ── */
+    .iteration {
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    .iteration-number {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-dim);
+      margin-bottom: 10px;
+    }
+
+    .iteration h3 {
+      margin-top: 0;
+      font-size: 16px;
+    }
+
+    .iteration p {
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+
+    /* ── Before / After ── */
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .ba-card {
+      padding: 18px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .ba-card.before {
+      background: #130d0d;
+      border-color: #2a1515;
+    }
+
+    .ba-card.after {
+      background: #0d1310;
+      border-color: #152a1d;
+    }
+
+    .ba-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .ba-card.before .ba-label { color: #8b3a3a; }
+    .ba-card.after .ba-label { color: #3a8b5a; }
+
+    .ba-card p {
+      font-size: 13px;
+      margin-bottom: 0;
+      color: #999;
+    }
+
+    /* ── Metrics ── */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 28px 0;
+    }
+
+    .metric-card {
+      padding: 20px 22px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .metric-value {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .metric-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ── Artifacts ── */
+    .artifact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .artifact-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      color: #b0b0b0;
+    }
+
+    .artifact-list a {
+      color: var(--accent-dim);
+      text-decoration: none;
+    }
+
+    .artifact-list a:hover { text-decoration: underline; }
+
+    /* ── Divider ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 48px 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      margin-top: 48px;
+    }
+
+    footer p {
+      font-size: 12px;
+      color: #444;
+      margin: 0;
+    }
+
+    /* ── Iframe embed ── */
+    .dashboard-embed {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin: 28px 0;
+      position: relative;
+    }
+
+    .dashboard-embed iframe {
+      width: 100%;
+      height: 640px;
+      border: none;
+      display: block;
+    }
+
+    .embed-caption {
+      padding: 12px 18px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .embed-caption::before {
+      content: '↗';
+      font-size: 11px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .before-after { grid-template-columns: 1fr; }
+      .metrics-grid { grid-template-columns: 1fr 1fr; }
+      .dashboard-embed iframe { height: 480px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <p class="eyebrow">Product Design &amp; Strategy · Cantu Inc.</p>
+    <h1>Rebuilding an Enterprise Operational Console to Scale</h1>
+    <p class="subtitle">Consolidated five fragmented internal tools into a single operational console used daily by support, finance, and operations teams across Brazil and international markets.</p>
+    <div class="meta-row">
+      <span class="tag accent">VerumCenter</span>
+      <span class="tag">B2B · SaaS</span>
+      <span class="tag">UX Strategy</span>
+      <span class="tag">Information Architecture</span>
+      <span class="tag">Mobile-First</span>
+      <span class="tag">Enterprise</span>
+    </div>
+  </header>
+
+  <!-- Context -->
+  <section>
+    <h2>Context</h2>
+    <p>Cantu Inc. is one of the largest automotive parts distributors in Brazil, with over 6,000 partner auto centers. The company was undergoing a strategic platform convergence — merging two separate commercial systems into a single unified global product: <strong>VerumSales Global (VSG)</strong>.</p>
+    <p>The operational layer — the tool that support agents, finance analysts, and operations managers use to run day-to-day work — was called <strong>Conect</strong>. It had been patched and extended for years without a coherent information architecture, and was reaching its limits as the company scaled internationally.</p>
+    <p>I led the design and strategy for <strong>VerumCenter</strong>: a new operational console built to replace Conect, designed to serve the full complexity of the global platform from day one.</p>
+  </section>
+
+  <!-- My Role -->
+  <section>
+    <h2>My Role</h2>
+    <p>I worked as a hybrid <strong>UX + Product Strategy lead</strong> on this project. My responsibilities went beyond UI design:</p>
+    <ul class="pain-list">
+      <li><span class="pain-icon">◎</span>Led discovery sessions directly with the CEO and board to map platform requirements before a single screen was designed</li>
+      <li><span class="pain-icon">◎</span>Translated platform-wide business rules into a structured knowledge system (Architecture Decision Records) that governed all design and engineering decisions</li>
+      <li><span class="pain-icon">◎</span>Designed information architecture, interaction patterns, and key interfaces across the console</li>
+      <li><span class="pain-icon">◎</span>Created the governance framework that allowed cross-functional teams to align on over 1,183 business rules without deadlock</li>
+    </ul>
+  </section>
+
+  <!-- Problem -->
+  <section>
+    <h2>Problem</h2>
+    <p>Before VerumCenter, running a single customer operation required navigating five separate tools with no integration between them.</p>
+
+    <h3>How work actually got done</h3>
+    <ul class="pain-list">
+      <li><span class="pain-icon">⚠</span><div><strong>WhatsApp + spreadsheets as ops layer.</strong> Sales reps and support agents coordinated order exceptions and escalations through WhatsApp groups and shared spreadsheets — no system of record.</div></li>
+      <li><span class="pain-icon">⚠</span><div><strong>Fiscal rules lived in people's heads.</strong> Tax classification decisions required phone calls to specialists. Rules changed per channel, per tax code, and per state — and there was no centralized reference.</div></li>
+      <li><span class="pain-icon">⚠</span><div><strong>The double-discount loop bug.</strong> A structural flaw in the pricing engine caused orders to be incorrectly priced when agents used a workaround field. Agents had learned to work around the bug — but the workaround introduced new inconsistencies downstream.</div></li>
+    </ul>
+
+    <h3>Systemic impact</h3>
+    <div class="before-after">
+      <div class="ba-card before">
+        <p class="ba-label">Before</p>
+        <p>Supply-constrained orders took <strong>20–30 days</strong> because no single view existed across systems. Credit limits for shared-ownership auto centers were invisible. Rule differences between countries lived in emails and institutional memory.</p>
+      </div>
+      <div class="ba-card after">
+        <p class="ba-label">After</p>
+        <p>Single console with role-based views, consolidated order tracking, visible credit limits across economic groups, and a structured rule system accessible to any team without specialist intervention.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research -->
+  <section>
+    <h2>Research</h2>
+    <p>Discovery ran in parallel with platform architecture design. Key inputs:</p>
+    <ul class="pain-list">
+      <li><span class="pain-icon">→</span>Stakeholder interviews with support leads, finance managers, commercial directors, and operations coordinators — mapping informal workarounds that had become load-bearing habits</li>
+      <li><span class="pain-icon">→</span>Process mapping of the full order lifecycle: opportunity creation → fiscal classification → pricing → approval → fulfillment → post-sale</li>
+      <li><span class="pain-icon">→</span>Rule inventory: catalogued 1,183 business rules across 5 domains (identity, personas, calculation engines, gaps, intelligence)</li>
+      <li><span class="pain-icon">→</span>Seller feedback sessions on mobile: direct input from field sales reps surfaced the horizontal-scroll problem that drove a key design pivot</li>
+    </ul>
+  </section>
+
+  <!-- Solution -->
+  <section>
+    <h2>Solution</h2>
+
+    <p>VerumCenter was designed around four principles: <strong>single source of truth</strong>, <strong>role-appropriate access</strong>, <strong>rule transparency</strong>, and <strong>global-ready from day one</strong>.</p>
+
+    <!-- Iteration 1: Identity & Permissiveness -->
+    <div class="iteration">
+      <p class="iteration-number">Iteration 01</p>
+      <h3>Identity &amp; Permissiveness Dashboard</h3>
+      <p>The most complex design challenge: making 1,183 business rules legible to humans. Rules in VSG are multi-dimensional — a customer's permissions depend on scope, channel, tax regime, and country simultaneously.</p>
+      <p>I designed a filterable dashboard where any stakeholder can select <strong>Scope × Channel</strong> and immediately see which rules apply, with expandable cards showing rule rationale, dependencies, and known edge cases. It replaced phone calls to specialists with a self-serve interface usable by support agents and finance directors alike.</p>
+    </div>
+
+    <div class="img-block">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      <span class="img-label">INSERT: Identity &amp; Permissiveness Dashboard — filter interaction</span>
+    </div>
+
+    <!-- Iteration 2: Country + Channel Filter -->
+    <div class="iteration">
+      <p class="iteration-number">Iteration 02</p>
+      <h3>Dynamic Country × Channel Filter Layer</h3>
+      <p>As the platform expanded globally, a new problem emerged: rules that work in Brazil don't always apply in Argentina or Chile. Tax treatment, channel availability, and customer classification differ by country — and there was no shared tool to communicate what applied where.</p>
+      <p>I added a country dimension to the filter system. Business areas, legal, and country-specific commercial leads can now filter by <strong>country + channel</strong> to see a precise view of the rules that govern each market — without a separate documentation system per region.</p>
+    </div>
+
+    <div class="img-block">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <span class="img-label">INSERT: Dashboard — country × channel filter selection</span>
+    </div>
+
+    <!-- Iteration 3: Mobile-first cards -->
+    <div class="iteration">
+      <p class="iteration-number">Iteration 03</p>
+      <h3>Mobile-First Card Layout</h3>
+      <p>An early version of the seller-facing interface used data tables — the default pattern for dense operational data. Field testing revealed a fundamental problem: on mobile, horizontal scroll made the tables nearly unusable. Reps reported skipping screens entirely because navigating the table wasn't worth the effort.</p>
+      <p>The pivot: replaced tables with <strong>card-based layouts designed mobile-first</strong>. Each card surfaces critical data in a glanceable format, with progressive disclosure for details. Colored status badges (Phase Status + Order Status) became first-class elements of the card, visible without scrolling. Validated through seller feedback before shipping.</p>
+    </div>
+
+    <div class="img-block" style="aspect-ratio: 9/16; max-width: 360px; margin: 28px auto;">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+      <span class="img-label">INSERT: Mobile — Opportunities list, card view</span>
+    </div>
+
+    <!-- Governance -->
+    <h3>Governance System (ADR)</h3>
+    <p>With 1,183 rules and multiple teams contributing requirements, alignment was the persistent bottleneck. I introduced an Architecture Decision Record (ADR) system — a structured format for logging decisions, the context behind them, alternatives considered, and consequences accepted.</p>
+    <p>ADRs gave teams a process for making decisions without escalating everything to leadership, and created an audit trail that prevented rule regressions as the platform evolved.</p>
+  </section>
+
+  <!-- Impact -->
+  <section>
+    <h2>Impact</h2>
+    <p style="margin-bottom: 24px; font-size: 13px; color: var(--text-muted);">Metrics are directional and NDA-compliant. Exact figures available in context.</p>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-value">6,000+</div>
+        <div class="metric-label">Partner auto centers served by the unified platform</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">1,183</div>
+        <div class="metric-label">Business rules made self-serve through the filter dashboard</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">5 → 1</div>
+        <div class="metric-label">Internal tools consolidated into a single operational console</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">↓ Calls</div>
+        <div class="metric-label">Order-status support calls reduced after mobile card rollout</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Retrospective -->
+  <section>
+    <h2>What I'd Do Differently</h2>
+    <p><strong>More seller testing earlier.</strong> The horizontal-scroll table problem was caught during field testing — but could have been caught in research if I'd prioritized mobile walkthroughs with reps earlier in the process. The pivot was fast once we had the signal; getting the signal sooner would have been better.</p>
+    <p><strong>Separate the rule dashboard sooner.</strong> The Identity &amp; Permissiveness Dashboard started as a feature inside VerumCenter and could have been its own standalone tool for business areas. Keeping it integrated was right for support agents — but business stakeholders (legal, finance, commercial) would have benefited from a dedicated, embeddable view earlier.</p>
+  </section>
+
+  <!-- Artifacts -->
+  <section>
+    <h2>Artifacts</h2>
+
+    <h3 style="margin-top:0;">Business Rules Dashboard — Live</h3>
+    <p>Interactive filterable view of all 1,183 business rules. Use the Scope and Channel filters to explore the rule set as stakeholders would.</p>
+
+    <div class="dashboard-embed">
+      <iframe src="verum-center-en.html" title="VerumSales Global — Business Rules Dashboard"></iframe>
+      <div class="embed-caption">Interactive artifact · Scope × Channel × Country filters active</div>
+    </div>
+
+    <ul class="artifact-list">
+      <li><span>📱</span> Figma — Mobile card layout, seller interface [INSERT LINK]</li>
+      <li><span>🖥</span> Figma — Identity &amp; Permissiveness Dashboard, filter interaction [INSERT LINK]</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>VerumCenter is a production system. Screenshots and metrics have been sanitized to protect confidential business information.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
