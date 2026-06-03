@@ -1,0 +1,42 @@
+export const SCENARIOS = {
+  toast: {
+    contaCadastrada: { title: "Conta cadastrada com sucesso", description: "Sua conta foi cadastrada com sucesso" },
+    beneficioFiscalAdicionado: { title: "Benefício fiscal adicionado", description: "Benefício fiscal adicionado com sucesso" },
+    contatoAdicionado: { title: "Contato adicionado", description: "Contato adicionado com sucesso" },
+    anexoEnviado: { title: "Anexo enviado", description: "Anexo enviado com sucesso" },
+    erroCpfCnpjJaCadastrado: { title: "Erro ao cadastrar conta", description: "CPF/CNPJ já cadastrado" },
+    erroSalvarConta: { title: "Erro ao salvar conta", description: "Falha ao salvar conta" },
+    erroEnviarSap: { title: "Erro ao enviar para SAP", description: "Falha ao enviar dados para SAP" },
+    erroAnexarArquivo: { title: "Erro ao anexar arquivo", description: "Falha ao anexar arquivo" },
+  },
+  alert: {
+    contaAguardandoValidacao: { variant: "info" as const, title: "Conta aguardando validação", description: "Conta aguardando validação" },
+    integracaoSapFalhou: { variant: "error" as const, title: "Integração SAP falhou", description: "Integração SAP falhou" },
+    beneficioFiscalExpirado: { variant: "warning" as const, title: "Benefício fiscal expirado", description: "Benefício fiscal expirado" },
+    contaRejeitadaSap: { variant: "error" as const, title: "Conta rejeitada pelo SAP", description: "Conta rejeitada pelo SAP" },
+  },
+  tooltip: {
+    clienteInternacional: { title: "Cliente internacional", description: "CPF/CNPJ deixa de ser obrigatório" },
+    tipoRelacao: { title: "Tipo de relação", description: "Definido automaticamente pelo CNAE" },
+    grupoEconomico: { title: "Grupo econômico", description: "Contas vinculadas passam por validação do Crédito" },
+    beneficioFiscal: { title: "Benefício fiscal", description: "Necessita aprovação do Cadastro/Admin" },
+    contatoPrincipal: { title: "Contato principal", description: "Apenas um contato principal por conta" },
+    multiplasIEs: { title: "Múltiplas IEs", description: "Cada IE deve possuir um endereço exclusivo" },
+  },
+  modal: {
+    cancelarCadastro: { title: "Cancelar cadastro", description: "Você perderá as alterações não salvas.", confirmLabel: "Sim, cancelar", variant: "destructive" as const },
+    removerContato: { title: "Remover contato", description: "Tem certeza que deseja remover este contato?", confirmLabel: "Sim, remover contato", variant: "destructive" as const },
+    removerIE: { title: "Remover IE", description: "Tem certeza que deseja remover esta inscrição estadual?", confirmLabel: "Sim, remover IE", variant: "destructive" as const },
+    selecionarEnderecoNF: { title: "Selecionar endereço para NF", description: "Selecione o endereço para nota fiscal", confirmLabel: "Selecionar", variant: "default" as const },
+  },
+  inlineError: {
+    cpfCnpjInvalido: "CPF/CNPJ inválido",
+    cpfCnpjDuplicado: "CPF/CNPJ duplicado",
+    cepInvalido: "CEP inválido",
+    paisNaoSelecionado: "País não selecionado",
+    grupoEconomicoSemMatriz: "Grupo econômico sem matriz",
+    grupoEconomicoNaoEncontrado: "Grupo econômico não encontrado",
+    anexoObrigatorioFaltando: "Anexo obrigatório faltando",
+    contatoObrigatorioFaltando: "Contato obrigatório faltando",
+  },
+} as const
