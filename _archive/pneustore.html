@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PneuStore 360° — Portfolio Case Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface-2: #1a1a1a;
+      --border: #222222;
+      --text: #f0f0f0;
+      --text-muted: #888888;
+      --accent: #e8e0d4;
+      --accent-dim: #c4b89a;
+      --tag-bg: #1e1e1e;
+      --tag-border: #2e2e2e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Nav ── */
+    nav {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav a:hover { color: var(--text); }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 48px 0 56px;
+      margin-bottom: 72px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--text-muted);
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 560px;
+      margin-bottom: 36px;
+    }
+
+    .meta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 100px;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    .tag.accent {
+      background: #1a1710;
+      border-color: #3a3420;
+      color: var(--accent-dim);
+    }
+
+    /* ── Sections ── */
+    section { margin-bottom: 72px; }
+
+    h2 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 12px;
+      margin-top: 40px;
+    }
+
+    h3:first-of-type { margin-top: 0; }
+
+    p {
+      font-size: 15px;
+      color: #c8c8c8;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    /* ── Pain list ── */
+    .pain-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .pain-list li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      color: #b0b0b0;
+      line-height: 1.6;
+    }
+
+    .pain-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Problem cards ── */
+    .problem-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 28px 0;
+    }
+
+    .problem-card {
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .problem-card-number {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-dim);
+      margin-bottom: 8px;
+    }
+
+    .problem-card h3 { margin-top: 0; font-size: 16px; margin-bottom: 10px; }
+    .problem-card p { font-size: 14px; margin-bottom: 0; color: #999; }
+
+    /* ── Stat row ── */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .stat-card {
+      padding: 18px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-value.warn { color: #c47a4a; }
+
+    .stat-label { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+
+    /* ── Data table ── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+    }
+
+    .data-table th {
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #181818;
+      color: #b0b0b0;
+      vertical-align: top;
+    }
+
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table td strong { color: #ddd; }
+
+    /* ── Verbatim ── */
+    .verbatim {
+      border-left: 3px solid #2a2a2a;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 14px;
+      color: #999;
+      font-style: italic;
+      line-height: 1.65;
+    }
+
+    .verbatim cite {
+      display: block;
+      margin-top: 8px;
+      font-size: 11px;
+      font-style: normal;
+      color: #555;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Callout ── */
+    .callout {
+      padding: 18px 20px;
+      background: #0e0e12;
+      border: 1px solid #252535;
+      border-left: 3px solid var(--accent-dim);
+      border-radius: 8px;
+      margin: 24px 0;
+      font-size: 14px;
+      color: #b0b0b0;
+      line-height: 1.65;
+    }
+
+    .callout.warn {
+      background: #100e08;
+      border-color: #2a220a;
+      border-left-color: #c47a4a;
+    }
+
+    /* ── Flow diagram ── */
+    .flow {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 20px 0;
+    }
+
+    .flow-step {
+      font-size: 12px;
+      padding: 6px 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: #aaa;
+    }
+
+    .flow-step.highlight {
+      background: #141208;
+      border-color: #3a3420;
+      color: var(--accent-dim);
+      font-weight: 500;
+    }
+
+    .flow-step.danger {
+      background: #130a08;
+      border-color: #2a1510;
+      color: #c47a4a;
+    }
+
+    .flow-arrow { color: #444; font-size: 14px; }
+
+    /* ── Iteration card ── */
+    .iteration {
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    .iteration-number {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-dim);
+      margin-bottom: 10px;
+    }
+
+    .iteration h3 { margin-top: 0; font-size: 16px; }
+    .iteration p { font-size: 14px; margin-bottom: 0; }
+    .iteration p + p { margin-top: 10px; }
+
+    /* ── Sprint list ── */
+    .sprint-block {
+      margin: 20px 0;
+      padding: 20px 22px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .sprint-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .sprint-block ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sprint-block li {
+      font-size: 14px;
+      color: #b0b0b0;
+      display: flex;
+      gap: 10px;
+    }
+
+    .sprint-block li::before {
+      content: '→';
+      color: #444;
+      flex-shrink: 0;
+    }
+
+    /* ── Before / After ── */
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .ba-card {
+      padding: 18px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .ba-card.before { background: #130d0d; border-color: #2a1515; }
+    .ba-card.after  { background: #0d1310; border-color: #152a1d; }
+
+    .ba-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .ba-card.before .ba-label { color: #8b3a3a; }
+    .ba-card.after  .ba-label { color: #3a8b5a; }
+    .ba-card p { font-size: 13px; margin-bottom: 0; color: #999; }
+
+    /* ── Metrics ── */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 28px 0;
+    }
+
+    .metric-card {
+      padding: 20px 22px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .metric-value {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .metric-label { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+
+    /* ── Image placeholder ── */
+    .img-block {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--surface-2);
+      border: 1px dashed #2a2a2a;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 28px 0;
+      color: #444;
+    }
+
+    .img-block .img-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #3a3a3a;
+    }
+
+    /* ── Artifacts ── */
+    .artifact-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+    .artifact-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      color: #b0b0b0;
+    }
+
+    /* ── Persona grid ── */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .persona-card {
+      padding: 16px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .persona-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .persona-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      margin-top: 48px;
+    }
+
+    footer p { font-size: 12px; color: #444; margin: 0; }
+
+    @media (max-width: 600px) {
+      .before-after { grid-template-columns: 1fr; }
+      .metrics-grid { grid-template-columns: 1fr 1fr; }
+      .stat-row { grid-template-columns: 1fr 1fr; }
+      .persona-grid { grid-template-columns: 1fr 1fr; }
+      .flow { gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <nav>
+    <a href="index.html">← Back</a>
+  </nav>
+
+  <header>
+    <div class="eyebrow">Cantu Inc. &nbsp;·&nbsp; B2C E-commerce</div>
+    <h1>Three Research Workstreams That Diagnosed Why a Tire Platform Was Losing Customers</h1>
+    <p class="subtitle">Led UX research across three interconnected failures in PneuStore 360° — from behavioral data and NPS analysis to strategic design direction — covering O2O installation, vehicle-context search, and wrong-size purchases.</p>
+    <div class="meta-row">
+      <span class="tag accent">PneuStore 360°</span>
+      <span class="tag">UX Research</span>
+      <span class="tag">Behavioral Data Analysis</span>
+      <span class="tag">O2O / Omnichannel</span>
+      <span class="tag">B2C</span>
+    </div>
+  </header>
+
+  <!-- ── CONTEXT ── -->
+  <section>
+    <h2>Context</h2>
+    <p>PneuStore 360° is Cantu Inc.'s direct-to-consumer e-commerce channel for automotive tires — part of the same distribution network that powers 6,000+ auto centers across Brazil. The platform allows customers to browse, purchase, and schedule tire installation at partner shops nationwide.</p>
+    <p>Despite significant commercial investment, three structural UX failures were driving abandonment, wrong purchases, and customer churn. I was brought in to investigate each one from discovery — using behavioral data, NPS qualitative analysis, and stakeholder walkthroughs — and define the design direction before solutions were built.</p>
+    <p>The three workstreams were independent in origin but shared a common root: the platform was designed around products, not around the complete tire-buying journey.</p>
+  </section>
+
+  <!-- ── MY ROLE ── -->
+  <section>
+    <h2>My Role</h2>
+    <ul class="pain-list">
+      <li>
+        <span class="pain-icon">○</span>
+        <span>Led end-to-end UX research for all three workstreams — behavioral data analysis (Microsoft Clarity), NPS/qualitative synthesis (SoluCX), stakeholder mapping, and benchmarking</span>
+      </li>
+      <li>
+        <span class="pain-icon">○</span>
+        <span>Produced structured research artifacts: root cause analysis, JTBD mapping, customer journey maps, prioritization matrices, and sprint roadmaps</span>
+      </li>
+      <li>
+        <span class="pain-icon">○</span>
+        <span>Defined the conceptual model for the "Compra e Instale" O2O flow and the vehicle-context fitment UX direction</span>
+      </li>
+      <li>
+        <span class="pain-icon">○</span>
+        <span>Identified that the wrong-size purchase failure was systemic — driven by 6 compounding root causes — and prioritized a sprint roadmap covering immediate, structural, and transformational interventions</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ── PROBLEM ── -->
+  <section>
+    <h2>Problem</h2>
+    <p>Three failures, one underlying pattern: the platform treated the tire as the end goal. The customer's actual goal — getting the right tire installed on their car — was left for them to figure out.</p>
+
+    <div class="problem-cards">
+      <div class="problem-card">
+        <div class="problem-card-number">Problem 01 — Compra e Instale</div>
+        <h3>Buying a tire doesn't include getting it installed</h3>
+        <p>The purchase flow ended at delivery. Installation — mandatory, complex, and anxiety-inducing — was left entirely to the customer post-checkout. The platform had partner shops, scheduling infrastructure, and installation capabilities. None of it was surfaced in the purchase experience.</p>
+      </div>
+
+      <div class="problem-card">
+        <div class="problem-card-number">Problem 02 — Página de Carros</div>
+        <h3>Vehicle search returned results the user couldn't trust</h3>
+        <p>Users searching by vehicle expected to see only compatible tires. The catalog returned a generic product list organized by brand, line, and size — with no vehicle context. The fitment engine already validated compatibility in the backend. The front-end never confirmed it, silently breaking trust at the most critical decision point.</p>
+      </div>
+
+      <div class="problem-card">
+        <div class="problem-card-number">Problem 03 — Erro de Medida</div>
+        <h3>Users were buying the wrong tire size — and couldn't fix it</h3>
+        <p>Customers were purchasing incompatible tire sizes at a frequency high enough to generate measurable NPS impact, operational cost, and churn. The interface offered no guided entry point by vehicle, no compatibility validation on the product page, and no friction before checkout. When the error was discovered post-delivery, the cancellation path was broken — turning a UX failure into a support and reputation crisis.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RESEARCH ── -->
+  <section>
+    <h2>Research</h2>
+
+    <h3>Workstream 03 — Diagnosing the wrong-size purchase failure</h3>
+    <p>The third workstream had the most quantifiable evidence. I crossed behavioral data from Microsoft Clarity (30 days, 2.47M sessions) with qualitative NPS data from SoluCX (2,524 respondents, April–May 2026) to establish where the failure was happening, who it was affecting, and why the interface was enabling it.</p>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-value">2.47M</div>
+        <div class="stat-label">Sessions analyzed over 30 days</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value warn">0.72%</div>
+        <div class="stat-label">Conversion rate — 17,864 purchases</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value warn">309K</div>
+        <div class="stat-label">Sessions that started checkout but didn't finish</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value warn">82%</div>
+        <div class="stat-label">Mobile traffic — with 64% bounce rate</div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <strong style="color: #c47a4a;">The mobile gap:</strong> 82% of traffic was mobile, but mobile bounce rate was 62% higher than desktop. Users on mobile had significantly more difficulty navigating, filtering, and confirming sizes — yet that's where most purchase decisions were being made.
+    </div>
+
+    <h3>Where frustration was concentrated</h3>
+    <p>Rage click analysis revealed a clear signal: the /search page had 23,661 rage clicks — 4.5× more than any other page on the site. Users searching for specific tire sizes were hitting an interface that didn't respond as expected, filtering by size and seeing mixed results with similar but incompatible measurements.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Page</th><th>Rage Clicks</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>/search</strong></td><td><strong>23,661 🚨</strong></td></tr>
+        <tr><td>/ (Homepage)</td><td>5,271</td></tr>
+        <tr><td>/marca/michelin</td><td>4,591</td></tr>
+        <tr><td>PDP — product page</td><td>4,116</td></tr>
+        <tr><td>/checkout/pagamento</td><td>2,273</td></tr>
+      </tbody>
+    </table>
+
+    <h3>The NPS signal</h3>
+    <p>Of 312 detractor comments with written feedback, 21 were direct reports of purchasing the wrong tire size — 6.7% of all detractors, with explicit verbatims describing how the interface led them to the error. An additional 99 comments contained keywords related to size, exchange, error, or return.</p>
+
+    <div class="verbatim">
+      "The site induces error. I searched for a tire size, brand and model. In the same brand, the searched size appeared alongside other sizes. I bought the wrong one. The return after cancellation takes too long. No exchanges, only cancellations."
+      <cite>— Detractor, NPS 7</cite>
+    </div>
+
+    <div class="verbatim">
+      "Before, there was a vehicle compatibility list on each product listing."
+      <cite>— Promoter, NPS 10 — missing a feature that had been removed</cite>
+    </div>
+
+    <div class="verbatim">
+      "I was on the phone for an hour and a half. When the agent finally answered, the call dropped."
+      <cite>— Detractor, NPS 0 — trying to correct a wrong-size purchase</cite>
+    </div>
+
+    <div class="callout">
+      <strong style="color: var(--accent-dim);">The amplification pattern:</strong> Support was the largest category of detractor complaints (43%), above delayed delivery (33%). When users bought the wrong size, they tried to correct it — and couldn't reach anyone. The UX failure became a support failure, which became an NPS failure. The problems compounded.
+    </div>
+
+    <h3>Six root causes — not a single fixable issue</h3>
+    <ul class="pain-list">
+      <li>
+        <span class="pain-icon">1</span>
+        <span><strong style="color:#ddd;">The site guides by size, not by vehicle.</strong> No vehicle-first entry point on homepage or search. Users who don't know their size by heart have no guided path — they estimate, compare similar sizes, and error.</span>
+      </li>
+      <li>
+        <span class="pain-icon">2</span>
+        <span><strong style="color:#ddd;">Search is the highest-friction page on the site.</strong> 23,661 rage clicks on /search indicate filters don't work as expected and similar sizes appear without clear hierarchy.</span>
+      </li>
+      <li>
+        <span class="pain-icon">3</span>
+        <span><strong style="color:#ddd;">The PDP offers no compatibility validation.</strong> The vehicle compatibility list that previously existed on product pages was removed. No signal tells the user whether this specific tire fits their specific car.</span>
+      </li>
+      <li>
+        <span class="pain-icon">4</span>
+        <span><strong style="color:#ddd;">Mobile concentrates maximum risk.</strong> 82% of sessions happen on mobile — where sizes are harder to read, comparison requires excessive scroll, and the search field is prone to input error.</span>
+      </li>
+      <li>
+        <span class="pain-icon">5</span>
+        <span><strong style="color:#ddd;">The purchase flow has zero positive friction.</strong> No confirmation moment between PDP and checkout. The user can complete a purchase without a single validation of the selected size.</span>
+      </li>
+      <li>
+        <span class="pain-icon">6</span>
+        <span><strong style="color:#ddd;">Post-purchase has no exit.</strong> Once the error is discovered, self-service cancellation before shipping is impossible via the site. Users are forced to wait for delivery, then navigate a broken returns flow.</span>
+      </li>
+    </ul>
+
+    <h3>The wrong-size customer journey</h3>
+    <p>Mapped across 9 stages from site entry to brand abandonment — each with behavioral evidence.</p>
+
+    <div class="flow">
+      <span class="flow-step">Entry via paid search</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step danger">Search fails</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">Listing — picks similar size</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step danger">PDP — no validation</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step danger">Cart — zero friction</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">Checkout completed</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step danger">Delivery — wrong size</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step danger">Support — unreachable</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step danger">Brand abandonment</span>
+    </div>
+
+    <h3>Workstreams 01 & 02 — Research summary</h3>
+    <p>For "Compra e Instale" and "Página de Carros," research included: stakeholder mapping across three tiers, process walkthroughs with the product and logistics teams, benchmark analysis (Leroy Merlin, Magazine Luiza, Best Buy, Tire Rack, Fitment Group, WillTheyFit), and persona synthesis across 7 user profiles.</p>
+
+    <div class="persona-grid">
+      <div class="persona-card">
+        <div class="persona-name">Ricardo</div>
+        <div class="persona-desc">App-native driver. Expects end-to-end flow — buys and books in one session.</div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-name">Seu Manoel</div>
+        <div class="persona-desc">Auto shop owner. Buys in bulk, needs invoice and fast confirmation.</div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-name">Fabiana</div>
+        <div class="persona-desc">Fleet manager. Multiple vehicles. SLA and audit trail matter more than price.</div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-name">Enzo</div>
+        <div class="persona-desc">Convenience-first. Will pay more to avoid friction. Drops immediately if flow feels incomplete.</div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-name">Dona Neide</div>
+        <div class="persona-desc">Digital novice. High anxiety. Needs reassurance at every step.</div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-name">Julia</div>
+        <div class="persona-desc">Small fleet. Researches carefully. Wrong purchase invisible in funnel data.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong style="color: var(--accent-dim);">Fitment root cause:</strong> The backend engine already validated vehicle compatibility. This wasn't a missing feature — it was a broken connection. The front-end simply never surfaced the validation that was already running invisibly.
+    </div>
+  </section>
+
+  <!-- ── SOLUTION ── -->
+  <section>
+    <h2>Solution Direction</h2>
+
+    <h3>01 — Compra e Instale: Installation as the default, not an afterthought</h3>
+    <p>The central design decision: installation should be the pre-selected choice at checkout, not a secondary option the user has to discover. The logistics moment becomes a deliberate, visible decision point — not a hidden feature tucked in post-purchase.</p>
+
+    <p>Redesigned purchase flow:</p>
+    <div class="flow">
+      <span class="flow-step">PDP</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step highlight">Logistics choice (Install default)</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">Select partner shop</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">Schedule appointment</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step">Checkout</span>
+      <span class="flow-arrow">→</span>
+      <span class="flow-step highlight">Dual confirmation</span>
+    </div>
+
+    <div class="iteration">
+      <div class="iteration-number">Trust Signal</div>
+      <h3>"Instalação Garantida" seal</h3>
+      <p>Products eligible for the partner shop installation network carry a visible trust seal on the product card and detail page. It pre-answers the user's question before they have to ask: this tire is compatible with the installation service, a certified shop is available in your area, and the appointment is confirmed at checkout — not separately.</p>
+      <p>The seal functions as a persistent anchor across the funnel, not just at the logistics choice moment — reducing the cognitive load of evaluating whether installation is possible for a given product.</p>
+    </div>
+
+    <div class="img-block">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      <span class="img-label">Figma — Compra e Instale: logistics choice + dual confirmation screen</span>
+    </div>
+
+    <h3>02 — Página de Carros: vehicle context stays visible throughout</h3>
+    <p>Once a user enters their vehicle, that context persists as a visible filter banner across the entire shopping session. Every product card shows a compatibility confirmation drawn from the backend validation that was already running. The catalog switches from product-first to vehicle-first — not by rebuilding the engine, but by surfacing what it already knew.</p>
+
+    <div class="before-after">
+      <div class="ba-card before">
+        <div class="ba-label">Before</div>
+        <p>Search "pneus para Onix" → generic catalog organized by brand/line/size → no vehicle context visible → user can't trust results → abandons or buys wrong</p>
+      </div>
+      <div class="ba-card after">
+        <div class="ba-label">Direction</div>
+        <p>Vehicle selected once → persists across entire session → every result shows "Compatible with your Chevrolet Onix 2021" → incompatible products hidden or marked → user confidence restored</p>
+      </div>
+    </div>
+
+    <div class="img-block">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      <span class="img-label">Figma — Página de Carros: vehicle-context persistence in search results</span>
+    </div>
+
+    <h3>03 — Erro de Medida: a 3-sprint intervention roadmap</h3>
+    <p>The wrong-size problem had 6 root causes and couldn't be solved with a single fix. The research produced a prioritized roadmap sequenced by impact versus effort — quick wins first, transformational changes last.</p>
+
+    <div class="sprint-block">
+      <div class="sprint-label">Sprint 1 — Quick wins: high impact, low effort</div>
+      <ul>
+        <li>Confirmation modal before cart: "You're buying 205/55R16 — for which vehicle?" — positive friction that doesn't block experienced users</li>
+        <li>Visual hierarchy of tire size on PDP and listing — size becomes the most visible element, not the discount</li>
+        <li>Self-service cancellation before shipping — eliminates the post-error trap that currently destroys NPS</li>
+      </ul>
+    </div>
+
+    <div class="sprint-block">
+      <div class="sprint-label">Sprint 2 — Structural: medium effort, high return</div>
+      <ul>
+        <li>Compatibility checker on PDP — reintroduces a feature users explicitly noted as missing; confirms fit before add-to-cart</li>
+        <li>Search page overhaul — address the 23,661 rage clicks: autocomplete by size, filters that work, size-exact prioritization before similar alternatives</li>
+        <li>Size education inline — tooltip explaining what 205/55R16 means, at the moment the user is choosing</li>
+      </ul>
+    </div>
+
+    <div class="sprint-block">
+      <div class="sprint-label">Sprint 3 — Transformational: vehicle-first entry</div>
+      <ul>
+        <li>Vehicle-guided entry as the primary search pattern — plate, model/year, or "My Cars" for returning users — eliminates the root cause for users who don't know their size</li>
+        <li>Mobile-first redesign of the full purchase flow — addresses the 82% mobile traffic + 64% bounce gap</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── IMPACT ── -->
+  <section>
+    <h2>Impact</h2>
+    <p><em style="color: #666;">Research-phase project. Metrics below are behavioral baselines from the diagnosis period. Post-implementation measurement was not yet available at the time of this writing.</em></p>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-value">6</div>
+        <div class="metric-label">Root causes mapped for wrong-size purchases — each with a distinct intervention point in the funnel</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">21</div>
+        <div class="metric-label">Direct NPS verbatims on wrong-size purchases — quantified a problem that was previously invisible in funnel data</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">3</div>
+        <div class="metric-label">Interconnected research workstreams synthesized into a unified design direction for a single platform</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">0</div>
+        <div class="metric-label">New backend features required for vehicle-context fitment — the engine existed; the front-end connection was the gap</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RETROSPECTIVE ── -->
+  <section>
+    <h2>What I'd Do Differently</h2>
+
+    <h3>Cross-reference returns data from operations earlier</h3>
+    <p>The NPS analysis surfaced the wrong-size problem quantitatively — but the NPS data only captured customers who responded to the survey. The actual scale of wrong-size purchases likely exceeded the 21 verbatims by a significant margin. A returns-data audit from the operations team (cancellation reason codes) would have sharpened the business case and accelerated prioritization. I'd push for that cross-reference at the start of the research, not after the behavioral analysis was complete.</p>
+
+    <h3>Test the confirmation modal assumption before locking the sprint sequence</h3>
+    <p>The modal ("You're buying 205/55R16 — for which vehicle?") is a strong hypothesis for preventing wrong-size purchases with minimal development effort. But positive friction can also reduce conversion if it feels intrusive for users who already know their size. I'd validate this with an A/B test before positioning it as Sprint 1 — the ordering of quick wins should be validated, not just prioritized by intuition.</p>
+
+    <h3>Treat the three workstreams as one connected story earlier</h3>
+    <p>The three research threads were initiated separately and converged in analysis. The shared root — platform organized around products, not around the complete tire-buying journey — became clear only after all three were mapped. Framing that unifying insight at the start of each investigation would have sharpened the research questions and made the recommendations more coherent from the beginning.</p>
+  </section>
+
+  <!-- ── ARTIFACTS ── -->
+  <section>
+    <h2>Artifacts</h2>
+    <ul class="artifact-list">
+      <li>○ &nbsp; Research — Wrong-size purchase root cause analysis (6 causes, behavioral + qualitative evidence) <span style="color:#444; margin-left:auto; font-size:12px;">[INSERT LINK]</span></li>
+      <li>○ &nbsp; Research — Customer journey map: from paid search entry to brand abandonment (9 stages, evidence at each) <span style="color:#444; margin-left:auto; font-size:12px;">[INSERT LINK]</span></li>
+      <li>○ &nbsp; Research — Opportunity prioritization matrix: 8 UX interventions × Impact / Effort / Urgency <span style="color:#444; margin-left:auto; font-size:12px;">[INSERT LINK]</span></li>
+      <li>○ &nbsp; Figma — Compra e Instale: PDP → logistics choice → store selector → scheduling → dual confirmation <span style="color:#444; margin-left:auto; font-size:12px;">[INSERT LINK]</span></li>
+      <li>○ &nbsp; Figma — Página de Carros: vehicle-context persistence across search and results <span style="color:#444; margin-left:auto; font-size:12px;">[INSERT LINK]</span></li>
+      <li>○ &nbsp; Research — JTBD mapping: functional, emotional, and social dimensions across 7 personas <span style="color:#444; margin-left:auto; font-size:12px;">[INSERT LINK]</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Keythe Rueckert · Product Designer · <a href="mailto:keytherueckert93@gmail.com" style="color:#555; text-decoration:none;">keytherueckert93@gmail.com</a></p>
+  </footer>
+
+</div>
+</body>
+</html>

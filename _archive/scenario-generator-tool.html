@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scenario Generator</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      color: #cccccc;
+      background: #1e1e1e;
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    h2 { font-size: 15px; font-weight: 600; margin: 0 0 12px; color: #e0e0e0; }
+    p  { font-size: 12px; margin: 0 0 10px; color: #999; }
+    a  { color: #4a9eff; }
+
+    textarea, input[type="password"] {
+      width: 100%;
+      background: #2d2d2d;
+      color: #cccccc;
+      border: 1px solid #3e3e3e;
+      padding: 8px;
+      font-family: inherit;
+      font-size: 13px;
+      display: block;
+      margin-top: 6px;
+      border-radius: 3px;
+      outline: none;
+    }
+
+    textarea:focus, input[type="password"]:focus { border-color: #4a9eff; }
+    textarea { min-height: 200px; resize: vertical; }
+
+    button {
+      margin-top: 10px;
+      padding: 7px 16px;
+      background: #0e639c;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: inherit;
+    }
+
+    button:disabled { opacity: 0.5; cursor: default; }
+    button:not(:disabled):hover { background: #1177bb; }
+
+    .link-btn {
+      background: none;
+      border: none;
+      color: #4a9eff;
+      padding: 0;
+      margin: 0;
+      font-size: 12px;
+      cursor: pointer;
+      text-decoration: underline;
+      margin-top: 8px;
+      display: inline-block;
+    }
+    .link-btn:hover { color: #75beff; background: none; }
+
+    #api-message, #main-message {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #f48771;
+      min-height: 16px;
+    }
+
+    #char-count { font-size: 11px; margin-top: 4px; color: #666; }
+    #char-count.warn  { color: #cca700; }
+    #char-count.trunc { color: #f48771; }
+
+    #count {
+      margin: 16px 0 8px;
+      font-size: 12px;
+      color: #888;
+    }
+
+    .card {
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      border-radius: 3px;
+      border-left: 3px solid var(--card-accent);
+      background: var(--card-bg);
+    }
+
+    .card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+
+    .badge {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-weight: 700;
+      text-transform: uppercase;
+      border: 1px solid var(--card-accent);
+      color: var(--card-accent);
+      background: var(--card-bg);
+    }
+
+    .badge-dim {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-weight: 600;
+      border: 1px solid #555;
+      color: #888;
+      background: transparent;
+    }
+
+    .card-name    { font-weight: 600; font-size: 13px; color: #e0e0e0; }
+    .card-desc    { font-size: 12px; color: #999; margin-bottom: 4px; }
+    .card-trigger { font-size: 11px; color: #777; font-style: italic; margin-bottom: 8px; }
+    .card-copy    { padding: 8px; background: rgba(0,0,0,0.25); border-radius: 3px; }
+    .card-copy-title { font-weight: 600; font-size: 12px; margin-bottom: 3px; color: #ccc; }
+    .card-copy-body  { font-size: 12px; color: #888; }
+
+    #api-form, #main-form { max-width: 700px; }
+
+    #copy-all-btn {
+      display: none;
+      margin: 0 0 12px;
+      padding: 7px 16px;
+      background: #3a3d41;
+      color: #cccccc;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: inherit;
+    }
+    #copy-all-btn:hover { background: #45494e; }
+  </style>
+</head>
+<body>
+
+  <div id="api-form" hidden>
+    <h2>Scenario Generator</h2>
+    <p>Insira sua API key do Groq para começar.<br>
+       Obtenha gratuitamente em <a href="https://console.groq.com" target="_blank">console.groq.com</a>.</p>
+    <label style="font-size:12px">API Key
+      <input type="password" id="api-key-input" placeholder="gsk_...">
+    </label>
+    <button id="save-key-btn">Salvar</button>
+    <div id="api-message"></div>
+  </div>
+
+  <div id="main-form" hidden>
+    <h2>Scenario Generator</h2>
+    <label style="font-size:12px">Cole a descrição do módulo abaixo
+      <textarea id="desc" placeholder="Descrição, regras de negócio, fluxos alternativos..."></textarea>
+    </label>
+    <div id="char-count"></div>
+    <button id="generate-btn" disabled>Gerar Cenários</button>
+    <div id="main-message"></div>
+    <div id="count"></div>
+    <button id="copy-all-btn">Copiar para o Claude</button>
+    <div id="cards"></div>
+    <button class="link-btn" id="change-key-btn">Trocar API key</button>
+  </div>
+
+  <script>
+    const API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+    const MODEL   = 'llama-3.3-70b-versatile';
+    const MAX_DESC_CHARS = 12000;
+    const STORAGE_KEY = 'scenarioGenerator.apiKey';
+
+    const COLORS = {
+      confirmation: { bg: '#0d2137', accent: '#4a9eff' },
+      error:        { bg: '#2d1212', accent: '#f48771' },
+      warning:      { bg: '#2d2412', accent: '#cca700' },
+      info:         { bg: '#0d1e2d', accent: '#75beff' },
+      success:      { bg: '#0d2d0d', accent: '#73c991' },
+      loading:      { bg: '#1e1e2d', accent: '#c5a5e8' },
+      empty:        { bg: '#1e1e1e', accent: '#888888' },
+    };
+
+    const apiForm     = document.getElementById('api-form');
+    const mainForm    = document.getElementById('main-form');
+    const desc        = document.getElementById('desc');
+    const generateBtn = document.getElementById('generate-btn');
+    const saveKeyBtn  = document.getElementById('save-key-btn');
+    const changeKeyBtn = document.getElementById('change-key-btn');
+    const apiKeyInput = document.getElementById('api-key-input');
+    const apiMessage  = document.getElementById('api-message');
+    const mainMessage = document.getElementById('main-message');
+    const count       = document.getElementById('count');
+    const cards       = document.getElementById('cards');
+    const charCount   = document.getElementById('char-count');
+    const copyAllBtn  = document.getElementById('copy-all-btn');
+
+    let lastModals = [];
+
+    copyAllBtn.addEventListener('click', () => {
+      const text = lastModals.map(m =>
+        `### ${m.name} (${m.component} • ${m.type})\n- **Trigger:** ${m.trigger}\n- **Descrição:** ${m.description}\n- **Título:** ${m.title}\n- **Corpo:** ${m.body}`
+      ).join('\n\n');
+      navigator.clipboard.writeText(`Implemente os seguintes cenários de UI:\n\n${text}`).then(() => {
+        const prev = copyAllBtn.textContent;
+        copyAllBtn.textContent = 'Copiado!';
+        setTimeout(() => { copyAllBtn.textContent = prev; }, 1500);
+      });
+    });
+
+    function showApiForm() {
+      apiForm.removeAttribute('hidden');
+      mainForm.setAttribute('hidden', '');
+      apiMessage.textContent = '';
+    }
+
+    function showMainForm() {
+      apiForm.setAttribute('hidden', '');
+      mainForm.removeAttribute('hidden');
+    }
+
+    function init() {
+      const key = localStorage.getItem(STORAGE_KEY);
+      key ? showMainForm() : showApiForm();
+    }
+
+    saveKeyBtn.addEventListener('click', () => {
+      const key = apiKeyInput.value.trim();
+      if (!key) return;
+      localStorage.setItem(STORAGE_KEY, key);
+      apiKeyInput.value = '';
+      showMainForm();
+    });
+
+    changeKeyBtn.addEventListener('click', () => {
+      localStorage.removeItem(STORAGE_KEY);
+      showApiForm();
+    });
+
+    desc.addEventListener('input', () => {
+      const len = desc.value.length;
+      generateBtn.disabled = desc.value.trim().length === 0;
+      if (len === 0) {
+        charCount.textContent = '';
+        charCount.className = '';
+      } else if (len > MAX_DESC_CHARS) {
+        charCount.textContent = `${len} / ${MAX_DESC_CHARS} chars — texto será truncado no envio`;
+        charCount.className = 'trunc';
+      } else if (len > MAX_DESC_CHARS * 0.8) {
+        charCount.textContent = `${len} / ${MAX_DESC_CHARS} chars`;
+        charCount.className = 'warn';
+      } else {
+        charCount.textContent = `${len} chars`;
+        charCount.className = '';
+      }
+    });
+
+    generateBtn.addEventListener('click', async () => {
+      mainMessage.textContent  = '';
+      count.textContent        = '';
+      cards.innerHTML          = '';
+      copyAllBtn.style.display = 'none';
+      generateBtn.disabled = true;
+      generateBtn.textContent = 'Gerando...';
+
+      const apiKey = localStorage.getItem(STORAGE_KEY) || '';
+      const text = desc.value.trim();
+
+      try {
+        const modals = await callGroq(apiKey, text);
+        lastModals = modals || [];
+        renderModals(modals);
+      } catch (err) {
+        const labels = {
+          invalid_key:   'API key inválida. Clique em "Trocar API key" abaixo.',
+          network_error: 'Erro ao conectar ao Groq. Tente novamente.',
+          parse_error:   'Não foi possível parsear a resposta. Tente novamente.',
+          rate_limit:    'Limite de requisições atingido. Aguarde um momento.',
+        };
+        const kind = err.kind || 'network_error';
+        mainMessage.textContent = err.detail ? `${labels[kind] || kind} (${err.detail})` : (labels[kind] || String(err));
+      } finally {
+        generateBtn.disabled = desc.value.trim().length === 0;
+        generateBtn.textContent = 'Gerar Cenários';
+      }
+    });
+
+    async function callGroq(apiKey, description, attemptsLeft = 2) {
+      const safe = description.length > MAX_DESC_CHARS
+        ? description.slice(0, MAX_DESC_CHARS) + '\n[descrição truncada]'
+        : description;
+
+      const prompt = `Liste todos os cenários de UI deste módulo (modals, toasts, tooltips).
+
+Retorne APENAS um array JSON. Cada item:
+{"name":"...","description":"...","trigger":"...","type":"confirmation|error|warning|info|success|loading|empty","component":"modal|toast|tooltip","title":"...","body":"..."}
+
+Regra component: modal=decisão/destructivo, toast=feedback pós-ação, tooltip=info contextual.
+
+---
+${safe}`;
+
+      let response;
+      try {
+        response = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`,
+          },
+          body: JSON.stringify({ model: MODEL, messages: [{ role: 'user', content: prompt }] }),
+        });
+      } catch (e) {
+        throw { kind: 'network_error', detail: e.message };
+      }
+
+      if (response.status === 401 || response.status === 403) throw { kind: 'invalid_key' };
+      if (response.status === 429) throw { kind: 'rate_limit' };
+      if (!response.ok) {
+        let body = '';
+        try { body = await response.text(); } catch { /**/ }
+        throw { kind: 'network_error', detail: `HTTP ${response.status}: ${body.slice(0, 200)}` };
+      }
+
+      const data = await response.json();
+      const text = data.choices?.[0]?.message?.content?.trim() ?? '';
+
+      if (!text) {
+        if (attemptsLeft > 1) return callGroq(apiKey, description, attemptsLeft - 1);
+        throw { kind: 'parse_error' };
+      }
+
+      const clean = text.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '').trim();
+      try {
+        return JSON.parse(clean);
+      } catch {
+        if (attemptsLeft > 1) return callGroq(apiKey, description, attemptsLeft - 1);
+        throw { kind: 'parse_error' };
+      }
+    }
+
+    function renderModals(modals) {
+      if (!modals || modals.length === 0) {
+        count.textContent = 'Nenhum cenário identificado. Tente adicionar mais detalhes à descrição.';
+        return;
+      }
+      const n = modals.length;
+      count.textContent = `${n} cenário${n > 1 ? 's' : ''} identificado${n > 1 ? 's' : ''}`;
+      copyAllBtn.style.display = 'block';
+      cards.innerHTML = modals.map(cardHTML).join('');
+    }
+
+    function cardHTML(m) {
+      const c = COLORS[m.type] || COLORS.info;
+      const compLabel = { modal: 'modal', toast: 'toast', tooltip: 'tooltip' }[m.component] || m.component;
+      return `
+        <div class="card" style="--card-bg:${c.bg}; --card-accent:${c.accent}">
+          <div class="card-header">
+            <span class="badge">${esc(m.type)}</span>
+            <span class="badge-dim">${esc(compLabel)}</span>
+            <span class="card-name">${esc(m.name)}</span>
+          </div>
+          <div class="card-desc">${esc(m.description)}</div>
+          <div class="card-trigger">Trigger: ${esc(m.trigger)}</div>
+          <div class="card-copy">
+            <div class="card-copy-title">${esc(m.title)}</div>
+            <div class="card-copy-body">${esc(m.body)}</div>
+          </div>
+        </div>`;
+    }
+
+    function esc(s) {
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    init();
+  </script>
+</body>
+</html>

@@ -237,6 +237,50 @@ const ITEMS = [
     detalhe:"Today the CRM operates on an exclusive ownership model: one 'owner' seller per account. To evolve to multi-BU (e.g., Gripmaster serves OTR + B2Fleet serves cargo for the same CNPJ), the system must distinguish 'Owner' (primary responsible) from 'Served By' (BU with active sales access). Each BU would have independent price tables, commission and fiscal permissiveness for the same client. Prerequisite for real omnichannel expansion.",
     relacionados:["PERM-001","PERM-002","PERM-014","GAP-014","MOT-010"] },
 
+  // USA — Country-Specific Rules
+  { id:"PERM-USA-01", pilar:"identidade", status:"ativo", tags:["USA"],
+    titulo:"Reseller License — State Certificate Validation",
+    descricao:"USA resellers must present a state-issued resale certificate (e.g., Form ST-120 in NY, CDTFA-230 in CA) to bypass sales tax and access wholesale price tables. No certificate = consumption pricing.",
+    detalhe:"Unlike Brazil's CNAE-based classification, the US system relies on self-declared reseller status backed by state certificates. The system must store and validate the certificate per state, and flag expired certificates before the next transaction. Certificate requirements vary by state — a single national database is not possible.",
+    relacionados:["PERM-001","PERM-002","PERM-003"] },
+  { id:"PERM-USA-02", pilar:"identidade", status:"ativo", tags:["USA","Fleet Rental"],
+    titulo:"Fleet DOT Number — FMCSA Requirement",
+    descricao:"Commercial fleet channel clients in the USA must have a valid FMCSA DOT number to access fleet pricing and SLA contracts. The system validates DOT status before enabling the fleet channel.",
+    detalhe:"The DOT number links to FMCSA's public database. Inactive or revoked DOT = automatic block of fleet channel access. Fleet SLA pricing (per-km contracts) only activates once DOT is confirmed active. Replaces the CNPJ + CNAE validation used in Brazil.",
+    relacionados:["PERM-007","PERM-008","PER-004"] },
+  { id:"PERM-USA-03", pilar:"identidade", status:"em-revisão", tags:["USA","B2C"],
+    titulo:"MAP Policy — Minimum Advertised Price Enforcement",
+    descricao:"B2C channel in the USA is bound by manufacturer MAP agreements. The system must enforce MAP floor pricing regardless of seller discount authority. Discounts below MAP require brand approval.",
+    detalhe:"MAP agreements are legally binding contracts with tire manufacturers (Michelin, Bridgestone, Continental). Violations risk brand removal from distribution. Unlike Brazil, where pricing exceptions flow through internal approval, MAP violations in the USA have external legal consequences. The system must flag MAP-protected SKUs and block below-MAP orders without brand-level override.",
+    relacionados:["MOT-001","MOT-004","GAP-006"] },
+  { id:"PERM-USA-04", pilar:"identidade", status:"ativo", tags:["USA"],
+    titulo:"Federal Tax ID (EIN) — Account Registration",
+    descricao:"All business accounts in the USA must be registered with a valid Employer Identification Number (EIN). Sole proprietors may use SSN with consent flag. EIN is the US equivalent of CNPJ for account classification.",
+    detalhe:"EIN validation at registration prevents duplicate account creation and ensures correct tax reporting (Form 1099 for vendors). Credit analysis uses EIN to pull commercial credit reports (Dun & Bradstreet, Experian Business). Without valid EIN, account is treated as B2C consumer.",
+    relacionados:["PERM-001","PERM-009","PERM-010"] },
+
+  // MEX — Country-Specific Rules
+  { id:"PERM-MEX-01", pilar:"identidade", status:"ativo", tags:["MEX"],
+    titulo:"RFC Classification — Persona Moral vs. Física",
+    descricao:"Mexico uses RFC (Registro Federal de Contribuyentes) for tax identity. Persona Moral (company, 12-char RFC) accesses wholesale resale tables. Persona Física (individual, 13-char RFC) is treated as consumption client.",
+    detalhe:"RFC replaces CNPJ + CNAE as the classification mechanism. The system extracts the RFC structure: 3-letter initialism + birth/founding date + homoclave. Persona Moral: letters are company initials. Persona Física: letters are individual initials. Misclassification leads to incorrect CFDI invoice generation and SAT non-compliance.",
+    relacionados:["PERM-001","PERM-002","PERM-003"] },
+  { id:"PERM-MEX-02", pilar:"identidade", status:"ativo", tags:["MEX"],
+    titulo:"CFDI 4.0 — Mandatory SAT Stamping Before Dispatch",
+    descricao:"All invoices in Mexico require electronic stamping (timbre) by the SAT via a certified PAC (Proveedor Autorizado de Certificación) under CFDI 4.0 standard. Orders cannot be dispatched without a valid UUID from the SAT.",
+    detalhe:"CFDI 4.0 (mandatory since 2023) requires: buyer RFC + full registered name + tax domicile + fiscal regime. Unlike Brazil's NF-e, CFDI validation is real-time and blocks shipment if PAC returns an error. The system must integrate with a certified PAC (e.g., Finkok, SW Sapien) and handle retry logic for SAT downtime without releasing unvalidated orders.",
+    relacionados:["PERM-MEX-01","PERM-MEX-03","GAP-001"] },
+  { id:"PERM-MEX-03", pilar:"identidade", status:"ativo", tags:["MEX"],
+    titulo:"IVA Treatment — Resale vs. Final Consumer",
+    descricao:"Mexico IVA (16%) must be handled differently by client type. Resale channel (Persona Moral, tire distributor): IVA transferido — shown separately on CFDI. Final consumer (Persona Física): IVA included in final price. System must route each invoice type correctly.",
+    detalhe:"Unlike Brazil's ICMS (state-level, complex incentives), Mexico IVA is federal and uniform at 16%. However, the CFDI invoice must correctly declare the IVA transfer or retention depending on the fiscal relationship between buyer and seller. Incorrect IVA handling triggers SAT audit flags. No equivalent to Group 106 or TTD in Mexico — tax treatment is simpler but CFDI compliance is stricter.",
+    relacionados:["PERM-MEX-01","PERM-MEX-02","PERM-004","PERM-005"] },
+  { id:"PERM-MEX-04", pilar:"identidade", status:"em-revisão", tags:["MEX"],
+    titulo:"Distributor Tier Model — Mayorista vs. Detallista",
+    descricao:"Mexico's distribution structure differs from Brazil. Mayoristas (wholesalers) receive tier-1 pricing and volume credit. Detallistas (retailers) receive tier-2 pricing. The system must map RFC to tier at registration, replacing the branch-based structure used in Brazil.",
+    detalhe:"In Brazil, pricing flows through BU + CNAE. In Mexico, the distributor tier (Mayorista / Detallista) is the primary pricing driver, negotiated annually and stored per RFC. Seasonal promotions differ by tier. Credit limits also scale differently — Mayoristas operate on net-30/60 terms; Detallistas typically require upfront or shorter cycles. Requires localized approval hierarchy that doesn't map 1:1 to Brazil's Regional Manager model.",
+    relacionados:["PERM-MEX-01","MOT-001","MOT-002","PERM-015"] },
+
   // PERSONAS
   { id:"PER-001", pilar:"personas", status:"ativo", tags:["CORE","BR","B2B","B2Fleet"], grupo:"sales",
     titulo:"Sales Rep",
@@ -607,7 +651,7 @@ const ITEMS = [
 ];
 
 // STATE
-let activePilar = "identidade";
+let activePilar = "personas";
 const activeFilters = { escopo: new Set(), canal: new Set() };
 
 // FILTER

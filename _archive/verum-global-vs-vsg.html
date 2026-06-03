@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>From "Ship It" to "Scale It" — Portfolio Case Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface-2: #1a1a1a;
+      --border: #222222;
+      --text: #f0f0f0;
+      --text-muted: #888888;
+      --accent: #e8e0d4;
+      --accent-dim: #c4b89a;
+      --tag-bg: #1e1e1e;
+      --tag-border: #2e2e2e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+    nav {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav a:hover { color: var(--text); }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 48px 0 56px;
+      margin-bottom: 72px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--text-muted);
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 560px;
+      margin-bottom: 36px;
+    }
+
+    .meta-row { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 100px;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    .tag.accent {
+      background: #1a1710;
+      border-color: #3a3420;
+      color: var(--accent-dim);
+    }
+
+    section { margin-bottom: 72px; }
+
+    h2 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 12px;
+      margin-top: 40px;
+    }
+
+    h3:first-of-type { margin-top: 0; }
+
+    p {
+      font-size: 15px;
+      color: #c8c8c8;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    /* ── Pain list ── */
+    .pain-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .pain-list li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      color: #b0b0b0;
+      line-height: 1.6;
+    }
+
+    .pain-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Comparison block ── */
+    .comparison {
+      margin: 32px 0;
+    }
+
+    .comparison-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .comparison-label.before { color: #8b3a3a; }
+    .comparison-label.after  { color: #3a7a5a; }
+
+    .comparison-label::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .comparison img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: block;
+    }
+
+    .comparison-caption {
+      font-size: 12px;
+      color: #444;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    .comparison + .comparison { margin-top: 24px; }
+
+    /* ── Decision cards ── */
+    .decision {
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    .decision-number {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-dim);
+      margin-bottom: 10px;
+    }
+
+    .decision h3 { margin-top: 0; font-size: 16px; }
+    .decision p { font-size: 14px; margin-bottom: 0; }
+    .decision p + p { margin-top: 10px; }
+
+    /* ── Shift diagram ── */
+    .shift-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 16px;
+      align-items: center;
+      margin: 28px 0;
+    }
+
+    .shift-col {
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .shift-col.before-col { background: #130d0d; border-color: #2a1515; }
+    .shift-col.after-col  { background: #0d130e; border-color: #152a1d; }
+
+    .shift-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .shift-col.before-col .shift-label { color: #8b3a3a; }
+    .shift-col.after-col  .shift-label { color: #3a8b5a; }
+    .shift-col p { font-size: 13px; margin: 0; color: #999; }
+
+    .shift-arrow { color: #333; font-size: 20px; text-align: center; }
+
+    /* ── Metrics ── */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 28px 0;
+    }
+
+    .metric-card {
+      padding: 20px 22px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .metric-value {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .metric-label { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+
+    /* ── Screenshot ── */
+    .screenshot {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin: 24px 0;
+      display: block;
+    }
+
+    .screenshot-caption {
+      font-size: 12px;
+      color: #555;
+      text-align: center;
+      margin-top: -16px;
+      margin-bottom: 24px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      margin-top: 48px;
+    }
+
+    footer p { font-size: 12px; color: #444; margin: 0; }
+
+    @media (max-width: 600px) {
+      .shift-row { grid-template-columns: 1fr; }
+      .shift-arrow { display: none; }
+      .metrics-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <nav><a href="index.html">← Back</a></nav>
+
+  <header>
+    <p class="eyebrow">Design Engineering · Verum Sales Global</p>
+    <h1>From "Ship It" to "Scale It"</h1>
+    <p class="subtitle">What building the same product twice taught me about the difference between designing screens and designing systems.</p>
+    <div class="meta-row">
+      <span class="tag accent">Verum Global → VSG</span>
+      <span class="tag">Design Engineering</span>
+      <span class="tag">System Design</span>
+      <span class="tag">B2B · Enterprise</span>
+      <span class="tag">Next.js · shadcn/ui</span>
+    </div>
+  </header>
+
+  <!-- Context -->
+  <section>
+    <h2>Context</h2>
+    <p>Verum Global and Verum Sales Global (VSG) were built for the same client ecosystem, solving adjacent problems in the same domain. On paper, the second project should have been easier — familiar context, established relationships, clearer scope.</p>
+    <p>In practice, it forced me to confront something I had avoided in the first pass: the difference between building something that works and building something that scales.</p>
+    <p>This case is not about a UX breakthrough or a conversion lift. It is about what happens when a designer starts writing production code, ships a product, watches it bend under its own weight, and gets a second chance to do it right.</p>
+  </section>
+
+  <!-- My Role -->
+  <section>
+    <h2>My Role</h2>
+    <ul class="pain-list">
+      <li><span class="pain-icon">◎</span>Sole designer and primary front-end contributor on both projects — from discovery through production</li>
+      <li><span class="pain-icon">◎</span>Built the full component system in VSG before writing the first product screen</li>
+      <li><span class="pain-icon">◎</span>Used AI as architectural reviewer, not just code generator — a deliberate shift from Verum Global</li>
+      <li><span class="pain-icon">◎</span>Stack: VS Code, Next.js, Tailwind CSS, shadcn/ui</li>
+    </ul>
+  </section>
+
+  <!-- Problem -->
+  <section>
+    <h2>Problem</h2>
+    <p>Verum Global delivered. The product worked. But when the client came back to expand it, the cracks were immediate.</p>
+    <ul class="pain-list">
+      <li><span class="pain-icon">⚠</span><div><strong>Component duplication.</strong> The same UI element — a status badge, a data row, a filter control — existed in 3–4 variations with no shared logic.</div></li>
+      <li><span class="pain-icon">⚠</span><div><strong>No global layout contract.</strong> Each screen made independent decisions about spacing, container width, and responsive behavior.</div></li>
+      <li><span class="pain-icon">⚠</span><div><strong>AI-generated inconsistency.</strong> Because I hadn't defined architectural constraints upfront, the AI produced structurally inconsistent outputs that I accepted and shipped.</div></li>
+      <li><span class="pain-icon">⚠</span><div><strong>Handoff friction.</strong> Explaining the system to another developer meant explaining the exceptions — because the exceptions were the rules.</div></li>
+    </ul>
+    <p>The core issue was not a lack of skill. It was a lack of architecture before execution. I had used AI as a code generator. I had not used it as a design partner.</p>
+
+    <!-- Before: Accounts list -->
+    <div class="comparison" style="margin-top: 36px;">
+      <p class="comparison-label before">Before — Verum Global</p>
+      <img src="vg-accounts-list.png" alt="Verum Global accounts list — dense table with many columns, SAP status, owner, colored badges" />
+      <p class="comparison-caption">Accounts list in Verum Global. Functional — but column grouping, status logic, and visual hierarchy were all ad hoc decisions made per screen.</p>
+    </div>
+  </section>
+
+  <!-- What Changed -->
+  <section>
+    <h2>What Changed</h2>
+    <p>When VSG kicked off, I spent the first week building nothing visible.</p>
+    <p>Instead, I defined the system:</p>
+
+    <div class="shift-row">
+      <div class="shift-col before-col">
+        <p class="shift-label">Verum Global</p>
+        <p>Build components when needed. Conventions emerge implicitly. AI generates output.</p>
+      </div>
+      <div class="shift-arrow">→</div>
+      <div class="shift-col after-col">
+        <p class="shift-label">VSG</p>
+        <p>Build the system, then build the product inside it. AI critiques architecture before execution.</p>
+      </div>
+    </div>
+
+    <ul class="pain-list">
+      <li><span class="pain-icon">→</span><div>A <strong>PageLayout</strong> component with explicit slot contracts: header, toolbar, content, footer — optional slots with documented behavior</div></li>
+      <li><span class="pain-icon">→</span><div>A <strong>DataTable</strong> with sorting, filtering, and empty states as first-class concerns, not afterthoughts</div></li>
+      <li><span class="pain-icon">→</span><div><strong>FormCard + FormGrid</strong> as the layout contract at the section level — replacing ad hoc inline class strings</div></li>
+      <li><span class="pain-icon">→</span><div>A <strong>token system</strong> for spacing, typography, and color that both Tailwind utilities and component internals reference</div></li>
+      <li><span class="pain-icon">→</span><div>Global behavioral rules written down: how modals dismiss, how forms validate, how loading states surface</div></li>
+    </ul>
+
+    <p>Only after those foundational components existed did I build the first real screen. The AI's role changed too — instead of "build me a table for this data," I was prompting with "given this PageLayout contract and these token values, implement this screen — flag any deviation from the established pattern."</p>
+  </section>
+
+  <!-- Solution -->
+  <section>
+    <h2>Solution</h2>
+    <p>Three artifacts that did not exist in Verum Global:</p>
+
+    <!-- Decision 1 -->
+    <div class="decision">
+      <p class="decision-number">Artifact 01</p>
+      <h3>Component Registry Before the First Screen</h3>
+      <p>12 components defined with their props and behavioral rules before any product screen was assembled. When a new module was added mid-project, onboarding it to the existing system took hours, not days. Zero rework on new module integration.</p>
+    </div>
+
+    <!-- Decision 2 -->
+    <div class="decision">
+      <p class="decision-number">Artifact 02</p>
+      <h3>A Global Layout Contract</h3>
+      <p>Every screen in VSG inherits from the same PageLayout. Responsive behavior, container constraints, and slot availability are defined once. When the client requested layout changes, the adjustments propagated from one source of truth rather than requiring per-screen edits.</p>
+    </div>
+
+    <!-- Decision 3 -->
+    <div class="decision">
+      <p class="decision-number">Artifact 03</p>
+      <h3>AI at the Architectural Layer</h3>
+      <p>The most consequential change was asking AI to critique decisions, not just execute them. Before committing to a component structure, I described the intended behavior and asked where it would break at scale. This caught two structural decisions in VSG that would have produced the same class of problem I experienced in Verum Global.</p>
+      <p>Code review was also automated: each task went through a spec compliance pass ("does the code do what was asked?") and a quality pass ("is the code well-constructed?") — catching HTML invalidity, Radix prop mismatches, and accessibility failures before they reached production.</p>
+    </div>
+
+    <!-- Process decisions -->
+    <h3 style="margin-top: 48px;">Process in Practice — Accounts Module</h3>
+    <p>The Accounts module was built entirely inside the VSG system and shows the delta most clearly.</p>
+
+    <!-- New Account step 1 comparison -->
+    <div class="comparison" style="margin-top: 32px;">
+      <p class="comparison-label before">Before — Verum Global: New Account Step 1</p>
+      <img src="vg-new-account-step1.png" alt="Verum Global new account step 1 — simple radio buttons PJ/PF, no context" />
+      <p class="comparison-caption">Two radio options. No explanation of what each means, what fields they unlock, or why the choice matters. Functional — but it transfers the cognitive load entirely to the user.</p>
+    </div>
+
+    <div class="comparison">
+      <p class="comparison-label after">After — VSG: New Account Step 1</p>
+      <img src="vsg-new-account-step1.png" alt="VSG new account step 1 — rich cards with icon, description, bullets, stepper" />
+      <p class="comparison-caption">Same choice — two account types — but now with context. Each card explains what the type means, what fields it unlocks, and what compliance rules apply. The stepper communicates total scope upfront. The warning message ("This choice defines the tax fields and the SAP integration flow. It cannot be changed after proceeding.") surfaces a constraint that was invisible before.</p>
+    </div>
+
+    <!-- Step 2 before -->
+    <div class="comparison" style="margin-top: 24px;">
+      <p class="comparison-label before">Before — Verum Global: New Account Step 2</p>
+      <img src="vg-new-account-step2.png" alt="Verum Global new account step 2 — flat form fields, no visual grouping" />
+      <p class="comparison-caption">Flat form fields with no visual grouping. No distinction between required and optional. No feedback on field-level constraints. Every form in Verum Global was built this way — independently, without a shared layout contract.</p>
+    </div>
+
+    <!-- Accounts list after -->
+    <div class="comparison" style="margin-top: 24px;">
+      <p class="comparison-label after">After — VSG: Accounts List</p>
+      <img src="vsg-accounts-list.png" alt="VSG accounts list — clean table, registration phase badges, configure columns" />
+      <p class="comparison-caption">The same data surface, rebuilt inside the DataTable system. Registration phase replaces the scattered status columns. "Configure columns" is a first-class feature, not an Excel workaround. The table is built once; every new account type inherits the same column rules.</p>
+    </div>
+
+    <!-- RadioGroup decision callout -->
+    <div class="decision" style="margin-top: 40px;">
+      <p class="decision-number">Key Decision — RadioGroup as Semantic Primitive</p>
+      <h3>Replacing Custom Divs with a Real Accessibility Model</h3>
+      <p>The original PJ/PF cards in Verum Global used button elements with a radio visual — purely cosmetic. A review pass flagged the absence of a semantic primitive: no RadioGroup, no keyboard navigation, no screen reader signaling.</p>
+      <p>In VSG, the type selection was rebuilt with Radix UI RadioGroup. The card container became a label (making the entire area clickable without JS). State propagation follows the Radix/shadcn convention. The fix added zero visual complexity and closed an accessibility gap that would have been invisible in a standard review.</p>
+    </div>
+
+    <div class="decision">
+      <p class="decision-number">Key Decision — FormCard + FormGrid as Layout Contract</p>
+      <h3>Turning an Inline Pattern into an Explicit API</h3>
+      <p>In Verum Global, every section card repeated the same string of classes inline: <code style="font-family: monospace; font-size: 12px; color: #aaa;">bg-card border border-border rounded-md p-4 flex flex-col gap-4</code>. No abstraction, no shared contract — just copied and slightly wrong in each new place.</p>
+      <p>In VSG, FormCard and FormGrid became global components. The rule "when a row has 3+ fields of different semantic weight, the first field takes 50% and the rest divide the remaining half" is now an API, not a convention you have to remember. Any new form section inherits the contract.</p>
+    </div>
+  </section>
+
+  <!-- Impact -->
+  <section>
+    <h2>Impact</h2>
+    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">Metrics are process-level and NDA-compliant.</p>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-value">12</div>
+        <div class="metric-label">Components defined before the first product screen was built</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">0</div>
+        <div class="metric-label">Rework required when a new module was added mid-project</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">40+</div>
+        <div class="metric-label">Implementation gaps caught via structured spec review before any code shipped</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value">9</div>
+        <div class="metric-label">Clean commits in a single session via spec + quality review pipeline</div>
+      </div>
+    </div>
+    <p>The less quantifiable but more significant outcome: cross-screen inconsistency was reduced from drift to deliberate exception. Any deviation from the VSG system was a choice — not an accident.</p>
+  </section>
+
+  <!-- Retrospective -->
+  <section>
+    <h2>What I'd Do Differently</h2>
+    <p><strong>Version decisions, not just components.</strong> The component registry captures what was built, not the reasoning behind it. The next project should include decision logs alongside component documentation — so a developer joining mid-stream understands not only the rule but why it exists.</p>
+    <p><strong>Systematize the AI critique prompts.</strong> The architectural review prompts I used in VSG were informal — run when I remembered to. The next version should be a standard template: a fixed prompt that runs against every new component before it's merged, checking for slot consistency, token compliance, and behavioral alignment. That turns a useful habit into a repeatable process.</p>
+  </section>
+
+  <!-- Why This Matters -->
+  <section>
+    <h2>Why This Case Matters</h2>
+    <p>The transition from product designer to design engineer is not about learning to code. The transition is about changing what you consider a design deliverable.</p>
+    <p>In Verum Global, my deliverable was screens. In VSG, my deliverable was a system that generates screens consistently, scales to new requirements without rework, and communicates its own rules to anyone who joins.</p>
+    <p>That shift — from output to architecture, from execution to constraint design — is what I am bringing to the next team.</p>
+  </section>
+
+  <footer>
+    <p>VSG is a production system. Screenshots have been sanitized to protect confidential business information.</p>
+  </footer>
+
+</div>
+</body>
+</html>
