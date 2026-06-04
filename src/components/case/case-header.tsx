@@ -1,5 +1,3 @@
-import Link from "next/link"
-
 interface CaseHeaderProps {
   eyebrow: string
   title: string
@@ -10,14 +8,7 @@ interface CaseHeaderProps {
 export function CaseHeader({ eyebrow, title, subtitle, tags }: CaseHeaderProps) {
   return (
     <>
-      <nav className="border-b border-border py-5">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1.5 text-[13px] text-muted-foreground hover:text-foreground"
-        >
-          ← Back
-        </Link>
-      </nav>
+
       <header className="mb-[72px] border-b border-border pb-14 pt-12">
         <p className="mb-6 inline-flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.08em] text-muted-foreground before:block before:h-px before:w-5 before:bg-muted-foreground">
           {eyebrow}
