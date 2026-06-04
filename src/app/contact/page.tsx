@@ -1,0 +1,104 @@
+import type { Metadata } from "next"
+import Link from "next/link"
+
+export const metadata: Metadata = {
+  title: "Contact — Keythe Rueckert",
+  description: "Get in touch with Keythe Rueckert — Product Designer transitioning to Design Engineer.",
+}
+
+export default function ContactPage() {
+  return (
+    <div className="mx-auto max-w-[760px] px-6">
+      <nav className="border-b border-border py-5">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 text-[13px] text-[#777] transition-colors hover:text-foreground"
+        >
+          ← Back
+        </Link>
+      </nav>
+
+      <header className="border-b border-border pb-14 pt-12">
+        <p className="mb-6 inline-flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.08em] text-muted-foreground before:block before:h-px before:w-5 before:bg-muted-foreground before:content-['']">
+          Contact
+        </p>
+        <h1 className="mb-4 text-[clamp(28px,5vw,44px)] font-semibold leading-[1.15] tracking-[-0.02em]">
+          Let&apos;s work together.
+        </h1>
+        <p className="max-w-[480px] text-[17px] leading-[1.6] text-muted-foreground">
+          Open to new projects, freelance work, and full-time roles. Tell me what you&apos;re building and I&apos;ll get back to you within 24 hours.
+        </p>
+      </header>
+
+      <form
+        action="https://formspree.io/f/mnjyqelk"
+        method="POST"
+        className="flex flex-col gap-6 py-14"
+      >
+        <input type="hidden" name="_subject" value="Portfolio contact — Keythe Rueckert" />
+
+        <div className="grid grid-cols-2 gap-4 max-sm:grid-cols-1">
+          <div className="flex flex-col gap-2">
+            <label htmlFor="name" className="text-[12px] font-medium uppercase tracking-[0.06em] text-muted-foreground">
+              Name
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              placeholder="Your name"
+              className="rounded-lg border border-border bg-[var(--surface-2)] px-4 py-3 text-[14px] text-foreground placeholder:text-[#444] transition-colors focus:border-[#444] focus:outline-none"
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label htmlFor="email" className="text-[12px] font-medium uppercase tracking-[0.06em] text-muted-foreground">
+              Email
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              placeholder="your@email.com"
+              className="rounded-lg border border-border bg-[var(--surface-2)] px-4 py-3 text-[14px] text-foreground placeholder:text-[#444] transition-colors focus:border-[#444] focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="message" className="text-[12px] font-medium uppercase tracking-[0.06em] text-muted-foreground">
+            Message
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows={6}
+            placeholder="Tell me about your project, team, or what you're looking for..."
+            className="resize-none rounded-lg border border-border bg-[var(--surface-2)] px-4 py-3 text-[14px] text-foreground placeholder:text-[#444] transition-colors focus:border-[#444] focus:outline-none"
+          />
+        </div>
+
+        <div className="flex items-center justify-between gap-4 max-sm:flex-col max-sm:items-start">
+          <p className="text-[12px] text-[#555]">
+            Or reach me directly at{" "}
+            <a
+              href="mailto:keytherueckert93@gmail.com"
+              className="text-[#777] underline-offset-2 hover:text-foreground hover:underline"
+            >
+              keytherueckert93@gmail.com
+            </a>
+          </p>
+          <button
+            type="submit"
+            className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent-warm)] px-6 py-3 text-sm font-medium text-[#0a0a0a] transition-opacity hover:opacity-80"
+          >
+            Send message
+          </button>
+        </div>
+      </form>
+    </div>
+  )
+}
