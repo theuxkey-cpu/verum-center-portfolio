@@ -1,9 +1,17 @@
+import type { Metadata } from "next"
 import Image from "next/image"
 import { CaseHeader } from "@/components/case/case-header"
 import { CaseSection } from "@/components/case/case-section"
 import { PainList } from "@/components/case/pain-list"
 import { MetricsGrid } from "@/components/case/metrics-grid"
 import { IterationCard } from "@/components/case/iteration-card"
+import { BeforeAfter } from "@/components/case/before-after"
+import { CaseNav } from "@/components/case/case-nav"
+
+export const metadata: Metadata = {
+  title: "Verum Supply — Enterprise Supply Chain Design | Keythe Rueckert",
+  description: "End-to-end UX for a supply chain platform that replaced spreadsheets and isolated SAP tools across four departments at Cantu Inc.",
+}
 
 function P({ children }: { children: React.ReactNode }) {
   return <p className="mb-4 text-[15px] leading-[1.75] text-[#c8c8c8]">{children}</p>
@@ -22,16 +30,6 @@ function Flow({ steps }: { steps: string[] }) {
   )
 }
 
-function ImgPlaceholder({ label }: { label: string }) {
-  return (
-    <div className="my-7 flex aspect-video w-full flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-[#2a2a2a] bg-[var(--surface-2)] text-[#444]">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M9 21V9" />
-      </svg>
-      <span className="text-[11px] font-medium uppercase tracking-[0.06em] text-[#3a3a3a]">{label}</span>
-    </div>
-  )
-}
 
 export default function VerumSupplyPage() {
   return (
@@ -72,16 +70,11 @@ export default function VerumSupplyPage() {
           { icon: "⚠", content: <><strong>Backorder tracking was phone calls and email chains.</strong> No system showed which orders were stuck, at which stage, or why.</> },
           { icon: "⚠", content: <><strong>SAP data wasn&apos;t real-time.</strong> Teams made stocking decisions on stale information. Approval chains were informal — no audit trail, no SLAs.</> },
         ]} />
-        <div className="my-6 grid grid-cols-2 gap-3 max-sm:grid-cols-1">
-          <div className="rounded-[10px] border border-[#2a1515] bg-[#130d0d] p-[18px]">
-            <p className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.1em] text-[#8b3a3a]">Before</p>
-            <p className="text-[13px] text-[#999]">Spreadsheets, isolated SAP, phone calls for backorder status, informal approvals with no audit trail, decisions made on stale data.</p>
-          </div>
-          <div className="rounded-[10px] border border-[#152a1d] bg-[#0d1310] p-[18px]">
-            <p className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.1em] text-[#3a8b5a]">After</p>
-            <p className="text-[13px] text-[#999]">Single platform with real-time stock visibility, structured Push/Pull flows, approval chains with full audit trail, and consolidated backorder monitoring.</p>
-          </div>
-        </div>
+        <BeforeAfter
+          before="Spreadsheets, isolated SAP, phone calls for backorder status, informal approvals with no audit trail, decisions made on stale data."
+          after="Single platform with real-time stock visibility, structured Push/Pull flows, approval chains with full audit trail, and consolidated backorder monitoring."
+          afterLabel="After"
+        />
       </CaseSection>
 
       <CaseSection title="Research">
@@ -114,7 +107,7 @@ export default function VerumSupplyPage() {
           height={428}
           className="mb-2 mt-6 w-full rounded-[10px] border border-border"
         />
-        <p className="mb-8 text-[12px] leading-[1.5] text-[#555]">
+        <p className="mb-8 text-[12px] leading-[1.5] text-[#777]">
           Plano de abastecimento — color-coded segments: Organizational Context (gray), Product Identity (blue), Strategic Segmentation (amber), Status (red), Supply (blue), Local Demand (purple)
         </p>
 
@@ -154,8 +147,6 @@ export default function VerumSupplyPage() {
           <p>Key features: SAP integration for real-time order sync, material detail modal consolidating full item data in a single view, divergence management for discrepancies identified during SAP sync, and individual order detail screens with full operational context.</p>
         </IterationCard>
 
-        <ImgPlaceholder label="INSERT: Backorder monitoring screen" />
-
         <IterationCard number="Module 03" title="Access Management by Profile">
           <p>A supply chain platform serving multiple departments requires precise access control. I designed the system around three operational roles: Supply Analyst (full planning and approval access), Branch Manager (pull requests scoped to their assigned units only), and ADM Master (user management).</p>
           <p>Profile-to-unit linking allows the same person to hold different roles at different locations — a common pattern in a distributed distribution network.</p>
@@ -182,8 +173,12 @@ export default function VerumSupplyPage() {
         <P><strong>Design the column configuration system in the first version.</strong> The fixed/configurable column pattern was introduced as a post-launch improvement. Supply analysts had already adapted by exporting to Excel to manage column selection. Mapping their specific scanning workflows during discovery would have surfaced this in time to ship it from day one.</P>
       </CaseSection>
 
-      <footer className="mt-12 border-t border-border py-8">
-        <p className="text-[12px] text-[#444]">VerumSupply is a production system. Screenshots and metrics have been sanitized to protect confidential business information.</p>
+      <footer className="mt-12 border-t border-border py-8 flex flex-col gap-8">
+        <CaseNav current="/cases/verum-supply" />
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="text-[12px] text-[#666]">VerumSupply is a production system. Screenshots and metrics have been sanitized to protect confidential business information.</p>
+          <a href="mailto:keytherueckert93@gmail.com" className="text-[13px] text-muted-foreground transition-colors hover:text-foreground">keytherueckert93@gmail.com</a>
+        </div>
       </footer>
     </div>
   )

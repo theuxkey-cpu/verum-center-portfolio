@@ -1,8 +1,15 @@
+import type { Metadata } from "next"
 import { CaseHeader } from "@/components/case/case-header"
+import { CaseNav } from "@/components/case/case-nav"
 import { CaseSection } from "@/components/case/case-section"
 import { PainList } from "@/components/case/pain-list"
 import { MetricsGrid } from "@/components/case/metrics-grid"
 import { IterationCard } from "@/components/case/iteration-card"
+
+export const metadata: Metadata = {
+  title: "PneuStore 360° — UX Research | Keythe Rueckert",
+  description: "Three UX research workstreams that diagnosed why a tire e-commerce platform was losing customers — 2.47M sessions, NPS analysis, and O2O design direction.",
+}
 
 function P({ children }: { children: React.ReactNode }) {
   return <p className="mb-4 text-[15px] leading-[1.75] text-[#c8c8c8]">{children}</p>
@@ -27,7 +34,7 @@ function Verbatim({ children, cite }: { children: string; cite: string }) {
   return (
     <blockquote className="my-4 border-l-[3px] border-[#2a2a2a] py-3.5 pl-[18px] text-[14px] italic leading-[1.65] text-[#999]">
       {children}
-      <cite className="mt-2 block text-[11px] not-italic tracking-[0.04em] text-[#555]">— {cite}</cite>
+      <cite className="mt-2 block text-[11px] not-italic tracking-[0.04em] text-[#777]">— {cite}</cite>
     </blockquote>
   )
 }
@@ -307,8 +314,12 @@ export default function PneustorePage() {
         <P><strong>Treat the three workstreams as one connected story earlier.</strong> The shared root — platform organized around products, not around the complete tire-buying journey — became clear only after all three were mapped. Framing that unifying insight at the start would have sharpened research questions.</P>
       </CaseSection>
 
-      <footer className="mt-12 border-t border-border py-8">
-        <p className="text-[12px] text-[#444]">Keythe Rueckert · Product Designer · <a href="mailto:keytherueckert93@gmail.com" className="text-[#555] no-underline">keytherueckert93@gmail.com</a></p>
+      <footer className="mt-12 border-t border-border py-8 flex flex-col gap-8">
+        <CaseNav current="/cases/pneustore" />
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="text-[12px] text-[#666]">PneuStore 360° is a production system. Research data and metrics have been sanitized to protect confidential business information.</p>
+          <a href="mailto:keytherueckert93@gmail.com" className="text-[13px] text-muted-foreground transition-colors hover:text-foreground">keytherueckert93@gmail.com</a>
+        </div>
       </footer>
     </div>
   )

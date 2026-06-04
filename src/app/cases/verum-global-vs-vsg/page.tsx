@@ -1,10 +1,17 @@
+import type { Metadata } from "next"
 import Image from "next/image"
 import { CaseHeader } from "@/components/case/case-header"
+import { CaseNav } from "@/components/case/case-nav"
 import { CaseSection } from "@/components/case/case-section"
 import { PainList } from "@/components/case/pain-list"
 import { MetricsGrid } from "@/components/case/metrics-grid"
 import { IterationCard } from "@/components/case/iteration-card"
 import { ComparisonBlock } from "@/components/case/comparison-block"
+
+export const metadata: Metadata = {
+  title: 'From "Ship It" to "Scale It" — Design Engineering | Keythe Rueckert',
+  description: "What building the same product twice taught me about system design vs. screen design. Before/after: Verum Global → VSG.",
+}
 
 function P({ children }: { children: React.ReactNode }) {
   return <p className="mb-4 text-[15px] leading-[1.75] text-[#c8c8c8]">{children}</p>
@@ -167,8 +174,12 @@ export default function VerumGlobalVsVsgPage() {
         <P>That shift — from output to architecture, from execution to constraint design — is what I am bringing to the next team.</P>
       </CaseSection>
 
-      <footer className="mt-12 border-t border-border py-8">
-        <p className="text-[12px] text-[#444]">VSG is a production system. Screenshots have been sanitized to protect confidential business information.</p>
+      <footer className="mt-12 border-t border-border py-8 flex flex-col gap-8">
+        <CaseNav current="/cases/verum-global-vs-vsg" />
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="text-[12px] text-[#666]">VSG is a production system. Screenshots have been sanitized to protect confidential business information.</p>
+          <a href="mailto:keytherueckert93@gmail.com" className="text-[13px] text-muted-foreground transition-colors hover:text-foreground">keytherueckert93@gmail.com</a>
+        </div>
       </footer>
     </div>
   )

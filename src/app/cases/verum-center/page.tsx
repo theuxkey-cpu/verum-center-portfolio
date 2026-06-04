@@ -1,9 +1,17 @@
+import type { Metadata } from "next"
 import Image from "next/image"
 import { CaseHeader } from "@/components/case/case-header"
 import { CaseSection } from "@/components/case/case-section"
 import { PainList } from "@/components/case/pain-list"
 import { MetricsGrid } from "@/components/case/metrics-grid"
 import { IterationCard } from "@/components/case/iteration-card"
+import { BeforeAfter } from "@/components/case/before-after"
+import { CaseNav } from "@/components/case/case-nav"
+
+export const metadata: Metadata = {
+  title: "VerumCenter — Platform Design | Keythe Rueckert",
+  description: "How I designed a unified B2B platform from scratch for Cantu Inc. — consolidating retail and wholesale operations across Brazil, USA, and Mexico.",
+}
 
 function P({ children }: { children: React.ReactNode }) {
   return <p className="mb-4 text-[15px] leading-[1.75] text-[#c8c8c8]">{children}</p>
@@ -13,36 +21,12 @@ function ScreenImg({ src, alt, caption }: { src: string; alt: string; caption: s
   return (
     <>
       <Image src={src} alt={alt} width={760} height={428} className="mb-2 mt-5 w-full rounded-[10px] border border-border" />
-      <p className="mb-8 text-[12px] leading-[1.5] text-[#555]">{caption}</p>
+      <p className="mb-8 text-[12px] leading-[1.5] text-[#777]">{caption}</p>
     </>
   )
 }
 
-function BeforeAfter({ before, direction }: { before: string; direction: string }) {
-  return (
-    <div className="my-6 grid grid-cols-2 gap-3 max-sm:grid-cols-1">
-      <div className="rounded-[10px] border border-[#2a1515] bg-[#130d0d] p-[18px]">
-        <p className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.1em] text-[#8b3a3a]">Before</p>
-        <p className="text-[13px] text-[#999]">{before}</p>
-      </div>
-      <div className="rounded-[10px] border border-[#152a1d] bg-[#0d1310] p-[18px]">
-        <p className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.1em] text-[#3a8b5a]">Direction</p>
-        <p className="text-[13px] text-[#999]">{direction}</p>
-      </div>
-    </div>
-  )
-}
 
-function ImgPlaceholder({ label }: { label: string }) {
-  return (
-    <div className="my-7 flex aspect-video w-full flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-[#2a2a2a] bg-[var(--surface-2)] text-[#444]">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M9 21V9" />
-      </svg>
-      <span className="text-[11px] font-medium uppercase tracking-[0.06em] text-[#3a3a3a]">{label}</span>
-    </div>
-  )
-}
 
 export default function VerumCenterPage() {
   return (
@@ -89,7 +73,7 @@ export default function VerumCenterPage() {
         ]} />
         <BeforeAfter
           before="Two separate products (Conect + VSG), each built for one business model. Three countries with divergent rules. Fiscal decisions requiring specialist calls. No shared module, no shared language."
-          direction="A single product with role-based access, shared modules, and an explicit rule layer — designed so that retail and wholesale workflows can coexist, and so that adding a new country means configuring the existing system, not building a new one."
+          after="A single product with role-based access, shared modules, and an explicit rule layer — designed so that retail and wholesale workflows can coexist, and so that adding a new country means configuring the existing system, not building a new one."
         />
       </CaseSection>
 
@@ -148,8 +132,6 @@ export default function VerumCenterPage() {
           <p>The pivot: replaced tables with <strong>card-based layouts designed mobile-first</strong>. Each card surfaces Phase Status, Order Status, account name, and value in a glanceable format. The card pattern was then standardized across other modules as part of the shared component system.</p>
         </IterationCard>
 
-        <ImgPlaceholder label="INSERT: Desktop — Opportunities module" />
-
         <h3 className="mb-3 mt-10 text-lg font-semibold tracking-[-0.01em]">Validation through deployed prototypes</h3>
         <P>Rather than relying on static Figma links for user feedback, I built functional prototypes using AI-assisted development and deployed them on Vercel for direct validation with real users. This approach eliminated the friction of scheduled design reviews and let field teams interact with a working interface on their own devices.</P>
         <P>Handoff to engineering was organized through GitHub, with specs and context structured to support accurate implementation — a deliberate decision to close the gap between design intent and built product.</P>
@@ -171,8 +153,12 @@ export default function VerumCenterPage() {
         <P><strong>Separate the rule dashboard sooner.</strong> The Identity &amp; Permissiveness Dashboard started as a feature inside VerumCenter. Business stakeholders — legal, finance, commercial leads — would have benefited from a standalone, embeddable version earlier.</P>
       </CaseSection>
 
-      <footer className="mt-12 border-t border-border py-8">
-        <p className="text-[12px] text-[#444]">VerumCenter is a production system. Screenshots and metrics have been sanitized to protect confidential business information.</p>
+      <footer className="mt-12 border-t border-border py-8 flex flex-col gap-8">
+        <CaseNav current="/cases/verum-center" />
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="text-[12px] text-[#666]">VerumCenter is a production system. Screenshots and metrics have been sanitized to protect confidential business information.</p>
+          <a href="mailto:keytherueckert93@gmail.com" className="text-[13px] text-muted-foreground transition-colors hover:text-foreground">keytherueckert93@gmail.com</a>
+        </div>
       </footer>
     </div>
   )

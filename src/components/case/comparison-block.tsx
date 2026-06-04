@@ -25,7 +25,7 @@ export function ComparisonBlock({ variant, label, src, alt, caption }: Compariso
         height={428}
         className="w-full rounded-[10px] border border-border"
       />
-      {caption && <p className="mt-2.5 text-[12px] leading-[1.5] text-[#444]">{caption}</p>}
+      {caption && <p className="mt-2.5 text-[12px] leading-[1.5] text-[#777]">{caption}</p>}
     </div>
   )
 }
