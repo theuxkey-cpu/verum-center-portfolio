@@ -12,7 +12,7 @@ export default function ContactPage() {
       <nav className="border-b border-border py-5">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-[13px] text-[#777] transition-colors hover:text-foreground"
+          className="inline-flex items-center gap-1.5 text-[13px] text-muted-foreground transition-colors hover:text-foreground"
         >
           ← Back
         </Link>
@@ -48,7 +48,7 @@ export default function ContactPage() {
               type="text"
               required
               placeholder="Your name"
-              className="rounded-lg border border-border bg-[var(--surface-2)] px-4 py-3 text-[14px] text-foreground placeholder:text-[#444] transition-colors focus:border-[#444] focus:outline-none"
+              className="rounded-lg border border-border bg-[var(--surface-2)] px-4 py-3 text-[14px] text-foreground placeholder:text-muted-foreground transition-colors focus:border-ring focus:outline-none"
             />
           </div>
 
@@ -62,7 +62,7 @@ export default function ContactPage() {
               type="email"
               required
               placeholder="your@email.com"
-              className="rounded-lg border border-border bg-[var(--surface-2)] px-4 py-3 text-[14px] text-foreground placeholder:text-[#444] transition-colors focus:border-[#444] focus:outline-none"
+              className="rounded-lg border border-border bg-[var(--surface-2)] px-4 py-3 text-[14px] text-foreground placeholder:text-muted-foreground transition-colors focus:border-ring focus:outline-none"
             />
           </div>
         </div>
@@ -77,23 +77,23 @@ export default function ContactPage() {
             required
             rows={6}
             placeholder="Tell me about your project, team, or what you're looking for..."
-            className="resize-none rounded-lg border border-border bg-[var(--surface-2)] px-4 py-3 text-[14px] text-foreground placeholder:text-[#444] transition-colors focus:border-[#444] focus:outline-none"
+            className="resize-none rounded-lg border border-border bg-[var(--surface-2)] px-4 py-3 text-[14px] text-foreground placeholder:text-muted-foreground transition-colors focus:border-ring focus:outline-none"
           />
         </div>
 
         <div className="flex items-center justify-between gap-4 max-sm:flex-col max-sm:items-start">
-          <p className="text-[12px] text-[#555]">
+          <p className="text-[12px] text-muted-foreground">
             Or reach me directly at{" "}
             <a
               href="mailto:keytherueckert93@gmail.com"
-              className="text-[#777] underline-offset-2 hover:text-foreground hover:underline"
+              className="text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
             >
               keytherueckert93@gmail.com
             </a>
           </p>
           <button
             type="submit"
-            className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent-warm)] px-6 py-3 text-sm font-medium text-[#0a0a0a] transition-opacity hover:opacity-80"
+            className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent-warm)] px-6 py-3 text-sm font-medium text-[var(--btn-cta-text)] transition-opacity hover:opacity-80"
           >
             Send message
           </button>

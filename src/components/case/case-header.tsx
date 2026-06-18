@@ -23,7 +23,7 @@ export function CaseHeader({ eyebrow, title, subtitle, tags }: CaseHeaderProps) 
               key={t.label}
               className={`rounded-full border px-3 py-[5px] text-[12px] font-medium tracking-[0.02em] ${
                 t.accent
-                  ? "border-[#3a3420] bg-[#1a1710] text-[var(--accent-dim)]"
+                  ? "border-[var(--badge-warm-border)] bg-[var(--badge-warm-bg)] text-[var(--accent-dim)]"
                   : "border-[var(--tag-border)] bg-[var(--tag-bg)] text-muted-foreground"
               }`}
             >

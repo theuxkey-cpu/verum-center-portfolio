@@ -11,7 +11,7 @@ function CaseCard({
   return (
     <Link
       href={href}
-      className="group relative block rounded-[14px] border border-[var(--tag-border)] bg-[var(--card)] p-7 transition-all hover:border-[#333] hover:bg-[#161616] hover:shadow-[0_8px_32px_-4px_oklch(0.77_0.038_65_/_0.08)] sm:p-8"
+      className="group relative block rounded-[14px] border border-[var(--tag-border)] bg-[var(--card)] p-7 transition-all hover:border-[var(--card-hover-border)] hover:bg-[var(--card-hover-bg)] hover:shadow-[0_8px_32px_-4px_oklch(0.77_0.038_65_/_0.08)] sm:p-8"
     >
       <span aria-hidden="true" className="absolute right-7 top-7 text-lg text-muted-foreground transition-transform group-hover:translate-x-[3px] group-hover:translate-y-[-3px]">↗</span>
       <div className="mb-4 flex flex-wrap items-center gap-2.5">
@@ -37,7 +37,7 @@ function ExpItem({ date, role, company, desc }: { date: string; role: string; co
       <div>
         <p className="text-[15px] font-medium text-foreground">{role}</p>
         {company && <p className="text-[13px] text-muted-foreground">{company}</p>}
-        {desc && <p className="mt-1 text-[13px] leading-[1.5] text-[#666]">{desc}</p>}
+        {desc && <p className="mt-1 text-[13px] leading-[1.5] text-muted-foreground">{desc}</p>}
       </div>
     </div>
   )
@@ -55,23 +55,23 @@ export default function Home() {
           <div className="flex-1 min-w-0">
             <div style={{ animation: "slide-up 0.5s ease both" }} className="mb-6 flex flex-wrap items-center gap-2.5">
               <p className="text-xs font-medium uppercase tracking-[0.08em] text-muted-foreground">Product Designer</p>
-              <span className="rounded-full border border-[#2a2518] bg-[#1a1610] px-2.5 py-1 text-[10px] font-medium text-[var(--accent-dim)]">↗ Design Engineer</span>
+              <span className="rounded-full border border-[var(--badge-warm-border)] bg-[var(--badge-warm-bg)] px-2.5 py-1 text-[10px] font-medium text-[var(--accent-dim)]">↗ Design Engineer</span>
             </div>
             <h1 style={{ animation: "slide-up 0.6s ease both 0.1s" }} className="mb-6 text-[clamp(32px,6vw,52px)] font-semibold leading-[1.1] tracking-[-0.025em]">
               Hi, I&apos;m <span className="text-[var(--accent-dim)]">Keythe</span>.
             </h1>
-            <p style={{ animation: "slide-up 0.6s ease both 0.22s" }} className="mb-9 max-w-[560px] text-base leading-[1.75] text-[#b0b0b0]">
+            <p style={{ animation: "slide-up 0.6s ease both 0.22s" }} className="mb-9 max-w-[560px] text-base leading-[1.75] text-muted-foreground">
               3+ years designing B2B and B2C digital products — UX research, design systems, and operational interfaces for SaaS and CRM platforms. Currently crossing into Design Engineering: shipping production interfaces in Next.js, using AI as an architectural reviewer, and deploying on Vercel.
             </p>
             <div style={{ animation: "slide-up 0.5s ease both 0.34s" }} className="flex flex-wrap gap-3">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent-warm)] px-5 py-2.5 text-sm font-medium text-[#0a0a0a] transition-opacity hover:opacity-80"
+                className="inline-flex items-center gap-2 rounded-lg bg-[var(--accent-warm)] px-5 py-2.5 text-sm font-medium text-[var(--btn-cta-text)] transition-opacity hover:opacity-80"
               >
                 Let's talk
               </Link>
               <a
-                href="https://linkedin.com/in/keytherueckert"
+                href="https://www.linkedin.com/in/keythee/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-muted-foreground transition-opacity hover:opacity-80"
@@ -139,7 +139,7 @@ export default function Home() {
         <div className="flex flex-col gap-4">
           <Link
             href="/lab/cenarios"
-            className="group relative block rounded-[14px] border border-[var(--tag-border)] bg-[var(--card)] p-7 transition-all hover:border-[#333] hover:bg-[#161616] hover:shadow-[0_8px_32px_-4px_oklch(0.77_0.038_65_/_0.08)] sm:p-8"
+            className="group relative block rounded-[14px] border border-[var(--tag-border)] bg-[var(--card)] p-7 transition-all hover:border-[var(--card-hover-border)] hover:bg-[var(--card-hover-bg)] hover:shadow-[0_8px_32px_-4px_oklch(0.77_0.038_65_/_0.08)] sm:p-8"
           >
             <span aria-hidden="true" className="absolute right-7 top-7 text-lg text-muted-foreground transition-transform group-hover:translate-x-[3px] group-hover:translate-y-[-3px]">↗</span>
             <div className="mb-4 flex flex-wrap items-center gap-2.5">
@@ -171,18 +171,19 @@ export default function Home() {
       {/* Education */}
       <section id="education" data-section="Education" className="py-[72px] max-sm:py-14">
         <p className="mb-10 inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground before:block before:h-px before:w-5 before:shrink-0 before:bg-[var(--accent-dim)] before:content-['']">Education</p>
-        <ExpItem date="2026 – Present" role="AI — ongoing focus" />
+        <ExpItem date="2026 – Present" role="Design Engineering — ongoing" desc="Transitioning from Product Designer → Design Engineer. Focus on animation and motion in code — the intersection where design sensibility meets technical execution. Framer Motion, CSS advanced, React components." />
+        <ExpItem date="2026 – Present" role="AI — ongoing" desc="Using AI as an execution multiplier: directing, reviewing, and shipping — without losing design intent." />
         <ExpItem date="2023 – 2024" role="MBA — UX Research, Research Ops & Design Leadership" company="Unifast & Toronto School of Management" desc="Innovation, AI, and UX with emphasis on research, usability, and data-driven product design." />
         <ExpItem date="2015 – 2018" role="Bachelor — Advertising & Marketing" desc="Strategy, consumer behavior and digital communication." />
       </section>
 
       {/* Footer */}
       <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-border py-12">
-        <p className="text-[13px] text-[#444]">Keythe Rueckert · Product Designer</p>
+        <p className="text-[13px] text-muted-foreground">Keythe Rueckert · Product Designer</p>
         <div className="flex gap-5">
           <a href="mailto:keytherueckert93@gmail.com" className="text-[13px] text-muted-foreground hover:text-foreground">Email</a>
           <a href="https://www.behance.net/keytheruec167d" target="_blank" rel="noopener noreferrer" className="text-[13px] text-muted-foreground hover:text-foreground">Behance</a>
-          <a href="https://linkedin.com/in/keytherueckert" target="_blank" rel="noopener noreferrer" className="text-[13px] text-muted-foreground hover:text-foreground">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/keythee/" target="_blank" rel="noopener noreferrer" className="text-[13px] text-muted-foreground hover:text-foreground">LinkedIn</a>
         </div>
       </footer>
 

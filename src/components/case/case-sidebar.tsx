@@ -40,12 +40,12 @@ export function CaseSidebar({ showBack = true }: { showBack?: boolean }) {
       {showBack && (
         <Link
           href="/"
-          className="mb-6 flex items-center gap-1.5 text-[12px] text-[#777] transition-colors hover:text-foreground"
+          className="mb-6 flex items-center gap-1.5 text-[12px] text-muted-foreground transition-colors hover:text-foreground"
         >
           ← Back to home
         </Link>
       )}
-      <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#555]">
+      <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
         On this page
       </p>
       {sections.map(({ id, title }) => (
@@ -55,12 +55,12 @@ export function CaseSidebar({ showBack = true }: { showBack?: boolean }) {
           className={`flex items-center gap-2.5 py-[3px] text-[12px] leading-[1.4] transition-colors ${
             active === id
               ? "text-[var(--accent-dim)]"
-              : "text-[#777] hover:text-[#999]"
+              : "text-muted-foreground hover:text-foreground"
           }`}
         >
           <span
             className={`block h-px shrink-0 transition-all duration-200 ${
-              active === id ? "w-4 bg-[var(--accent-dim)]" : "w-3 bg-[#333]"
+              active === id ? "w-4 bg-[var(--accent-dim)]" : "w-3 bg-muted-foreground"
             }`}
           />
           {title}

@@ -13,7 +13,7 @@ export function ComparisonBlock({ variant, label, src, alt, caption }: Compariso
     <div className="my-8">
       <p
         className={`mb-2.5 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.12em] before:block before:size-1.5 before:rounded-full before:bg-current ${
-          variant === "before" ? "text-[#8b3a3a]" : "text-[#3a7a5a]"
+          variant === "before" ? "text-[var(--before-label)]" : "text-[var(--after-label)]"
         }`}
       >
         {label}
@@ -25,7 +25,7 @@ export function ComparisonBlock({ variant, label, src, alt, caption }: Compariso
         height={428}
         className="w-full rounded-[10px] border border-border"
       />
-      {caption && <p className="mt-2.5 text-[12px] leading-[1.5] text-[#777]">{caption}</p>}
+      {caption && <p className="mt-2.5 text-[12px] leading-[1.5] text-muted-foreground">{caption}</p>}
     </div>
   )
 }

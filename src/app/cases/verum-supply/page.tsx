@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 }
 
 function P({ children }: { children: React.ReactNode }) {
-  return <p className="mb-4 text-[15px] leading-[1.75] text-[#c8c8c8]">{children}</p>
+  return <p className="mb-4 text-[15px] leading-[1.75] text-muted-foreground">{children}</p>
 }
 
 function Flow({ steps }: { steps: string[] }) {
@@ -22,8 +22,8 @@ function Flow({ steps }: { steps: string[] }) {
     <div className="my-5 flex flex-wrap items-center gap-2">
       {steps.map((step, i) => (
         <span key={i} className="flex items-center gap-2">
-          <span className="rounded-md border border-border bg-[var(--surface-2)] px-3 py-1.5 text-[12px] text-[#aaa]">{step}</span>
-          {i < steps.length - 1 && <span className="text-[14px] text-[#444]">→</span>}
+          <span className="rounded-md border border-border bg-[var(--surface-2)] px-3 py-1.5 text-[12px] text-muted-foreground">{step}</span>
+          {i < steps.length - 1 && <span className="text-[14px] text-muted-foreground">→</span>}
         </span>
       ))}
     </div>
@@ -89,10 +89,10 @@ export default function VerumSupplyPage() {
       <CaseSection title="Solution">
         <IterationCard number="Module 01" title="Supply Planning — Push & Pull">
           <p>Two modes, one coherent interface. The Push flow is system-driven; the Pull flow is branch-initiated with full governance.</p>
-          <p className="mt-3 mb-1 font-medium text-[#ccc]">Push:</p>
+          <p className="mt-3 mb-1 font-medium text-muted-foreground">Push:</p>
         </IterationCard>
         <Flow steps={["Load data", "Engine calculates", "Under review", "Adjust / simulate", "Approve", "Publish", "Orders generated"]} />
-        <p className="mb-1 mt-2 text-[14px] font-medium text-[#ccc]">Pull:</p>
+        <p className="mb-1 mt-2 text-[14px] font-medium text-muted-foreground">Pull:</p>
         <Flow steps={["Branch request", "Auto-validate", "Triage", "Approval chain", "Shipment"]} />
 
         <IterationCard number="Key Design Decision" title="Color-Segmented Column Groups">
@@ -107,7 +107,7 @@ export default function VerumSupplyPage() {
           height={428}
           className="mb-2 mt-6 w-full rounded-[10px] border border-border"
         />
-        <p className="mb-8 text-[12px] leading-[1.5] text-[#777]">
+        <p className="mb-8 text-[12px] leading-[1.5] text-muted-foreground">
           Plano de abastecimento — color-coded segments: Organizational Context (gray), Product Identity (blue), Strategic Segmentation (amber), Status (red), Supply (blue), Local Demand (purple)
         </p>
 
@@ -129,11 +129,11 @@ export default function VerumSupplyPage() {
                 { color: "#a78bfa", label: "Local Demand", cols: "VMM, Min stock, Optimal stock" },
               ].map((row) => (
                 <tr key={row.label}>
-                  <td className="border-b border-[#181818] py-2.5 pl-3.5 text-[#b0b0b0] last:border-0">
+                  <td className="border-b border-[var(--table-row-border)] py-2.5 pl-3.5 text-muted-foreground last:border-0">
                     <span className="mr-2 inline-block size-2.5 rounded-[3px]" style={{ background: row.color }} />
                     {row.label}
                   </td>
-                  <td className="border-b border-[#181818] py-2.5 pl-3.5 text-[#b0b0b0] last:border-0">{row.cols}</td>
+                  <td className="border-b border-[var(--table-row-border)] py-2.5 pl-3.5 text-muted-foreground last:border-0">{row.cols}</td>
                 </tr>
               ))}
             </tbody>
@@ -176,7 +176,7 @@ export default function VerumSupplyPage() {
       <footer className="mt-12 border-t border-border py-8 flex flex-col gap-8">
         <CaseNav current="/cases/verum-supply" />
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="text-[12px] text-[#666]">VerumSupply is a production system. Screenshots and metrics have been sanitized to protect confidential business information.</p>
+          <p className="text-[12px] text-muted-foreground">VerumSupply is a production system. Screenshots and metrics have been sanitized to protect confidential business information.</p>
           <a href="mailto:keytherueckert93@gmail.com" className="text-[13px] text-muted-foreground transition-colors hover:text-foreground">keytherueckert93@gmail.com</a>
         </div>
       </footer>

@@ -14,20 +14,20 @@ export const metadata: Metadata = {
 }
 
 function P({ children }: { children: React.ReactNode }) {
-  return <p className="mb-4 text-[15px] leading-[1.75] text-[#c8c8c8]">{children}</p>
+  return <p className="mb-4 text-[15px] leading-[1.75] text-muted-foreground">{children}</p>
 }
 
 function ShiftRow() {
   return (
     <div className="my-7 grid grid-cols-[1fr_auto_1fr] items-center gap-4 max-sm:grid-cols-1">
-      <div className="rounded-[10px] border border-[#2a1515] bg-[#130d0d] p-5">
-        <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.1em] text-[#8b3a3a]">Verum Global</p>
-        <p className="text-[13px] text-[#999]">Build components when needed. Conventions emerge implicitly. AI generates output.</p>
+      <div className="rounded-[10px] border border-[var(--before-border)] bg-[var(--before-bg)] p-5">
+        <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--before-label)]">Verum Global</p>
+        <p className="text-[13px] text-muted-foreground">Build components when needed. Conventions emerge implicitly. AI generates output.</p>
       </div>
-      <span className="text-center text-xl text-[#333] max-sm:hidden">→</span>
-      <div className="rounded-[10px] border border-[#152a1d] bg-[#0d130e] p-5">
-        <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.1em] text-[#3a8b5a]">VSG</p>
-        <p className="text-[13px] text-[#999]">Build the system, then build the product inside it. AI critiques architecture before execution.</p>
+      <span className="text-center text-xl text-muted-foreground max-sm:hidden">→</span>
+      <div className="rounded-[10px] border border-[var(--after-border)] bg-[var(--after-bg)] p-5">
+        <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--after-label)]">VSG</p>
+        <p className="text-[13px] text-muted-foreground">Build the system, then build the product inside it. AI critiques architecture before execution.</p>
       </div>
     </div>
   )
@@ -177,7 +177,7 @@ export default function VerumGlobalVsVsgPage() {
       <footer className="mt-12 border-t border-border py-8 flex flex-col gap-8">
         <CaseNav current="/cases/verum-global-vs-vsg" />
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="text-[12px] text-[#666]">VSG is a production system. Screenshots have been sanitized to protect confidential business information.</p>
+          <p className="text-[12px] text-muted-foreground">VSG is a production system. Screenshots have been sanitized to protect confidential business information.</p>
           <a href="mailto:keytherueckert93@gmail.com" className="text-[13px] text-muted-foreground transition-colors hover:text-foreground">keytherueckert93@gmail.com</a>
         </div>
       </footer>

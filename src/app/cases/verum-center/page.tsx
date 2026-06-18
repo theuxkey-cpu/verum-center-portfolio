@@ -14,14 +14,14 @@ export const metadata: Metadata = {
 }
 
 function P({ children }: { children: React.ReactNode }) {
-  return <p className="mb-4 text-[15px] leading-[1.75] text-[#c8c8c8]">{children}</p>
+  return <p className="mb-4 text-[15px] leading-[1.75] text-muted-foreground">{children}</p>
 }
 
 function ScreenImg({ src, alt, caption }: { src: string; alt: string; caption: string }) {
   return (
     <>
       <Image src={src} alt={alt} width={760} height={428} className="mb-2 mt-5 w-full rounded-[10px] border border-border" />
-      <p className="mb-8 text-[12px] leading-[1.5] text-[#777]">{caption}</p>
+      <p className="mb-8 text-[12px] leading-[1.5] text-muted-foreground">{caption}</p>
     </>
   )
 }
@@ -119,7 +119,7 @@ export default function VerumCenterPage() {
           <iframe
             src="/verum-center-en.html"
             title="VerumSales Global — Business Rules Dashboard"
-            className="block h-[640px] w-full border-none bg-[#111]"
+            className="block h-[640px] w-full border-none bg-card"
           />
           <div className="flex items-center gap-2 border-t border-border bg-card px-[18px] py-3 text-[12px] text-muted-foreground before:content-['↗']">
             Live artifact — use the Scope and Channel filters to explore rules by market.{" "}
@@ -156,7 +156,7 @@ export default function VerumCenterPage() {
       <footer className="mt-12 border-t border-border py-8 flex flex-col gap-8">
         <CaseNav current="/cases/verum-center" />
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="text-[12px] text-[#666]">VerumCenter is a production system. Screenshots and metrics have been sanitized to protect confidential business information.</p>
+          <p className="text-[12px] text-muted-foreground">VerumCenter is a production system. Screenshots and metrics have been sanitized to protect confidential business information.</p>
           <a href="mailto:keytherueckert93@gmail.com" className="text-[13px] text-muted-foreground transition-colors hover:text-foreground">keytherueckert93@gmail.com</a>
         </div>
       </footer>

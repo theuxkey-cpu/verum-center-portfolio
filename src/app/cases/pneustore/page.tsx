@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 function P({ children }: { children: React.ReactNode }) {
-  return <p className="mb-4 text-[15px] leading-[1.75] text-[#c8c8c8]">{children}</p>
+  return <p className="mb-4 text-[15px] leading-[1.75] text-muted-foreground">{children}</p>
 }
 
 function StatRow({ items }: { items: { value: string; warn?: boolean; label: string }[] }) {
@@ -20,7 +20,7 @@ function StatRow({ items }: { items: { value: string; warn?: boolean; label: str
     <div className="my-6 grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-3">
       {items.map((item) => (
         <div key={item.label} className="rounded-[10px] border border-border bg-card px-5 py-[18px]">
-          <div className={`mb-1.5 text-2xl font-bold leading-none tracking-[-0.02em] ${item.warn ? "text-[#c47a4a]" : "text-[var(--accent-warm)]"}`}>
+          <div className={`mb-1.5 text-2xl font-bold leading-none tracking-[-0.02em] ${item.warn ? "text-[var(--note-warn-accent)]" : "text-[var(--accent-warm)]"}`}>
             {item.value}
           </div>
           <div className="text-[12px] leading-[1.4] text-muted-foreground">{item.label}</div>
@@ -32,16 +32,16 @@ function StatRow({ items }: { items: { value: string; warn?: boolean; label: str
 
 function Verbatim({ children, cite }: { children: string; cite: string }) {
   return (
-    <blockquote className="my-4 border-l-[3px] border-[#2a2a2a] py-3.5 pl-[18px] text-[14px] italic leading-[1.65] text-[#999]">
+    <blockquote className="my-4 border-l-[3px] border-border py-3.5 pl-[18px] text-[14px] italic leading-[1.65] text-muted-foreground">
       {children}
-      <cite className="mt-2 block text-[11px] not-italic tracking-[0.04em] text-[#777]">— {cite}</cite>
+      <cite className="mt-2 block text-[11px] not-italic tracking-[0.04em] text-muted-foreground">— {cite}</cite>
     </blockquote>
   )
 }
 
 function Callout({ children, warn }: { children: React.ReactNode; warn?: boolean }) {
   return (
-    <div className={`my-6 rounded-lg border px-5 py-[18px] text-[14px] leading-[1.65] text-[#b0b0b0] ${warn ? "border-[#2a220a] border-l-[#c47a4a] bg-[#100e08] border-l-[3px]" : "border-[#252535] border-l-[var(--accent-dim)] bg-[#0e0e12] border-l-[3px]"}`}>
+    <div className={`my-6 rounded-lg border px-5 py-[18px] text-[14px] leading-[1.65] text-muted-foreground ${warn ? "border-[var(--note-warn-border)] border-l-[var(--note-warn-accent)] bg-[var(--note-warn-bg)] border-l-[3px]" : "border-[var(--note-info-border)] border-l-[var(--accent-dim)] bg-[var(--note-info-bg)] border-l-[3px]"}`}>
       {children}
     </div>
   )
@@ -65,8 +65,8 @@ function DataTable() {
           { page: "/checkout/pagamento", clicks: "2,273" },
         ].map((row) => (
           <tr key={row.page}>
-            <td className={`border-b border-[#181818] py-2.5 pl-3.5 text-[#b0b0b0] last:border-0 ${row.bold ? "font-semibold text-[#ddd]" : ""}`}>{row.page}</td>
-            <td className={`border-b border-[#181818] py-2.5 pl-3.5 text-[#b0b0b0] last:border-0 ${row.bold ? "font-semibold text-[#ddd]" : ""}`}>{row.clicks}</td>
+            <td className={`border-b border-[var(--table-row-border)] py-2.5 pl-3.5 text-muted-foreground last:border-0 ${row.bold ? "font-semibold text-foreground" : ""}`}>{row.page}</td>
+            <td className={`border-b border-[var(--table-row-border)] py-2.5 pl-3.5 text-muted-foreground last:border-0 ${row.bold ? "font-semibold text-foreground" : ""}`}>{row.clicks}</td>
           </tr>
         ))}
       </tbody>
@@ -100,10 +100,10 @@ function Flow({ steps }: { steps: { label: string; danger?: boolean; highlight?:
     <div className="my-5 flex flex-wrap items-center gap-2">
       {steps.map((step, i) => (
         <span key={i} className="flex items-center gap-2">
-          <span className={`rounded-md border px-3 py-1.5 text-[12px] ${step.danger ? "border-[#2a1510] bg-[#130a08] text-[#c47a4a]" : step.highlight ? "border-[#3a3420] bg-[#141208] font-medium text-[var(--accent-dim)]" : "border-border bg-[var(--surface-2)] text-[#aaa]"}`}>
+          <span className={`rounded-md border px-3 py-1.5 text-[12px] ${step.danger ? "border-[var(--before-border)] bg-[var(--before-bg)] text-[var(--before-label)]" : step.highlight ? "border-[var(--badge-warm-border)] bg-[var(--badge-warm-bg)] font-medium text-[var(--accent-dim)]" : "border-border bg-[var(--surface-2)] text-muted-foreground"}`}>
             {step.label}
           </span>
-          {i < steps.length - 1 && <span className="text-[14px] text-[#444]">→</span>}
+          {i < steps.length - 1 && <span className="text-[14px] text-muted-foreground">→</span>}
         </span>
       ))}
     </div>
@@ -116,7 +116,7 @@ function SprintBlock({ label, items }: { label: string; items: string[] }) {
       <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{label}</p>
       <ul className="flex flex-col gap-2">
         {items.map((item, i) => (
-          <li key={i} className="flex gap-2.5 text-[14px] text-[#b0b0b0] before:shrink-0 before:text-[#444] before:content-['→']">{item}</li>
+          <li key={i} className="flex gap-2.5 text-[14px] text-muted-foreground before:shrink-0 before:text-muted-foreground before:content-['→']">{item}</li>
         ))}
       </ul>
     </div>
@@ -165,7 +165,7 @@ export default function PneustorePage() {
             <div key={p.num} className="rounded-xl border border-border bg-card p-6">
               <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--accent-dim)]">{p.num}</p>
               <h3 className="mb-2.5 text-base font-semibold text-foreground">{p.title}</h3>
-              <p className="text-[14px] text-[#999]">{p.desc}</p>
+              <p className="text-[14px] text-muted-foreground">{p.desc}</p>
             </div>
           ))}
         </div>
@@ -183,7 +183,7 @@ export default function PneustorePage() {
         ]} />
 
         <Callout warn>
-          <strong className="text-[#c47a4a]">The mobile gap:</strong> 82% of traffic was mobile, but mobile bounce rate was 62% higher than desktop. Users on mobile had significantly more difficulty navigating, filtering, and confirming sizes — yet that&apos;s where most purchase decisions were being made.
+          <strong className="text-[var(--note-warn-accent)]">The mobile gap:</strong> 82% of traffic was mobile, but mobile bounce rate was 62% higher than desktop. Users on mobile had significantly more difficulty navigating, filtering, and confirming sizes — yet that&apos;s where most purchase decisions were being made.
         </Callout>
 
         <h3 className="mb-3 mt-10 text-lg font-semibold tracking-[-0.01em]">Where frustration was concentrated</h3>
@@ -209,12 +209,12 @@ export default function PneustorePage() {
 
         <h3 className="mb-3 mt-10 text-lg font-semibold tracking-[-0.01em]">Six root causes — not a single fixable issue</h3>
         <PainList items={[
-          { icon: "1", content: <><strong className="text-[#ddd]">The site guides by size, not by vehicle.</strong> No vehicle-first entry point on homepage or search. Users who don&apos;t know their size have no guided path — they estimate, compare similar sizes, and error.</> },
-          { icon: "2", content: <><strong className="text-[#ddd]">Search is the highest-friction page on the site.</strong> 23,661 rage clicks on /search indicate filters don&apos;t work as expected and similar sizes appear without clear hierarchy.</> },
-          { icon: "3", content: <><strong className="text-[#ddd]">The PDP offers no compatibility validation.</strong> The vehicle compatibility list that previously existed on product pages was removed. No signal tells the user whether this specific tire fits their specific car.</> },
-          { icon: "4", content: <><strong className="text-[#ddd]">Mobile concentrates maximum risk.</strong> 82% of sessions happen on mobile — where sizes are harder to read, comparison requires excessive scroll, and the search field is prone to input error.</> },
-          { icon: "5", content: <><strong className="text-[#ddd]">The purchase flow has zero positive friction.</strong> No confirmation moment between PDP and checkout. The user can complete a purchase without a single validation of the selected size.</> },
-          { icon: "6", content: <><strong className="text-[#ddd]">Post-purchase has no exit.</strong> Once the error is discovered, self-service cancellation before shipping is impossible via the site. Users are forced to wait for delivery, then navigate a broken returns flow.</> },
+          { icon: "1", content: <><strong className="text-foreground">The site guides by size, not by vehicle.</strong> No vehicle-first entry point on homepage or search. Users who don&apos;t know their size have no guided path — they estimate, compare similar sizes, and error.</> },
+          { icon: "2", content: <><strong className="text-foreground">Search is the highest-friction page on the site.</strong> 23,661 rage clicks on /search indicate filters don&apos;t work as expected and similar sizes appear without clear hierarchy.</> },
+          { icon: "3", content: <><strong className="text-foreground">The PDP offers no compatibility validation.</strong> The vehicle compatibility list that previously existed on product pages was removed. No signal tells the user whether this specific tire fits their specific car.</> },
+          { icon: "4", content: <><strong className="text-foreground">Mobile concentrates maximum risk.</strong> 82% of sessions happen on mobile — where sizes are harder to read, comparison requires excessive scroll, and the search field is prone to input error.</> },
+          { icon: "5", content: <><strong className="text-foreground">The purchase flow has zero positive friction.</strong> No confirmation moment between PDP and checkout. The user can complete a purchase without a single validation of the selected size.</> },
+          { icon: "6", content: <><strong className="text-foreground">Post-purchase has no exit.</strong> Once the error is discovered, self-service cancellation before shipping is impossible via the site. Users are forced to wait for delivery, then navigate a broken returns flow.</> },
         ]} />
 
         <h3 className="mb-3 mt-10 text-lg font-semibold tracking-[-0.01em]">The wrong-size customer journey</h3>
@@ -260,13 +260,13 @@ export default function PneustorePage() {
         <P>Once a user enters their vehicle, that context persists as a visible filter banner across the entire shopping session. Every product card shows a compatibility confirmation drawn from the backend validation that was already running.</P>
 
         <div className="my-6 grid grid-cols-2 gap-3 max-sm:grid-cols-1">
-          <div className="rounded-[10px] border border-[#2a1515] bg-[#130d0d] p-[18px]">
-            <p className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.1em] text-[#8b3a3a]">Before</p>
-            <p className="text-[13px] text-[#999]">Search &quot;pneus para Onix&quot; → generic catalog → no vehicle context → user can&apos;t trust results → abandons or buys wrong</p>
+          <div className="rounded-[10px] border border-[var(--before-border)] bg-[var(--before-bg)] p-[18px]">
+            <p className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--before-label)]">Before</p>
+            <p className="text-[13px] text-muted-foreground">Search &quot;pneus para Onix&quot; → generic catalog → no vehicle context → user can&apos;t trust results → abandons or buys wrong</p>
           </div>
-          <div className="rounded-[10px] border border-[#152a1d] bg-[#0d1310] p-[18px]">
-            <p className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.1em] text-[#3a8b5a]">Direction</p>
-            <p className="text-[13px] text-[#999]">Vehicle selected once → persists across entire session → every result shows &quot;Compatible with your Chevrolet Onix 2021&quot; → incompatible products marked</p>
+          <div className="rounded-[10px] border border-[var(--after-border)] bg-[var(--after-bg)] p-[18px]">
+            <p className="mb-2.5 text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--after-label)]">Direction</p>
+            <p className="text-[13px] text-muted-foreground">Vehicle selected once → persists across entire session → every result shows &quot;Compatible with your Chevrolet Onix 2021&quot; → incompatible products marked</p>
           </div>
         </div>
 
@@ -299,7 +299,7 @@ export default function PneustorePage() {
       </CaseSection>
 
       <CaseSection title="Impact">
-        <p className="mb-6 text-[13px] italic text-[#666]">Research-phase project. Metrics below are behavioral baselines from the diagnosis period.</p>
+        <p className="mb-6 text-[13px] italic text-muted-foreground">Research-phase project. Metrics below are behavioral baselines from the diagnosis period.</p>
         <MetricsGrid items={[
           { value: "6", label: "Root causes mapped for wrong-size purchases — each with a distinct intervention point in the funnel" },
           { value: "21", label: "Direct NPS verbatims on wrong-size purchases — quantified a problem previously invisible in funnel data" },
@@ -317,7 +317,7 @@ export default function PneustorePage() {
       <footer className="mt-12 border-t border-border py-8 flex flex-col gap-8">
         <CaseNav current="/cases/pneustore" />
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="text-[12px] text-[#666]">PneuStore 360° is a production system. Research data and metrics have been sanitized to protect confidential business information.</p>
+          <p className="text-[12px] text-muted-foreground">PneuStore 360° is a production system. Research data and metrics have been sanitized to protect confidential business information.</p>
           <a href="mailto:keytherueckert93@gmail.com" className="text-[13px] text-muted-foreground transition-colors hover:text-foreground">keytherueckert93@gmail.com</a>
         </div>
       </footer>

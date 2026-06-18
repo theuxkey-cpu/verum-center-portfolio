@@ -13,7 +13,7 @@ export function IterationCard({
         {number}
       </p>
       <h3 className="mb-3 text-base font-semibold tracking-[-0.01em] text-foreground">{title}</h3>
-      <div className="text-[14px] leading-[1.6] text-[#b0b0b0] [&>p+p]:mt-2.5">{children}</div>
+      <div className="text-[14px] leading-[1.6] text-muted-foreground [&>p+p]:mt-2.5">{children}</div>
     </div>
   )
 }
