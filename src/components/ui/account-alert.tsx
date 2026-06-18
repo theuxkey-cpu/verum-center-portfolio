@@ -12,13 +12,13 @@ interface AccountAlertProps {
 
 const styles: Record<AlertVariant, { container: string; icon: string; Icon: typeof Info }> = {
   info: {
-    container: "border-blue-800 bg-blue-950 text-blue-300",
-    icon: "text-blue-400",
+    container: "border-blue-300 bg-blue-100 text-blue-800",
+    icon: "text-blue-700",
     Icon: Info,
   },
   warning: {
-    container: "border-amber-800 bg-amber-950 text-amber-300",
-    icon: "text-amber-400",
+    container: "border-orange-300 bg-orange-100 text-orange-800",
+    icon: "text-orange-700",
     Icon: AlertTriangle,
   },
   error: {
