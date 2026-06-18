@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
@@ -44,14 +45,65 @@ export default function CenariosPage() {
 
       <header className="mb-[72px] border-b border-border pb-14 pt-12">
         <p className="mb-6 inline-flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.08em] text-muted-foreground before:block before:h-px before:w-5 before:bg-muted-foreground">
-          Interactive Demo · Verum Sales Global
+          VS Code Extension · Interactive Demo · Verum Sales Global
         </p>
         <h1 className="mb-5 text-[clamp(28px,5vw,44px)] font-semibold leading-[1.15] tracking-[-0.02em]">
-          UI Scenarios — Accounts Module
+          The UI States Nobody Mapped
         </h1>
-        <p className="max-w-[560px] text-[17px] leading-[1.6] text-muted-foreground">
-          Every UI state in the Accounts module, live. Generated with the Scenario Generator tool, implemented in production with the VSG design system. Click any button to trigger the interaction.
+        <p className="mb-10 max-w-[560px] text-[17px] leading-[1.6] text-muted-foreground">
+          Every module ships with dozens of UI states. Mapping them was invisible work - and it always happened too late.
         </p>
+
+        <div className="mb-10 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-3">
+          <div className="bg-card px-6 py-5">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">Before - UX</p>
+            <p className="text-sm leading-[1.6] text-foreground">Documented states manually in Figma. One component could take hours - empty, loading, partial, error, disabled, edge cases. Easy to miss, hard to keep in sync.</p>
+          </div>
+          <div className="bg-card px-6 py-5">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">Before - Front-end</p>
+            <p className="text-sm leading-[1.6] text-foreground">Implemented against incomplete specs. States that weren&apos;t documented got invented on the spot - or skipped entirely, becoming QA tickets later.</p>
+          </div>
+          <div className="bg-card px-6 py-5">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">Before - QA</p>
+            <p className="text-sm leading-[1.6] text-foreground">Found the gaps in production. Alerts with no copy, modals with no cancel behavior, errors with no recovery path. The cost came at the worst moment.</p>
+          </div>
+        </div>
+
+        <div className="max-w-[560px] space-y-4 border-l-2 border-[var(--accent-dim)] pl-5">
+          <p className="text-[15px] leading-[1.65] text-foreground">
+            I built a VS Code extension - the <strong>Scenario Generator</strong> - that produces a typed scenario map for any module from a simple config. Every state gets a name, a message, a variant, and a trigger. No more Figma archaeology.
+          </p>
+          <p className="text-[15px] leading-[1.65] text-muted-foreground">
+            The demo below is the live output for the Accounts module: every toast, alert, tooltip, modal, and inline error - implemented in production with the VSG design system. Click anything to trigger it.
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-3 sm:grid-cols-2">
+          <figure className="flex flex-col gap-2">
+            <div className="overflow-hidden rounded-xl border border-border bg-[#1e1e1e]">
+              <Image
+                src="/scenario-generator-input.png"
+                alt="Scenario Generator VS Code extension - paste module description and generate scenarios"
+                width={920}
+                height={680}
+                className="w-full"
+              />
+            </div>
+            <figcaption className="text-[11px] text-muted-foreground">1 - Paste the module spec into the extension</figcaption>
+          </figure>
+          <figure className="flex flex-col gap-2">
+            <div className="overflow-hidden rounded-xl border border-border bg-[#1e1e1e]">
+              <Image
+                src="/scenario-generator-output.png"
+                alt="Scenario Generator output - 13 scenarios identified with types, triggers and copy"
+                width={784}
+                height={900}
+                className="w-full"
+              />
+            </div>
+            <figcaption className="text-[11px] text-muted-foreground">2 - Every scenario typed, named, and ready to implement</figcaption>
+          </figure>
+        </div>
       </header>
 
       <div className="flex flex-col gap-10 pb-24">
