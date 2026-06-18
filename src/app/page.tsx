@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { FileText } from "lucide-react"
 import { CaseSidebar } from "@/components/case/case-sidebar"
 
 function CaseCard({
@@ -30,7 +31,7 @@ function CaseCard({
   )
 }
 
-function ExpItem({ date, role, company, desc }: { date: string; role: string; company?: string; desc?: string }) {
+function ExpItem({ date, role, company, desc, tools }: { date: string; role: string; company?: string; desc?: string; tools?: string[] }) {
   return (
     <div className="grid grid-cols-[140px_1fr] gap-6 border-b border-border py-6 last:border-b-0 last:pb-0 max-sm:grid-cols-1 max-sm:gap-1">
       <span className="pt-[3px] text-xs leading-[1.4] text-muted-foreground">{date}</span>
@@ -38,6 +39,15 @@ function ExpItem({ date, role, company, desc }: { date: string; role: string; co
         <p className="text-[15px] font-medium text-foreground">{role}</p>
         {company && <p className="text-[13px] text-muted-foreground">{company}</p>}
         {desc && <p className="mt-1 text-[13px] leading-[1.5] text-muted-foreground">{desc}</p>}
+        {tools && (
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {tools.map((tool) => (
+              <span key={tool} className="rounded-full border border-border bg-muted px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
+                {tool}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
@@ -61,7 +71,7 @@ export default function Home() {
               Hi, I&apos;m <span className="text-[var(--accent-dim)]">Keythe</span>.
             </h1>
             <p style={{ animation: "slide-up 0.6s ease both 0.22s" }} className="mb-9 max-w-[560px] text-base leading-[1.75] text-muted-foreground">
-              3+ years designing B2B and B2C digital products — UX research, design systems, and operational interfaces for SaaS and CRM platforms. Currently crossing into Design Engineering: shipping production interfaces in Next.js, using AI as an architectural reviewer, and deploying on Vercel.
+              3+ years designing B2B and B2C digital products - UX research, design systems, and operational interfaces for SaaS and CRM platforms. Currently crossing into Design Engineering: shipping production interfaces in Next.js, using AI as an architectural reviewer, and deploying on Vercel.
             </p>
             <div style={{ animation: "slide-up 0.5s ease both 0.34s" }} className="flex flex-wrap gap-3">
               <Link
@@ -71,10 +81,18 @@ export default function Home() {
                 Let's talk
               </Link>
               <a
+                href="/Keythe_Resume.pdf"
+                download
+                className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-muted-foreground transition-opacity hover:opacity-80"
+              >
+                <FileText size={15} />
+                Download CV
+              </a>
+              <a
                 href="https://www.linkedin.com/in/keythee/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-muted-foreground transition-opacity hover:opacity-80"
+                className="inline-flex items-center gap-2 px-1 py-2.5 text-sm font-medium text-muted-foreground transition-opacity hover:opacity-80"
               >
                 LinkedIn ↗
               </a>
@@ -103,7 +121,7 @@ export default function Home() {
             company="Cantu Inc."
             type="Platform Design · Enterprise"
             title="Designing VerumCenter: A New Product Built to Unify Two Business Models Across Three Countries"
-            description="VerumCenter didn't exist before this project. Led product design from discovery to handoff — consolidating retail and wholesale operations into a single platform for Brazil, USA, and Mexico."
+            description="VerumCenter didn't exist before this project. Led product design from discovery to handoff - consolidating retail and wholesale operations into a single platform for Brazil, USA, and Mexico."
             tags={["Product Strategy", "Platform Design", "3 Countries", "Retail + Wholesale"]}
           />
           <CaseCard
@@ -119,7 +137,7 @@ export default function Home() {
             company="Cantu Inc."
             type="Supply Chain · Enterprise"
             title="Designing the Intelligence Layer of an Enterprise Supply Chain Platform"
-            description="Built end-to-end UX for a supply chain platform that replaced spreadsheets and isolated SAP tools across four departments — sole designer from discovery through weekly production deploys."
+            description="Built end-to-end UX for a supply chain platform that replaced spreadsheets and isolated SAP tools across four departments - sole designer from discovery through weekly production deploys."
             tags={["End-to-End Design", "Complex Data Tables", "Governance", "SAP Integration"]}
           />
           <CaseCard
@@ -127,7 +145,7 @@ export default function Home() {
             company="Cantu Inc."
             type="B2C E-commerce · O2O"
             title="Three Research Workstreams That Diagnosed Why a Tire Platform Was Losing Customers"
-            description="Led UX research across three interconnected failures in a B2C tire platform — using Clarity behavioral data (2.47M sessions) and NPS analysis to diagnose wrong-size purchases and broken vehicle-context search."
+            description="Led UX research across three interconnected failures in a B2C tire platform - using Clarity behavioral data (2.47M sessions) and NPS analysis to diagnose wrong-size purchases and broken vehicle-context search."
             tags={["UX Research", "Behavioral Data", "O2O / Omnichannel", "B2C"]}
           />
         </div>
@@ -145,14 +163,14 @@ export default function Home() {
             <div className="mb-4 flex flex-wrap items-center gap-2.5">
               <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">Verum Sales Global</span>
               <span className="size-[3px] rounded-full bg-[var(--tag-border)]" />
-              <span className="text-[11px] text-muted-foreground">Interactive Demo</span>
+              <span className="text-[11px] text-muted-foreground">VS Code Extension · Interactive Demo</span>
             </div>
-            <h2 className="mb-2.5 text-xl font-semibold leading-[1.3] tracking-[-0.015em] text-foreground">UI Scenarios — Accounts Module</h2>
+            <h2 className="mb-2.5 text-xl font-semibold leading-[1.3] tracking-[-0.015em] text-foreground">The UI States Nobody Mapped</h2>
             <p className="mb-5 text-sm leading-[1.6] text-muted-foreground">
-              Live demo of every UI state in the Accounts module: toasts, alerts, tooltips, confirmation modals, and inline errors — generated with the Scenario Generator tool and implemented in production.
+              Every module ships with dozens of UI states - empty, loading, error, validation, edge cases. UX mapped them manually in Figma. Front-end guessed what was missing. QA found the rest in production. I built a VS Code extension that generates all scenarios from config - and turned the output into a live demo that became the team&apos;s ground truth.
             </p>
             <div className="flex flex-wrap gap-2">
-              {["Interactive", "Sonner Toasts", "Radix Dialogs", "VSG Design System"].map((t) => (
+              {["VS Code Extension", "Scenario Generator", "Interactive Demo", "VSG Design System"].map((t) => (
                 <span key={t} className="rounded-full border border-[var(--tag-border)] bg-[var(--tag-bg)] px-2.5 py-1 text-[11px] font-medium text-muted-foreground">{t}</span>
               ))}
             </div>
@@ -171,10 +189,10 @@ export default function Home() {
       {/* Education */}
       <section id="education" data-section="Education" className="py-[72px] max-sm:py-14">
         <p className="mb-10 inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground before:block before:h-px before:w-5 before:shrink-0 before:bg-[var(--accent-dim)] before:content-['']">Education</p>
-        <ExpItem date="2026 – Present" role="Design Engineering — ongoing" desc="Transitioning from Product Designer → Design Engineer. Focus on animation and motion in code — the intersection where design sensibility meets technical execution. Framer Motion, CSS advanced, React components." />
-        <ExpItem date="2026 – Present" role="AI — ongoing" desc="Using AI as an execution multiplier: directing, reviewing, and shipping — without losing design intent." />
-        <ExpItem date="2023 – 2024" role="MBA — UX Research, Research Ops & Design Leadership" company="Unifast & Toronto School of Management" desc="Innovation, AI, and UX with emphasis on research, usability, and data-driven product design." />
-        <ExpItem date="2015 – 2018" role="Bachelor — Advertising & Marketing" desc="Strategy, consumer behavior and digital communication." />
+        <ExpItem date="2026 – Present" role="Design Engineering - ongoing" desc="Transitioning from Product Designer to Design Engineer. Building scalable Design Systems in code, creating component architectures, and strengthening the connection between design quality and technical implementation." />
+        <ExpItem date="2025 – Present" role="AI for Product Design - ongoing" desc="Leveraging AI across discovery, research, UX strategy, documentation, prototyping, and product delivery. Building workflows that transform complexity into faster and more confident product decisions." tools={["ChatGPT", "Claude", "Perplexity", "NotebookLM", "Gemini", "VS Code", "GitHub", "Supabase", "Lovable", "Figma Make"]} />
+        <ExpItem date="2023 – 2024" role="MBA - UX Research, Research Ops & Design Leadership" company="Unifast & Toronto School of Management" desc="Innovation, AI, and UX with emphasis on research, usability, and data-driven product design." />
+        <ExpItem date="2015 – 2018" role="Bachelor - Advertising & Marketing" desc="Strategy, consumer behavior and digital communication." />
       </section>
 
       {/* Footer */}
