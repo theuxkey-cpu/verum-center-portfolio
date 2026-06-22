@@ -6,14 +6,14 @@ export const SCENARIOS = {
     anexoEnviado: { title: "Attachment uploaded", description: "File successfully uploaded" },
     erroCpfCnpjJaCadastrado: { title: "Registration failed", description: "Tax ID already registered" },
     erroSalvarConta: { title: "Could not save account", description: "An error occurred while saving" },
-    erroEnviarSap: { title: "SAP sync failed", description: "Could not send data to SAP" },
+    erroEnviarSap: { title: "ERP sync failed", description: "Could not send data to ERP" },
     erroAnexarArquivo: { title: "Upload failed", description: "Could not attach the file" },
   },
   alert: {
     contaAguardandoValidacao: { variant: "info" as const, title: "Pending validation", description: "Account is awaiting approval" },
-    integracaoSapFalhou: { variant: "error" as const, title: "SAP integration failed", description: "Could not sync with SAP" },
+    integracaoSapFalhou: { variant: "error" as const, title: "ERP integration failed", description: "Could not sync with ERP" },
     beneficioFiscalExpirado: { variant: "warning" as const, title: "Tax benefit expired", description: "This benefit is no longer valid" },
-    contaRejeitadaSap: { variant: "error" as const, title: "Account rejected by SAP", description: "SAP returned a rejection for this account" },
+    contaRejeitadaSap: { variant: "error" as const, title: "Account rejected by ERP", description: "ERP returned a rejection for this account" },
   },
   tooltip: {
     clienteInternacional: { title: "International customer", description: "Tax ID becomes optional for international accounts" },

@@ -7,8 +7,8 @@ import { MetricsGrid } from "@/components/case/metrics-grid"
 import { IterationCard } from "@/components/case/iteration-card"
 
 export const metadata: Metadata = {
-  title: "PneuStore 360° — UX Research | Keythe Rueckert",
-  description: "Three UX research workstreams that diagnosed why a tire e-commerce platform was losing customers — 2.47M sessions, NPS analysis, and O2O design direction.",
+  title: "B2C Tire Platform — UX Research | Keythe Rueckert",
+  description: "Three UX research workstreams that diagnosed why a B2C tire e-commerce platform was losing customers — behavioral session data, NPS analysis, and O2O design direction.",
 }
 
 function P({ children }: { children: React.ReactNode }) {
@@ -49,28 +49,30 @@ function Callout({ children, warn }: { children: React.ReactNode; warn?: boolean
 
 function DataTable() {
   return (
-    <table className="my-5 w-full border-collapse text-[13px]">
-      <thead>
-        <tr>
-          <th className="border-b border-border pb-2.5 pl-3.5 text-left text-[11px] font-semibold uppercase tracking-[0.06em] text-muted-foreground">Page</th>
-          <th className="border-b border-border pb-2.5 pl-3.5 text-left text-[11px] font-semibold uppercase tracking-[0.06em] text-muted-foreground">Rage Clicks</th>
-        </tr>
-      </thead>
-      <tbody>
-        {[
-          { page: "/search", clicks: "23,661 🚨", bold: true },
-          { page: "/ (Homepage)", clicks: "5,271" },
-          { page: "/marca/michelin", clicks: "4,591" },
-          { page: "PDP — product page", clicks: "4,116" },
-          { page: "/checkout/pagamento", clicks: "2,273" },
-        ].map((row) => (
-          <tr key={row.page}>
-            <td className={`border-b border-[var(--table-row-border)] py-2.5 pl-3.5 text-muted-foreground last:border-0 ${row.bold ? "font-semibold text-foreground" : ""}`}>{row.page}</td>
-            <td className={`border-b border-[var(--table-row-border)] py-2.5 pl-3.5 text-muted-foreground last:border-0 ${row.bold ? "font-semibold text-foreground" : ""}`}>{row.clicks}</td>
+    <div className="my-5 overflow-hidden rounded-lg border border-border">
+      <table className="w-full border-collapse text-[13px]">
+        <thead>
+          <tr>
+            <th className="border-b border-border py-2.5 pl-3.5 text-left text-[11px] font-semibold uppercase tracking-[0.06em] text-muted-foreground">Page</th>
+            <th className="border-b border-border py-2.5 pl-3.5 text-left text-[11px] font-semibold uppercase tracking-[0.06em] text-muted-foreground">Frustration Signal</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {[
+            { page: "/search", signal: "Critical — highest rage click density by a significant margin 🚨", bold: true },
+            { page: "/ (Homepage)", signal: "Elevated" },
+            { page: "Brand pages", signal: "Elevated" },
+            { page: "PDP — product page", signal: "Elevated" },
+            { page: "/checkout — payment step", signal: "Moderate" },
+          ].map((row) => (
+            <tr key={row.page}>
+              <td className={`border-b border-[var(--table-row-border)] py-2.5 pl-3.5 text-muted-foreground last:border-0 ${row.bold ? "font-semibold text-foreground" : ""}`}>{row.page}</td>
+              <td className={`border-b border-[var(--table-row-border)] py-2.5 pl-3.5 text-muted-foreground last:border-0 ${row.bold ? "font-semibold text-foreground" : ""}`}>{row.signal}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }
 
@@ -127,11 +129,11 @@ export default function PneustorePage() {
   return (
     <div className="mx-auto max-w-[760px] px-6">
       <CaseHeader
-        eyebrow="Cantu Inc. · B2C E-commerce"
+        eyebrow="Enterprise Client · B2C E-commerce"
         title="Three Research Workstreams That Diagnosed Why a Tire Platform Was Losing Customers"
-        subtitle="Led UX research across three interconnected failures in PneuStore 360° — from behavioral data and NPS analysis to strategic design direction — covering O2O installation, vehicle-context search, and wrong-size purchases."
+        subtitle="Led UX research across three interconnected failures in B2C Tire Platform — from behavioral data and NPS analysis to strategic design direction — covering O2O installation, vehicle-context search, and wrong-size purchases."
         tags={[
-          { label: "PneuStore 360°", accent: true },
+          { label: "B2C Tire Platform", accent: true },
           { label: "UX Research" },
           { label: "Behavioral Data Analysis" },
           { label: "O2O / Omnichannel" },
@@ -139,15 +141,19 @@ export default function PneustorePage() {
         ]}
       />
 
+      <div className="mb-6 mt-2 rounded-lg border border-border bg-[var(--surface-2)] px-5 py-3.5 text-[13px] leading-[1.65] text-muted-foreground">
+        <strong className="text-foreground">Legal notice —</strong> All platform and system names in this case study are fictional pseudonyms. Real product identifiers have been replaced for confidentiality compliance.
+      </div>
+
       <CaseSection title="Context">
-        <P>PneuStore 360° is Cantu Inc.&apos;s direct-to-consumer e-commerce channel for automotive tires — part of the same distribution network that powers 6,000+ auto centers across Brazil. The platform allows customers to browse, purchase, and schedule tire installation at partner shops nationwide.</P>
+        <P>The platform is a direct-to-consumer e-commerce channel for automotive tires, allowing customers to browse, purchase, and schedule tire installation at partner shops nationwide.</P>
         <P>Despite significant commercial investment, three structural UX failures were driving abandonment, wrong purchases, and customer churn. I was brought in to investigate each one from discovery — using behavioral data, NPS qualitative analysis, and stakeholder walkthroughs — and define the design direction before solutions were built.</P>
         <P>The three workstreams were independent in origin but shared a common root: the platform was designed around products, not around the complete tire-buying journey.</P>
       </CaseSection>
 
       <CaseSection title="My Role">
         <PainList items={[
-          { icon: "○", content: "Led end-to-end UX research for all three workstreams — behavioral data analysis (Microsoft Clarity), NPS/qualitative synthesis (SoluCX), stakeholder mapping, and benchmarking" },
+          { icon: "○", content: "Led end-to-end UX research for all three workstreams — behavioral session data analysis, NPS/qualitative synthesis, stakeholder mapping, and benchmarking" },
           { icon: "○", content: "Produced structured research artifacts: root cause analysis, JTBD mapping, customer journey maps, prioritization matrices, and sprint roadmaps" },
           { icon: "○", content: "Defined the conceptual model for the \"Compra e Instale\" O2O flow and the vehicle-context fitment UX direction" },
           { icon: "○", content: "Identified that the wrong-size purchase failure was systemic — driven by 6 compounding root causes — and prioritized a sprint roadmap covering immediate, structural, and transformational interventions" },
@@ -173,44 +179,34 @@ export default function PneustorePage() {
 
       <CaseSection title="Research">
         <h3 className="mb-3 text-lg font-semibold tracking-[-0.01em]">Workstream 03 — Diagnosing the wrong-size purchase failure</h3>
-        <P>I crossed behavioral data from Microsoft Clarity (30 days, 2.47M sessions) with qualitative NPS data from SoluCX (2,524 respondents, April–May 2026) to establish where the failure was happening, who it was affecting, and why the interface was enabling it.</P>
+        <P>I crossed session behavioral data with qualitative NPS feedback to establish where the failure was happening, who it was affecting, and why the interface was enabling it.</P>
 
         <StatRow items={[
-          { value: "2.47M", label: "Sessions analyzed over 30 days" },
-          { value: "0.72%", warn: true, label: "Conversion rate — 17,864 purchases" },
-          { value: "309K", warn: true, label: "Sessions that started checkout but didn't finish" },
-          { value: "82%", warn: true, label: "Mobile traffic — with 64% bounce rate" },
+          { value: "Millions", label: "Sessions analyzed over a 30-day period" },
+          { value: "< 1%", warn: true, label: "Conversion rate — significantly below category benchmark" },
+          { value: "High", warn: true, label: "Share of checkout-initiating sessions that did not convert" },
+          { value: "Majority", warn: true, label: "Mobile traffic — with bounce rate significantly higher than desktop" },
         ]} />
 
         <Callout warn>
-          <strong className="text-[var(--note-warn-accent)]">The mobile gap:</strong> 82% of traffic was mobile, but mobile bounce rate was 62% higher than desktop. Users on mobile had significantly more difficulty navigating, filtering, and confirming sizes — yet that&apos;s where most purchase decisions were being made.
+          <strong className="text-[var(--note-warn-accent)]">The mobile gap:</strong> The majority of traffic was mobile, but mobile bounce rate was significantly higher than desktop. Users on mobile had significantly more difficulty navigating, filtering, and confirming sizes — yet that&apos;s where most purchase decisions were being made.
         </Callout>
 
         <h3 className="mb-3 mt-10 text-lg font-semibold tracking-[-0.01em]">Where frustration was concentrated</h3>
-        <P>Rage click analysis revealed a clear signal: the /search page had 23,661 rage clicks — 4.5× more than any other page on the site.</P>
+        <P>Rage click analysis revealed a clear signal: the search page concentrated the vast majority of user frustration — significantly more than any other page on the site.</P>
         <DataTable />
 
         <h3 className="mb-3 mt-10 text-lg font-semibold tracking-[-0.01em]">The NPS signal</h3>
-        <P>Of 312 detractor comments with written feedback, 21 were direct reports of purchasing the wrong tire size — 6.7% of all detractors. An additional 99 comments contained keywords related to size, exchange, error, or return.</P>
-
-        <Verbatim cite="Detractor, NPS 7">
-          &quot;The site induces error. I searched for a tire size, brand and model. In the same brand, the searched size appeared alongside other sizes. I bought the wrong one. The return after cancellation takes too long. No exchanges, only cancellations.&quot;
-        </Verbatim>
-        <Verbatim cite="Promoter, NPS 10 — missing a feature that had been removed">
-          &quot;Before, there was a vehicle compatibility list on each product listing.&quot;
-        </Verbatim>
-        <Verbatim cite="Detractor, NPS 0 — trying to correct a wrong-size purchase">
-          &quot;I was on the phone for an hour and a half. When the agent finally answered, the call dropped.&quot;
-        </Verbatim>
+        <P>A significant portion of detractor written responses described purchasing the wrong tire size. Additional responses contained keywords related to size, exchange, error, or return — quantifying a problem that was invisible in funnel data alone.</P>
 
         <Callout>
-          <strong className="text-[var(--accent-dim)]">The amplification pattern:</strong> Support was the largest category of detractor complaints (43%), above delayed delivery (33%). When users bought the wrong size, they tried to correct it — and couldn&apos;t reach anyone. The UX failure became a support failure, which became an NPS failure.
+          <strong className="text-[var(--accent-dim)]">The amplification pattern:</strong> Support was the largest category of detractor complaints — above even delayed delivery. When users bought the wrong size, they tried to correct it and couldn&apos;t reach anyone. The UX failure became a support failure, which became an NPS failure.
         </Callout>
 
         <h3 className="mb-3 mt-10 text-lg font-semibold tracking-[-0.01em]">Six root causes — not a single fixable issue</h3>
         <PainList items={[
           { icon: "1", content: <><strong className="text-foreground">The site guides by size, not by vehicle.</strong> No vehicle-first entry point on homepage or search. Users who don&apos;t know their size have no guided path — they estimate, compare similar sizes, and error.</> },
-          { icon: "2", content: <><strong className="text-foreground">Search is the highest-friction page on the site.</strong> 23,661 rage clicks on /search indicate filters don&apos;t work as expected and similar sizes appear without clear hierarchy.</> },
+          { icon: "2", content: <><strong className="text-foreground">Search is the highest-friction page on the site.</strong> Rage click data on the search page indicated filters don&apos;t work as expected and similar sizes appear without clear hierarchy.</> },
           { icon: "3", content: <><strong className="text-foreground">The PDP offers no compatibility validation.</strong> The vehicle compatibility list that previously existed on product pages was removed. No signal tells the user whether this specific tire fits their specific car.</> },
           { icon: "4", content: <><strong className="text-foreground">Mobile concentrates maximum risk.</strong> 82% of sessions happen on mobile — where sizes are harder to read, comparison requires excessive scroll, and the search field is prone to input error.</> },
           { icon: "5", content: <><strong className="text-foreground">The purchase flow has zero positive friction.</strong> No confirmation moment between PDP and checkout. The user can complete a purchase without a single validation of the selected size.</> },
@@ -285,7 +281,7 @@ export default function PneustorePage() {
           label="Sprint 2 — Structural: medium effort, high return"
           items={[
             "Compatibility checker on PDP — reintroduces a feature users explicitly noted as missing; confirms fit before add-to-cart",
-            "Search page overhaul — address the 23,661 rage clicks: autocomplete by size, filters that work, size-exact prioritization",
+            "Search page overhaul — address the search frustration signal: autocomplete by size, filters that work, size-exact prioritization",
             "Size education inline — tooltip explaining what 205/55R16 means, at the moment the user is choosing",
           ]}
         />
@@ -317,7 +313,7 @@ export default function PneustorePage() {
       <footer className="mt-12 border-t border-border py-8 flex flex-col gap-8">
         <CaseNav current="/cases/pneustore" />
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="text-[12px] text-muted-foreground">PneuStore 360° is a production system. Research data and metrics have been sanitized to protect confidential business information.</p>
+          <p className="text-[12px] text-muted-foreground">This is a production system. Research data and metrics have been sanitized to protect confidential business information.</p>
           <a href="mailto:keytherueckert93@gmail.com" className="text-[13px] text-muted-foreground transition-colors hover:text-foreground">keytherueckert93@gmail.com</a>
         </div>
       </footer>

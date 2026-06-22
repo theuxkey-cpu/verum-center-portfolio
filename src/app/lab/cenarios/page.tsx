@@ -45,7 +45,7 @@ export default function CenariosPage() {
 
       <header className="mb-[72px] border-b border-border pb-14 pt-12">
         <p className="mb-6 inline-flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.08em] text-muted-foreground before:block before:h-px before:w-5 before:bg-muted-foreground">
-          VS Code Extension · Interactive Demo · Verum Sales Global
+          VS Code Extension · Interactive Demo · B2B Enterprise
         </p>
         <h1 className="mb-5 text-[clamp(28px,5vw,44px)] font-semibold leading-[1.15] tracking-[-0.02em]">
           The UI States Nobody Mapped
@@ -74,7 +74,7 @@ export default function CenariosPage() {
             I built a VS Code extension - the <strong>Scenario Generator</strong> - that produces a typed scenario map for any module from a simple config. Every state gets a name, a message, a variant, and a trigger. No more Figma archaeology.
           </p>
           <p className="text-[15px] leading-[1.65] text-muted-foreground">
-            The demo below is the live output for the Accounts module: every toast, alert, tooltip, modal, and inline error - implemented in production with the VSG design system. Click anything to trigger it.
+            The demo below is the live output for the Accounts module: every toast, alert, tooltip, modal, and inline error - implemented in production with the enterprise design system. Click anything to trigger it.
           </p>
         </div>
 

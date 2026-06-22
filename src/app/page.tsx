@@ -118,34 +118,34 @@ export default function Home() {
         <div className="flex flex-col gap-4">
           <CaseCard
             href="/cases/verum-center"
-            company="Cantu Inc."
+            company="Enterprise Client"
             type="Platform Design · Enterprise"
-            title="Designing VerumCenter: A New Product Built to Unify Two Business Models Across Three Countries"
-            description="VerumCenter didn't exist before this project. Led product design from discovery to handoff - consolidating retail and wholesale operations into a single platform for Brazil, USA, and Mexico."
+            title="Designing Nexus: A New Product Built to Unify Two Business Models Across Three Countries"
+            description="This product didn't exist before this project. Led product design from discovery to handoff - consolidating retail and wholesale operations into a single platform for Brazil, USA, and Mexico."
             tags={["Product Strategy", "Platform Design", "3 Countries", "Retail + Wholesale"]}
           />
           <CaseCard
             href="/cases/verum-global-vs-vsg"
-            company="Verum Sales Global"
+            company="B2B Enterprise"
             type="Design Engineering · B2B"
             title={'From "Ship It" to "Scale It": How Building the Same Product Twice Made Me a Better Designer and Engineer'}
-            description="Built Verum Global, watched it accumulate inconsistency, then rebuilt it as VSG with a system-first approach. Covers component architecture, AI as design reviewer, and how a layout contract changes what you can ship without rework."
+            description="Built the first version, watched it accumulate inconsistency, then rebuilt it with a system-first approach. Covers component architecture, AI as design reviewer, and how a layout contract changes what you can ship without rework."
             tags={["Design Engineering", "System Design", "Next.js · shadcn/ui", "Before / After"]}
           />
           <CaseCard
             href="/cases/verum-supply"
-            company="Cantu Inc."
+            company="Enterprise Client"
             type="Supply Chain · Enterprise"
             title="Designing the Intelligence Layer of an Enterprise Supply Chain Platform"
-            description="Built end-to-end UX for a supply chain platform that replaced spreadsheets and isolated SAP tools across four departments - sole designer from discovery through weekly production deploys."
-            tags={["End-to-End Design", "Complex Data Tables", "Governance", "SAP Integration"]}
+            description="Built end-to-end UX for a supply chain platform that replaced spreadsheets and legacy ERP tools across four departments - sole designer from discovery through weekly production deploys."
+            tags={["End-to-End Design", "Complex Data Tables", "Governance", "ERP Integration"]}
           />
           <CaseCard
             href="/cases/pneustore"
-            company="Cantu Inc."
+            company="Enterprise Client"
             type="B2C E-commerce · O2O"
             title="Three Research Workstreams That Diagnosed Why a Tire Platform Was Losing Customers"
-            description="Led UX research across three interconnected failures in a B2C tire platform - using Clarity behavioral data (2.47M sessions) and NPS analysis to diagnose wrong-size purchases and broken vehicle-context search."
+            description="Led UX research across three interconnected failures in a B2C tire platform - using behavioral session data and NPS analysis to diagnose wrong-size purchases and broken vehicle-context search."
             tags={["UX Research", "Behavioral Data", "O2O / Omnichannel", "B2C"]}
           />
         </div>
@@ -161,7 +161,7 @@ export default function Home() {
           >
             <span aria-hidden="true" className="absolute right-7 top-7 text-lg text-muted-foreground transition-transform group-hover:translate-x-[3px] group-hover:translate-y-[-3px]">↗</span>
             <div className="mb-4 flex flex-wrap items-center gap-2.5">
-              <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">Verum Sales Global</span>
+              <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">B2B Enterprise</span>
               <span className="size-[3px] rounded-full bg-[var(--tag-border)]" />
               <span className="text-[11px] text-muted-foreground">VS Code Extension · Interactive Demo</span>
             </div>
@@ -170,7 +170,7 @@ export default function Home() {
               Every module ships with dozens of UI states - empty, loading, error, validation, edge cases. UX mapped them manually in Figma. Front-end guessed what was missing. QA found the rest in production. I built a VS Code extension that generates all scenarios from config - and turned the output into a live demo that became the team&apos;s ground truth.
             </p>
             <div className="flex flex-wrap gap-2">
-              {["VS Code Extension", "Scenario Generator", "Interactive Demo", "VSG Design System"].map((t) => (
+              {["VS Code Extension", "Scenario Generator", "Interactive Demo", "Enterprise Design System"].map((t) => (
                 <span key={t} className="rounded-full border border-[var(--tag-border)] bg-[var(--tag-bg)] px-2.5 py-1 text-[11px] font-medium text-muted-foreground">{t}</span>
               ))}
             </div>
