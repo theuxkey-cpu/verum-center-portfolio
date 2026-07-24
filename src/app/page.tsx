@@ -115,9 +115,12 @@ export default function Home() {
       {/* Featured Work */}
       <section id="featured-work" data-section="Featured Work" className="border-b border-border py-[72px] max-sm:py-14">
         <p className="mb-10 inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground before:block before:h-px before:w-5 before:shrink-0 before:bg-[var(--accent-dim)] before:content-['']">Featured Work</p>
+        <p className="mb-8 max-w-[620px] text-sm leading-[1.7] text-muted-foreground">
+          Three of these cases come from sustained, deep work inside one complex multi-country platform ecosystem — product strategy, supply chain, and systems architecture, each a different layer of the same kind of hard problem. The fourth is an independent research deep-dive in B2C e-commerce. I chose depth over breadth: real constraints, shipped product, not a portfolio of disconnected concepts.
+        </p>
         <div className="flex flex-col gap-4">
           <CaseCard
-            href="/cases/verum-center"
+            href="/cases/nexus"
             company="Enterprise Client"
             type="Platform Design · Enterprise"
             title="Designing Nexus: A New Product Built to Unify Two Business Models Across Three Countries"
@@ -125,7 +128,7 @@ export default function Home() {
             tags={["Product Strategy", "Platform Design", "3 Countries", "Retail + Wholesale"]}
           />
           <CaseCard
-            href="/cases/verum-global-vs-vsg"
+            href="/cases/ship-it-to-scale-it"
             company="B2B Enterprise"
             type="Design Engineering · B2B"
             title={'From "Ship It" to "Scale It": How Building the Same Product Twice Made Me a Better Designer and Engineer'}
@@ -133,7 +136,7 @@ export default function Home() {
             tags={["Design Engineering", "System Design", "Next.js · shadcn/ui", "Before / After"]}
           />
           <CaseCard
-            href="/cases/verum-supply"
+            href="/cases/flowops"
             company="Enterprise Client"
             type="Supply Chain · Enterprise"
             title="Designing the Intelligence Layer of an Enterprise Supply Chain Platform"
@@ -141,7 +144,7 @@ export default function Home() {
             tags={["End-to-End Design", "Complex Data Tables", "Governance", "ERP Integration"]}
           />
           <CaseCard
-            href="/cases/pneustore"
+            href="/cases/tire-platform"
             company="Enterprise Client"
             type="B2C E-commerce · O2O"
             title="Three Research Workstreams That Diagnosed Why a Tire Platform Was Losing Customers"

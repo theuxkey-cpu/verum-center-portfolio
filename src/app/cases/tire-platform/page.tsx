@@ -185,7 +185,8 @@ export default function PneustorePage() {
           { value: "Millions", label: "Sessions analyzed over a 30-day period" },
           { value: "< 1%", warn: true, label: "Conversion rate — significantly below category benchmark" },
           { value: "High", warn: true, label: "Share of checkout-initiating sessions that did not convert" },
-          { value: "Majority", warn: true, label: "Mobile traffic — with bounce rate significantly higher than desktop" },
+          { value: "82%", warn: true, label: "Of sessions happen on mobile" },
+          { value: "64%", warn: true, label: "Mobile bounce rate gap vs. desktop" },
         ]} />
 
         <Callout warn>
@@ -311,7 +312,7 @@ export default function PneustorePage() {
       </CaseSection>
 
       <footer className="mt-12 border-t border-border py-8 flex flex-col gap-8">
-        <CaseNav current="/cases/pneustore" />
+        <CaseNav current="/cases/tire-platform" />
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="text-[12px] text-muted-foreground">This is a production system. Research data and metrics have been sanitized to protect confidential business information.</p>
           <a href="mailto:keytherueckert93@gmail.com" className="text-[13px] text-muted-foreground transition-colors hover:text-foreground">keytherueckert93@gmail.com</a>

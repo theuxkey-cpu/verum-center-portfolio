@@ -5,6 +5,7 @@ import { CaseSection } from "@/components/case/case-section"
 import { PainList } from "@/components/case/pain-list"
 import { MetricsGrid } from "@/components/case/metrics-grid"
 import { IterationCard } from "@/components/case/iteration-card"
+import { ComparisonBlock } from "@/components/case/comparison-block"
 
 export const metadata: Metadata = {
   title: 'From "Ship It" to "Scale It" — Design Engineering | Keythe Rueckert',
@@ -67,7 +68,7 @@ export default function VerumGlobalVsVsgPage() {
       </CaseSection>
 
       <CaseSection title="Problem">
-        <P>the first build delivered. The product worked. But when the client came back to expand it, the cracks were immediate.</P>
+        <P>The first build delivered. The product worked. But when the client came back to expand it, the cracks were immediate.</P>
         <PainList items={[
           { icon: "⚠", content: <><strong>Component duplication.</strong> The same UI element — a status badge, a data row, a filter control — existed in 3–4 variations with no shared logic.</> },
           { icon: "⚠", content: <><strong>No global layout contract.</strong> Each screen made independent decisions about spacing, container width, and responsive behavior.</> },
@@ -75,14 +76,14 @@ export default function VerumGlobalVsVsgPage() {
           { icon: "⚠", content: <><strong>Handoff friction.</strong> Explaining the system to another developer meant explaining the exceptions — because the exceptions were the rules.</> },
         ]} />
         <P>The core issue was not a lack of skill. It was a lack of architecture before execution. I had used AI as a code generator. I had not used it as a design partner.</P>
-        <div className="my-7 flex h-[220px] w-full flex-col items-center justify-center gap-4 rounded-[10px] border border-dashed border-border bg-[var(--surface-2)]">
-          <div className="flex size-10 items-center justify-center rounded-full border border-border bg-card text-lg">🔒</div>
-          <div className="text-center">
-            <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-muted-foreground mb-2">Before — First Build</p>
-            <p className="text-[13px] font-semibold text-foreground">Available upon interview request</p>
-            <p className="mt-1 text-[12px] text-muted-foreground">Confidential interface — NDA protected</p>
-          </div>
-        </div>
+        <ComparisonBlock
+          variant="before"
+          label="Before — First Build"
+          src="/vg-accounts-list.png"
+          alt="First build — Accounts list, showing inconsistent component patterns"
+          width={1907}
+          height={863}
+        />
       </CaseSection>
 
       <CaseSection title="What Changed">
@@ -115,38 +116,38 @@ export default function VerumGlobalVsVsgPage() {
         <h3 className="mb-4 mt-12 text-lg font-semibold tracking-[-0.01em]">Process in Practice — Accounts Module</h3>
         <P>The Accounts module was built entirely inside the rebuilt system and shows the delta most clearly.</P>
 
-        <div className="my-7 flex h-[220px] w-full flex-col items-center justify-center gap-4 rounded-[10px] border border-dashed border-border bg-[var(--surface-2)]">
-          <div className="flex size-10 items-center justify-center rounded-full border border-border bg-card text-lg">🔒</div>
-          <div className="text-center">
-            <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-muted-foreground mb-2">Before — First Build: New Account Step 1</p>
-            <p className="text-[13px] font-semibold text-foreground">Available upon interview request</p>
-            <p className="mt-1 text-[12px] text-muted-foreground">Confidential interface — NDA protected</p>
-          </div>
-        </div>
-        <div className="my-7 flex h-[220px] w-full flex-col items-center justify-center gap-4 rounded-[10px] border border-dashed border-border bg-[var(--surface-2)]">
-          <div className="flex size-10 items-center justify-center rounded-full border border-border bg-card text-lg">🔒</div>
-          <div className="text-center">
-            <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-muted-foreground mb-2">After — Rebuilt System: New Account Step 1</p>
-            <p className="text-[13px] font-semibold text-foreground">Available upon interview request</p>
-            <p className="mt-1 text-[12px] text-muted-foreground">Confidential interface — NDA protected</p>
-          </div>
-        </div>
-        <div className="my-7 flex h-[220px] w-full flex-col items-center justify-center gap-4 rounded-[10px] border border-dashed border-border bg-[var(--surface-2)]">
-          <div className="flex size-10 items-center justify-center rounded-full border border-border bg-card text-lg">🔒</div>
-          <div className="text-center">
-            <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-muted-foreground mb-2">Before — First Build: New Account Step 2</p>
-            <p className="text-[13px] font-semibold text-foreground">Available upon interview request</p>
-            <p className="mt-1 text-[12px] text-muted-foreground">Confidential interface — NDA protected</p>
-          </div>
-        </div>
-        <div className="my-7 flex h-[220px] w-full flex-col items-center justify-center gap-4 rounded-[10px] border border-dashed border-border bg-[var(--surface-2)]">
-          <div className="flex size-10 items-center justify-center rounded-full border border-border bg-card text-lg">🔒</div>
-          <div className="text-center">
-            <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-muted-foreground mb-2">After — Rebuilt System: Accounts List</p>
-            <p className="text-[13px] font-semibold text-foreground">Available upon interview request</p>
-            <p className="mt-1 text-[12px] text-muted-foreground">Confidential interface — NDA protected</p>
-          </div>
-        </div>
+        <ComparisonBlock
+          variant="before"
+          label="Before — First Build: New Account Step 1"
+          src="/vg-new-account-step1.png"
+          alt="First build — New Account, Step 1"
+          width={1910}
+          height={857}
+        />
+        <ComparisonBlock
+          variant="after"
+          label="After — Rebuilt System: New Account Step 1"
+          src="/vsg-new-account-step1.png"
+          alt="Rebuilt system — New Account, Step 1"
+          width={1910}
+          height={912}
+        />
+        <ComparisonBlock
+          variant="before"
+          label="Before — First Build: New Account Step 2"
+          src="/vg-new-account-step2.png"
+          alt="First build — New Account, Step 2"
+          width={1913}
+          height={863}
+        />
+        <ComparisonBlock
+          variant="after"
+          label="After — Rebuilt System: Accounts List"
+          src="/vsg-accounts-list.png"
+          alt="Rebuilt system — Accounts list"
+          width={1916}
+          height={912}
+        />
 
         <IterationCard number="Key Decision — RadioGroup as Semantic Primitive" title="Replacing Custom Divs with a Real Accessibility Model">
           <p>The original PJ/PF cards used button elements with a radio visual — purely cosmetic. A review pass flagged the absence of a semantic primitive: no RadioGroup, no keyboard navigation, no screen reader signaling.</p>
@@ -182,7 +183,7 @@ export default function VerumGlobalVsVsgPage() {
       </CaseSection>
 
       <footer className="mt-12 border-t border-border py-8 flex flex-col gap-8">
-        <CaseNav current="/cases/verum-global-vs-vsg" />
+        <CaseNav current="/cases/ship-it-to-scale-it" />
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="text-[12px] text-muted-foreground">This is a production system. Screenshots are available upon interview request.</p>
           <a href="mailto:keytherueckert93@gmail.com" className="text-[13px] text-muted-foreground transition-colors hover:text-foreground">keytherueckert93@gmail.com</a>

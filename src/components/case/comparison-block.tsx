@@ -5,10 +5,12 @@ interface ComparisonBlockProps {
   label: string
   src: string
   alt: string
+  width: number
+  height: number
   caption?: string
 }
 
-export function ComparisonBlock({ variant, label, src, alt, caption }: ComparisonBlockProps) {
+export function ComparisonBlock({ variant, label, src, alt, width, height, caption }: ComparisonBlockProps) {
   return (
     <div className="my-8">
       <p
@@ -21,9 +23,9 @@ export function ComparisonBlock({ variant, label, src, alt, caption }: Compariso
       <Image
         src={src}
         alt={alt}
-        width={760}
-        height={428}
-        className="w-full rounded-[10px] border border-border"
+        width={width}
+        height={height}
+        className="h-auto w-full rounded-[10px] border border-border"
       />
       {caption && <p className="mt-2.5 text-[12px] leading-[1.5] text-muted-foreground">{caption}</p>}
     </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import { CaseHeader } from "@/components/case/case-header"
 import { CaseSection } from "@/components/case/case-section"
 import { PainList } from "@/components/case/pain-list"
@@ -103,13 +104,13 @@ export default function FlowOpsPage() {
           <p>The solution: color-coded group headers acting as visual landmarks across the full table width. Six segments, each with a distinct hue spanning its columns — so analysts scan directly to the segment they need without reading individual headers.</p>
         </IterationCard>
 
-        <div className="mb-2 mt-6 flex h-[260px] w-full flex-col items-center justify-center gap-4 rounded-[10px] border border-dashed border-border bg-[var(--surface-2)]">
-          <div className="flex size-10 items-center justify-center rounded-full border border-border bg-card text-lg">🔒</div>
-          <div className="text-center">
-            <p className="text-[13px] font-semibold text-foreground">Available upon interview request</p>
-            <p className="mt-1 text-[12px] text-muted-foreground">Confidential interface — NDA protected</p>
-          </div>
-        </div>
+        <Image
+          src="/supply-table.png"
+          alt="Supply planning table with color-segmented column groups"
+          width={2000}
+          height={468}
+          className="mb-2 mt-6 h-auto w-full rounded-[10px] border border-border"
+        />
         <p className="mb-8 text-[12px] leading-[1.5] text-muted-foreground">
           Plano de abastecimento — color-coded segments: Organizational Context (gray), Product Identity (blue), Strategic Segmentation (amber), Status (red), Supply (blue), Local Demand (purple)
         </p>
@@ -177,7 +178,7 @@ export default function FlowOpsPage() {
       </CaseSection>
 
       <footer className="mt-12 border-t border-border py-8 flex flex-col gap-8">
-        <CaseNav current="/cases/verum-supply" />
+        <CaseNav current="/cases/flowops" />
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="text-[12px] text-muted-foreground">FlowOps is a production system. Screenshots and metrics have been sanitized to protect confidential business information.</p>
           <a href="mailto:keytherueckert93@gmail.com" className="text-[13px] text-muted-foreground transition-colors hover:text-foreground">keytherueckert93@gmail.com</a>

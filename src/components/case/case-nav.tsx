@@ -1,10 +1,10 @@
 import Link from "next/link"
 
 const CASES = [
-  { href: "/cases/verum-center", label: "VerumCenter" },
-  { href: "/cases/verum-global-vs-vsg", label: "First Build → Rebuilt" },
-  { href: "/cases/verum-supply", label: "FlowOps" },
-  { href: "/cases/pneustore", label: "B2C Tire Platform" },
+  { href: "/cases/nexus", label: "Nexus" },
+  { href: "/cases/ship-it-to-scale-it", label: "First Build → Rebuilt" },
+  { href: "/cases/flowops", label: "FlowOps" },
+  { href: "/cases/tire-platform", label: "B2C Tire Platform" },
 ]
 
 interface CaseNavProps {
