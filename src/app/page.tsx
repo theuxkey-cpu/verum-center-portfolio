@@ -96,6 +96,14 @@ export default function Home() {
               >
                 LinkedIn ↗
               </a>
+              <a
+                href="https://github.com/theuxkey-cpu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-1 py-2.5 text-sm font-medium text-muted-foreground transition-opacity hover:opacity-80"
+              >
+                GitHub ↗
+              </a>
             </div>
           </div>
 
@@ -205,6 +213,7 @@ export default function Home() {
           <a href="mailto:keytherueckert93@gmail.com" className="text-[13px] text-muted-foreground hover:text-foreground">Email</a>
           <a href="https://www.behance.net/keytheruec167d" target="_blank" rel="noopener noreferrer" className="text-[13px] text-muted-foreground hover:text-foreground">Behance</a>
           <a href="https://www.linkedin.com/in/keythee/" target="_blank" rel="noopener noreferrer" className="text-[13px] text-muted-foreground hover:text-foreground">LinkedIn</a>
+          <a href="https://github.com/theuxkey-cpu" target="_blank" rel="noopener noreferrer" className="text-[13px] text-muted-foreground hover:text-foreground">GitHub</a>
         </div>
       </footer>
 

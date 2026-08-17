@@ -185,7 +185,7 @@ export default function VerumGlobalVsVsgPage() {
       <footer className="mt-12 border-t border-border py-8 flex flex-col gap-8">
         <CaseNav current="/cases/ship-it-to-scale-it" />
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="text-[12px] text-muted-foreground">This is a production system. Screenshots are available upon interview request.</p>
+          <p className="text-[12px] text-muted-foreground">This is a production system. Screens above are shown directly; further detail is available upon interview request.</p>
           <a href="mailto:keytherueckert93@gmail.com" className="text-[13px] text-muted-foreground transition-colors hover:text-foreground">keytherueckert93@gmail.com</a>
         </div>
       </footer>
